@@ -6,9 +6,13 @@
 
 (add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
 
-- Exercise 1.1
+- triangle 1.1
 
-- Exercise 1.2
+![Triangle 1.1](screenshots/cgra-t03g05-tp1-mytriangle.png)
+
+- parallelogram
+
+![Parallelogram](screenshots/cgra-t03g05-tp1-myparallelogram.png)
 
 - Exercise 1.3
 
