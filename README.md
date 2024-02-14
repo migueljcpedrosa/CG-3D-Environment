@@ -1,10 +1,10 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T03G05
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Gonçalo Marques  | 202006874 | up202006874@up.pt  |
+| Miguel Pedrosa   | 202108809 | up202108809@up.pt  |
 
 ----
 
