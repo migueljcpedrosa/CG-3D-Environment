@@ -3,8 +3,8 @@
 ## Group T03G05
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| Gonçalo Marques  | 202006874 | up202006874@up.pt  |
-| Miguel Pedrosa   | 202108809 | up202108809@up.pt  |
+| Miguel Pedrosa   | 202108809 | up202108809@edu.fe.up.pt              |
+| Gonçalo Marques  | 202006874 | up202006874@edu.fe.up.pt              |
 
 ----
 
