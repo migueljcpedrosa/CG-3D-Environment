@@ -24,10 +24,10 @@ coexist within the same scene.
 
 | Description      | Image |
 |------------------|-------|
-| Triangle 1.1     | ![Triangle 1.1](screenshots/cgra-t03g05-tp1-mytriangle.png) |
-| Parallelogram    | ![Parallelogram](screenshots/cgra-t03g05-tp1-myparallelogram.png) |
-| Small Triangle   | ![Small Triangle](screenshots/cgra-t03g05-tp1-mytrianglesmall.png) |
-| Big Triangle     | ![Big Triangle](screenshots/cgra-t03g05-tp1-mytrianglebig.png) |
-| Final Result     | ![Final Result](screenshots/cgra-t03g05-tp1-1.png) |
+| Triangle 1.1     | ![Triangle 1.1](screenshots/cgra-t03g05-tp1-1.png) |
+| Parallelogram    | ![Parallelogram](screenshots/cgra-t03g05-tp1-2.png) |
+| Small Triangle   | ![Small Triangle](screenshots/cgra-t03g05-tp1-3.png) |
+| Big Triangle     | ![Big Triangle](screenshots/cgra-t03g05-tp1-4.png) |
+| Final Result     | ![Final Result](screenshots/cgra-t03g05-tp1-5.png) |
 
 
