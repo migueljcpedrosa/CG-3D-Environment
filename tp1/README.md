@@ -18,29 +18,17 @@ This exercise stimulated a thoughtful approach to 3D rendering, from the creatio
 
 - Exercise 2
 
-In this exercise, we were asked to create two additional shapes: a smaller triangle (MyTriangleSmall) and a larger triangle (MyTriangleBig). It helped us grasp the concepts of proportionality and scaling within a digital canvas, by forcing us to understand how objects of different scales coexist within the same scene.
+In this exercise, we were asked to create two additional shapes: a smaller triangle (MyTriangleSmall) and a larger triangle (MyTriangleBig). It helped us grasp the concepts of proportionality and scaling within a digital canvas, by forcing us to understand how objects of different scales 
+coexist within the same scene.
 
-- triangle 1.1
+- Images
 
-![Triangle 1.1](screenshots/cgra-t03g05-tp1-mytriangle.png)
+| Description      | Image |
+|------------------|-------|
+| Triangle 1.1     | ![Triangle 1.1](screenshots/cgra-t03g05-tp1-mytriangle.png) |
+| Parallelogram    | ![Parallelogram](screenshots/cgra-t03g05-tp1-myparallelogram.png) |
+| Small Triangle   | ![Small Triangle](screenshots/cgra-t03g05-tp1-mytrianglesmall.png) |
+| Big Triangle     | ![Big Triangle](screenshots/cgra-t03g05-tp1-mytrianglebig.png) |
+| Final Result     | ![Final Result](screenshots/cgra-t03g05-tp1-1.png) |
 
-
-- parallelogram
-
-![Parallelogram](screenshots/cgra-t03g05-tp1-myparallelogram.png)
-
-
-- small triangle
-
-![Small Triangle](screenshots/cgra-t03g05-tp1-mytrianglesmall.png)
-
-
-- big triangle
-
-![Big Triangle](screenshots/cgra-t03g05-tp1-mytrianglebig.png)
-
-
-- final result
-
-![Final Result](screenshots/cgra-t03g05-tp1-1.png)
 
