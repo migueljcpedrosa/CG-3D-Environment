@@ -21,7 +21,6 @@ This exercise stimulated a thoughtful approach to 3D rendering, from the creatio
 In this exercise, we were asked to create two additional shapes: a smaller triangle (MyTriangleSmall) and a larger triangle (MyTriangleBig). It helped us grasp the concepts of proportionality and scaling within a digital canvas, by forcing us to understand how objects of different scales 
 coexist within the same scene.
 
-- Images
 
 | Description      | Image |
 |------------------|-------|
