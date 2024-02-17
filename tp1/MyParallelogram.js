@@ -22,10 +22,15 @@ export class MyParallelogram extends CGFobject {
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
-            2, 0, 1,
-            2, 1, 4,
-            4, 1, 3,
-            4, 3, 5
+			2, 0, 1,  // Front side
+			2, 1, 4,
+			4, 1, 3,
+			4, 3, 5,
+	
+			1, 0, 2,  // Back side (reversed winding)
+			4, 1, 2,
+			3, 1, 4,
+			5, 3, 4
 		];
 
 		//The defined indices (and corresponding vertices)
