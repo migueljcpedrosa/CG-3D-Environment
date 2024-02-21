@@ -126,6 +126,15 @@ export class MyScene extends CGFscene {
         ];
     };
     
+    const rotateAroundXAxis = (angle) => {
+        return [
+            1, 0, 0, 0,
+            0, Math.cos(toRadians(angle)), -Math.sin(toRadians(angle)), 0,
+            0, Math.sin(toRadians(angle)), Math.cos(toRadians(angle)), 0,
+            0, 0, 0, 1
+        ];
+    };
+  
     
   
     const translate = (x, y, z) => {
@@ -153,6 +162,13 @@ export class MyScene extends CGFscene {
     this.multMatrix(rotateAroundZAxis(-20));   
     this.setDiffuse(0, 1, 0, 1.0);
     if(this.displayDiamond) this.diamond.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.multMatrix(translate(1.2, 0.25, 0));
+    this.multMatrix(rotateAroundZAxis(25));
+    this.setDiffuse(0.6, 0.2, 0.4, 1.0);
+    if(this.displayTriangle) this.triangle.display();
     this.popMatrix();
 
     /*
