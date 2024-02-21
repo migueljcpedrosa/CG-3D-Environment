@@ -26,5 +26,18 @@ export class MyUnitCubeQuad extends CGFobject {
         this.quad.display()
         this.scene.popMatrix()
 
+        //Front view
+        this.scene.pushMatrix()
+        this.scene.translate(0, 0, 0.5)
+        //no need to rotate
+        this.quad.display()
+        this.scene.popMatrix()
+
+        //Back view
+        this.scene.pushMatrix()
+        this.scene.translate(0,0,-0.5)
+        this.scene.rotate(Math.PI,1, 0, 0) //rotate 180 degrees. quad only visible from one side
+        this.quad.display()
+        this.scene.popMatrix()
     }
 }
