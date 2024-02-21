@@ -60,9 +60,10 @@ export class MyScene extends CGFscene {
     );
   }
   setDefaultAppearance() {
-    this.setAmbient(0.2, 0.4, 0.8, 1.0);
-    this.setDiffuse(0.2, 0.4, 0.8, 1.0);
-    this.setSpecular(0.2, 0.4, 0.8, 1.0);
+    this.setAmbient(0, 0, 0, 1.0);
+    // this.setDiffuse(0.2, 0.4, 0.8, 1.0);
+    this.setDiffuse(0.8, 0.4, 0.2, 1.0);
+    this.setSpecular(0, 0, 0, 1.0);
     this.setShininess(10.0);
   }
   display() {
@@ -148,11 +149,13 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     this.pushMatrix();
-    this.multMatrix(translate(-2.1, 0.7, 0));
-    this.multMatrix(rotateAroundZAxis(45));   
+    this.multMatrix(translate(-0.35, 0.95, 0));
+    this.multMatrix(rotateAroundZAxis(-20));   
+    this.setDiffuse(0, 1, 0, 1.0);
     if(this.displayDiamond) this.diamond.display();
     this.popMatrix();
 
+    /*
     this.pushMatrix();
     this.multMatrix(translate(-2.4, 1.4, 0));
     if(this.displayTriangleSmall) this.triangleSmall.display();
@@ -187,15 +190,6 @@ export class MyScene extends CGFscene {
     this.multMatrix(rotateAroundZAxis(-135));
     if(this.displayParallelogram) this.parallelogram.display();
     this.popMatrix();
-
-
-    /*
-    if(this.displayParallelogram) this.parallelogram.display();
-
-    if(this.displayTriangleSmall) this.triangleSmall.display();
-
-    if(this.displayTriangleBig) this.triangleBig.display();
-    // ---- END Primitive drawing section
     */
   }
 }
