@@ -115,6 +115,16 @@ export class MyScene extends CGFscene {
             0, 0, 0, 1
         ];
     };
+
+    const rotateAroundYAxis = (angle) => {
+        return [
+            Math.cos(toRadians(angle)), 0, Math.sin(toRadians(angle)), 0,
+            0, 1, 0, 0,
+            -Math.sin(toRadians(angle)), 0, Math.cos(toRadians(angle)), 0,
+            0, 0, 0, 1
+        ];
+    };
+    
     
   
     const translate = (x, y, z) => {
@@ -154,9 +164,32 @@ export class MyScene extends CGFscene {
     if(this.displayTriangleBig) this.triangleBig.display();
     this.popMatrix();
 
-    /*
-    if(this.displayTriangle) this.triangle.display();
+    this.pushMatrix();
+    this.multMatrix(translate(1.4, -1.4, 0));
+    this.multMatrix(rotateAroundZAxis(-45));
+    if(this.displayTriangleBig) this.triangleBig.display();
+    this.popMatrix();
 
+    this.pushMatrix();
+    this.multMatrix(translate(-1, -2.8, 0));
+    if(this.displayTriangleSmall) this.triangleSmall.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.multMatrix(translate(0, -2.8, 0));
+    this.multMatrix(rotateAroundZAxis(-90));
+    if(this.displayTriangle) this.triangle.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.multMatrix(translate(1.4, 0, 0));
+    this.multMatrix(rotateAroundYAxis(180));
+    this.multMatrix(rotateAroundZAxis(-135));
+    if(this.displayParallelogram) this.parallelogram.display();
+    this.popMatrix();
+
+
+    /*
     if(this.displayParallelogram) this.parallelogram.display();
 
     if(this.displayTriangleSmall) this.triangleSmall.display();
