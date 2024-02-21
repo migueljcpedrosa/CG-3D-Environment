@@ -104,18 +104,18 @@ export class MyScene extends CGFscene {
 
     //new code
     const toRadians = (angle) => {
-        return Math.PI * 2 * angle / 360;
-      };
+        return Math.PI * angle / 180;
+    }; 
   
-  
-    const rotateZAxis = (angle) => {
-    return [
-        Math.cos(toRadians(angle)), Math.sin(toRadians(angle)), 0, 0,
-        -Math.sin(toRadians(angle)), Math.cos(toRadians(angle)), 0, 0,
-        0, 0, 1, 0,
-        0, 0, 0, 1
-    ];
+    const rotateAroundZAxis = (angle) => {
+        return [
+            Math.cos(toRadians(angle)), -Math.sin(toRadians(angle)), 0, 0,
+            Math.sin(toRadians(angle)), Math.cos(toRadians(angle)), 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        ];
     };
+    
   
     const translate = (x, y, z) => {
     return [
@@ -135,7 +135,8 @@ export class MyScene extends CGFscene {
     ];
     };
 
-    this.multMatrix(rotateZAxis(45));
+    this.multMatrix(translate(-1, 0, 0));
+    this.multMatrix(rotateAroundZAxis(45));    
 
     // ---- BEGIN Primitive drawing section
     this.pushMatrix();
@@ -144,6 +145,7 @@ export class MyScene extends CGFscene {
 
     this.popMatrix();
 
+    /*
     if(this.displayTriangle) this.triangle.display();
 
     if(this.displayParallelogram) this.parallelogram.display();
@@ -152,5 +154,6 @@ export class MyScene extends CGFscene {
 
     if(this.displayTriangleBig) this.triangleBig.display();
     // ---- END Primitive drawing section
+    */
   }
 }
