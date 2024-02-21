@@ -4,6 +4,7 @@ import { MyParallelogram } from "./MyParallelogram.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
+import { MyUnitCube } from "./MyUnitCube.js";
 
 /**
  * MyScene
@@ -34,6 +35,7 @@ export class MyScene extends CGFscene {
     this.parallelogram = new MyParallelogram(this);
     this.triangleSmall = new MyTriangleSmall(this);
     this.triangleBig = new MyTriangleBig(this);
+    this.unitCube = new MyUnitCube(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -42,6 +44,7 @@ export class MyScene extends CGFscene {
     this.displayParallelogram = true;
     this.displayTriangleBig = true;
     this.displayTriangleSmall = true;
+    this.displayUnitCube = true;
     this.scaleFactor = 1;
   }
   initLights() {
@@ -146,14 +149,16 @@ export class MyScene extends CGFscene {
     ];
     }; 
 
+    if(this.displayUnitCube) this.unitCube.display();
+
     // ---- BEGIN Primitive drawing section
 
-    this.pushMatrix();
-    this.multMatrix(translate(-0.35, 0.95, 0));
-    this.multMatrix(rotateAroundZAxis(-20));   
-    this.setDiffuse(0, 1, 0, 1.0);
-    if(this.displayDiamond) this.diamond.display();
-    this.popMatrix();
+    //this.pushMatrix();
+    //this.multMatrix(translate(-0.35, 0.95, 0));
+    //this.multMatrix(rotateAroundZAxis(-20));   
+    //this.setDiffuse(0, 1, 0, 1.0);
+    //if(this.displayDiamond) this.diamond.display();
+    //this.popMatrix();
 
     /*
     this.pushMatrix();
