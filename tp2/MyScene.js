@@ -102,9 +102,47 @@ export class MyScene extends CGFscene {
 
     this.multMatrix(sca);
 
+    //new code
+    const toRadians = (angle) => {
+        return Math.PI * 2 * angle / 360;
+      };
+  
+  
+    const rotateZAxis = (angle) => {
+    return [
+        Math.cos(toRadians(angle)), Math.sin(toRadians(angle)), 0, 0,
+        -Math.sin(toRadians(angle)), Math.cos(toRadians(angle)), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    ];
+    };
+  
+    const translate = (x, y, z) => {
+    return [
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        x, y, z, 1
+    ];
+    };
+  
+    const scale = (x, y, z) => {
+    return [
+        x, 0, 0, 0,
+        0, y, 0, 0,
+        0, 0, z, 0,
+        0, 0, 0, 1
+    ];
+    };
+
+    this.multMatrix(rotateZAxis(45));
+
     // ---- BEGIN Primitive drawing section
+    this.pushMatrix();
 
     if(this.displayDiamond) this.diamond.display();
+
+    this.popMatrix();
 
     if(this.displayTriangle) this.triangle.display();
 
