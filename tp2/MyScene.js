@@ -133,16 +133,25 @@ export class MyScene extends CGFscene {
         0, 0, z, 0,
         0, 0, 0, 1
     ];
-    };
-
-    this.multMatrix(translate(-1, 0, 0));
-    this.multMatrix(rotateAroundZAxis(45));    
+    }; 
 
     // ---- BEGIN Primitive drawing section
+
     this.pushMatrix();
-
+    this.multMatrix(translate(-2.1, 0.7, 0));
+    this.multMatrix(rotateAroundZAxis(45));   
     if(this.displayDiamond) this.diamond.display();
+    this.popMatrix();
 
+    this.pushMatrix();
+    this.multMatrix(translate(-2.4, 1.4, 0));
+    if(this.displayTriangleSmall) this.triangleSmall.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.multMatrix(translate(-1.4, -1.4, 0));
+    this.multMatrix(rotateAroundZAxis(45));
+    if(this.displayTriangleBig) this.triangleBig.display();
     this.popMatrix();
 
     /*
