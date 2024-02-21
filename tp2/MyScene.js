@@ -4,6 +4,7 @@ import { MyParallelogram } from "./MyParallelogram.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
+import { MyQuad } from "./MyQuad.js";
 
 /**
  * MyScene
@@ -34,6 +35,7 @@ export class MyScene extends CGFscene {
     this.parallelogram = new MyParallelogram(this);
     this.triangleSmall = new MyTriangleSmall(this);
     this.triangleBig = new MyTriangleBig(this);
+    this.quad = new MyQuad(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -42,11 +44,12 @@ export class MyScene extends CGFscene {
     this.displayParallelogram = true;
     this.displayTriangleBig = true;
     this.displayTriangleSmall = true;
+    this.displayQuad = true;
     this.scaleFactor = 1;
   }
   initLights() {
-    this.lights[0].setPosition(15, 2, 5, 1);
-    this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[0].setPosition(0, 0, 15, 1);
+    this.lights[0].setDiffuse(0.5, 0.5, 0.5, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
   }
@@ -157,19 +160,32 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
+    //fica com mult matrix
     this.pushMatrix();
     this.multMatrix(translate(-0.35, 0.95, 0));
     this.multMatrix(rotateAroundZAxis(-20));   
-    this.setDiffuse(0, 1, 0, 1.0);
+    this.setDiffuse(0, 1, 0, 1);
+    this.setAmbient(0, 1, 0, 1);
     if(this.displayDiamond) this.diamond.display();
     this.popMatrix();
 
+    //usar pre definidas
     this.pushMatrix();
     this.multMatrix(translate(1.2, 0.25, 0));
     this.multMatrix(rotateAroundZAxis(25));
     this.setDiffuse(0.6, 0.2, 0.4, 1.0);
+    this.setAmbient(0.6, 0.2, 0.4, 1.0);
     if(this.displayTriangle) this.triangle.display();
     this.popMatrix();
+
+    this.pushMatrix();
+    this.multMatrix(translate(1.6, 1.2, 0));
+    this.multMatrix(rotateAroundZAxis(205));
+    this.setDiffuse(1, 0, 0, 1.0);
+    if(this.displayTriangleSmall) this.triangleSmall.display();
+    this.popMatrix();
+
+    if(this.displayQuad) this.quad.display(); 
 
     /*
     this.pushMatrix();
