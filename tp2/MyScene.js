@@ -4,6 +4,7 @@ import { MyParallelogram } from "./MyParallelogram.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
+import { MyTangram } from "./MyTangram.js";
 
 /**
  * MyScene
@@ -34,7 +35,8 @@ export class MyScene extends CGFscene {
     this.parallelogram = new MyParallelogram(this);
     this.triangleSmall = new MyTriangleSmall(this);
     this.triangleBig = new MyTriangleBig(this);
-
+    this.tangram = new MyTangram(this);
+    
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayDiamond = true;
@@ -42,6 +44,7 @@ export class MyScene extends CGFscene {
     this.displayParallelogram = true;
     this.displayTriangleBig = true;
     this.displayTriangleSmall = true;
+    this.displayTangram = true;
     this.scaleFactor = 1;
   }
   initLights() {
@@ -148,13 +151,13 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    
+   
 
     this.pushMatrix();
     this.multMatrix(translate(-0.35, 0.95, 0));
     this.multMatrix(rotateAroundZAxis(-20));   
     this.setDiffuse(0, 1, 0, 1.0);
-    //this.setAmbient(0, 1, 0, 1.0);
+    this.setAmbient(0, 1, 0, 1.0);
     if(this.displayDiamond) this.diamond.display();
     this.popMatrix();
 
@@ -163,7 +166,7 @@ export class MyScene extends CGFscene {
     this.multMatrix(translate(-2.38, 3.5, 0));
     this.multMatrix(rotateAroundZAxis(160));   
     this.setDiffuse(0.7, 0, 0.7, 1.0);
-    //this.setAmbient(0.7, 0, 0.7, 1.0);
+    this.setAmbient(0.7, 0, 0.7, 1.0);
     if(this.displayTriangleSmall) this.triangleSmall.display();
     this.popMatrix();
 
@@ -172,7 +175,7 @@ export class MyScene extends CGFscene {
     this.multMatrix(translate(-0.85, -1.8, 0));
     this.multMatrix(rotateAroundZAxis(-65));
     this.setDiffuse(0, 0, 0.6, 1.0);
-    //this.setAmbient(0, 0, 0.6, 1.0);
+    this.setAmbient(0, 0, 0.6, 1.0);
     if(this.displayTriangleBig) this.triangleBig.display();
     this.popMatrix();
 
@@ -181,7 +184,7 @@ export class MyScene extends CGFscene {
     this.multMatrix(translate(1.45, 3.1, 0));
     this.multMatrix(rotateAroundZAxis(-65));
     this.setDiffuse(1.1, 0.7, 0.3, 1.0);
-    //this.setAmbient(1.1, 0.7, 0.3, 1.0);
+    this.setAmbient(1.1, 0.7, 0.3, 1.0);
     if(this.displayTriangleBig) this.triangleBig.display();
     this.popMatrix();
 
@@ -191,16 +194,16 @@ export class MyScene extends CGFscene {
     this.multMatrix(rotateAroundZAxis(-110));
     this.multMatrix(scale(1.5, 1.5, 0));
     this.setDiffuse(0.3, 0.1, 0.2, 1.0);
-    //this.setAmbient(0.3, 0.1, 0.2, 1.0);
+    this.setAmbient(0.3, 0.1, 0.2, 1.0);
     if(this.displayTriangleSmall) this.triangleSmall.display();
     this.popMatrix();
 
     
     this.pushMatrix();
-    this.multMatrix(translate(1.85, 1.1, 0));
+    this.multMatrix(translate(1.87, 1.1, 0));
     this.multMatrix(rotateAroundZAxis(-20));
     this.setDiffuse(1, 0, 0, 1.0);
-    //this.setAmbient(1, 0, 0, 1.0);
+    this.setAmbient(1, 0, 0, 1.0);
     this.multMatrix(scale(0.8, 0.8, 0));
     if(this.displayTriangle) this.triangle.display();
     this.popMatrix();
@@ -214,6 +217,7 @@ export class MyScene extends CGFscene {
     this.setAmbient(0.9, 0.9, 0.0, 1.0);
     if(this.displayParallelogram) this.parallelogram.display();
     this.popMatrix();
+
     
   }
 }
