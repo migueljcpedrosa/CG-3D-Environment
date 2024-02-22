@@ -148,6 +148,8 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
+    
+
     this.pushMatrix();
     this.multMatrix(translate(-0.35, 0.95, 0));
     this.multMatrix(rotateAroundZAxis(-20));   
@@ -155,24 +157,34 @@ export class MyScene extends CGFscene {
     if(this.displayDiamond) this.diamond.display();
     this.popMatrix();
 
-    /*
+    
     this.pushMatrix();
-    this.multMatrix(translate(-2.4, 1.4, 0));
+    this.multMatrix(translate(-2.38, 3.5, 0));
+    this.multMatrix(rotateAroundZAxis(160));   
+    this.setDiffuse(0.7, 0, 0.7, 1.0);
+    this.setAmbient(0.7, 0, 0.7, 1.0);
     if(this.displayTriangleSmall) this.triangleSmall.display();
     this.popMatrix();
 
+    
     this.pushMatrix();
-    this.multMatrix(translate(-1.4, -1.4, 0));
-    this.multMatrix(rotateAroundZAxis(45));
+    this.multMatrix(translate(-0.85, -1.8, 0));
+    this.multMatrix(rotateAroundZAxis(-65));
+    this.setDiffuse(0, 0, 0.6, 1.0);
+    this.setAmbient(0, 0, 0.6, 1.0);
     if(this.displayTriangleBig) this.triangleBig.display();
     this.popMatrix();
 
+    
     this.pushMatrix();
-    this.multMatrix(translate(1.4, -1.4, 0));
-    this.multMatrix(rotateAroundZAxis(-45));
+    this.multMatrix(translate(1.3, 3.2, 0));
+    this.multMatrix(rotateAroundZAxis(-70));
+    this.setDiffuse(0.9, 0.5, 0.3, 1.0);
+    this.setAmbient(0, 0, 0.6, 1.0);
     if(this.displayTriangleBig) this.triangleBig.display();
     this.popMatrix();
 
+    /*
     this.pushMatrix();
     this.multMatrix(translate(-1, -2.8, 0));
     if(this.displayTriangleSmall) this.triangleSmall.display();
@@ -184,12 +196,15 @@ export class MyScene extends CGFscene {
     if(this.displayTriangle) this.triangle.display();
     this.popMatrix();
 
+    */
     this.pushMatrix();
-    this.multMatrix(translate(1.4, 0, 0));
+    this.multMatrix(translate(-1.33, 0.65, 0));
     this.multMatrix(rotateAroundYAxis(180));
-    this.multMatrix(rotateAroundZAxis(-135));
+    this.multMatrix(rotateAroundZAxis(-70));
+    this.setDiffuse(0.9, 0.9, 0.0, 1.0);
+    this.setAmbient(0.9, 0.9, 0.0, 1.0);
     if(this.displayParallelogram) this.parallelogram.display();
     this.popMatrix();
-    */
+    
   }
 }
