@@ -55,7 +55,7 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(-0.85, -1.8, 0);
         this.scene.rotate(65 * Math.PI / 180, 0, 0, 1)
-        this.scene.setDiffuse(0, 0, 1, 1.0);
+        this.scene.setDiffuse(0, 0.3, 1, 1.0);
         this.triangleBig.display();
         this.scene.popMatrix();
 
@@ -63,38 +63,49 @@ export class MyTangram extends CGFobject {
         //Big Orange Triangle
         this.scene.pushMatrix();
         this.scene.translate(1.45, 3.1, 0);
-        this.scene.rotate(65 * Math.PI / 180, 0, 0, 1)
+        this.scene.rotate(65 * Math.PI / 180, 0, 0, 1);
         this.scene.setDiffuse(1.1, 0.7, 0.3, 1);
         this.triangleBig.display();
         this.scene.popMatrix();
         
-
-        /*
-        //Paralelograma
+      
+        //Parallelogram
         this.scene.pushMatrix();
-        this.scene.translate(-1.33, 0.65, 0);
-        this.scene.rotate(70 * Math.PI / 180, 0, 0, 1)
-        this.scene.setDiffuse(0.9, 0.9, 0.0, 1.0);
-        this.triangleBig.display();
+        this.scene.translate(-1.4, 3.8, 0);
+        this.scene.rotate(110 * Math.PI / 180, 0, 0, 1);
+        this.scene.scale(-1, 1, 0);
+        this.scene.setDiffuse(1, 1, 0, 1);
+        this.parallelogram.display();
         this.scene.popMatrix();
-        
-        */
+   
+    
+        //Small Purple Triangle
+        this.scene.pushMatrix();
+        this.scene.translate(-2.38, 3.5, 0);
+        this.scene.rotate(200 * Math.PI / 180, 0, 0, 1);
+        this.scene.setDiffuse(0.7, 0.28, 0.83, 1.0);
+        this.scene.setAmbient(0.6, 0, 0.7, 1.0);
+        this.triangleSmall.display();
+        this.scene.popMatrix();
 
-
-        /* 
-        
-        */
-
-
-        /*
-        
-        
-        */
-
-        /* 
-        
-        
-        */
+        //Small Red Triangle
+        this.scene.pushMatrix();
+        this.scene.translate(1.7, 1.1, 0);
+        this.scene.rotate(155 * Math.PI / 180, 0, 0, 1);
+        this.scene.setDiffuse(1, 0, 0, 1.0);
+        this.scene.setAmbient(1, 0, 0, 1.0);
+        this.triangleSmall.display();
+        this.scene.popMatrix();
+    
+       
+        //Pink Triangle
+        this.scene.pushMatrix();
+        this.scene.translate(1.23, 0.2, 0);
+        this.scene.rotate(-25 * Math.PI / 180, 0, 0, 1);
+        this.scene.setDiffuse(1, 0.5, 0.8, 1.0);
+        this.scene.setAmbient(1, 0.5, 1, 1.0);
+        this.triangle.display();
+        this.scene.popMatrix();
         
     }
 }
