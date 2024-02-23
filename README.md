@@ -4,6 +4,7 @@
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
 | Miguel Pedrosa   | 202108809 | up202108809@edu.fe.up.pt              |
+| Joana Marques    | 202103346 | up202103346@edu.fe.up.pt              |
 | Gonçalo Marques  | 202006874 | up202006874@edu.fe.up.pt              |
 
 ----
