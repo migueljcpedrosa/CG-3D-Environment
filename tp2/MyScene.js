@@ -6,6 +6,7 @@ import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
 import { MyQuad } from "./MyQuad.js";
 import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
+import { MyTangram } from "./MyTangram.js";
 
 /**
  * MyScene
@@ -38,7 +39,8 @@ export class MyScene extends CGFscene {
     this.triangleBig = new MyTriangleBig(this);
     this.quad = new MyQuad(this);
     this.MyUnitCubeQuad = new MyUnitCubeQuad(this);
-
+    this.tangram = new MyTangram(this);
+    
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayDiamond = true;
@@ -48,6 +50,7 @@ export class MyScene extends CGFscene {
     this.displayTriangleSmall = true;
     this.displayQuad = true;
     this.displayMyUnitCubeQuad = true;
+    this.displayTangram = true;
     this.scaleFactor = 1;
   }
   initLights() {
@@ -109,128 +112,23 @@ export class MyScene extends CGFscene {
 
     this.multMatrix(sca);
 
-    //new code
-    const toRadians = (angle) => {
-        return Math.PI * angle / 180;
-    }; 
-  
-    const rotateAroundZAxis = (angle) => {
-        return [
-            Math.cos(toRadians(angle)), -Math.sin(toRadians(angle)), 0, 0,
-            Math.sin(toRadians(angle)), Math.cos(toRadians(angle)), 0, 0,
-            0, 0, 1, 0,
-            0, 0, 0, 1
-        ];
-    };
-
-    const rotateAroundYAxis = (angle) => {
-        return [
-            Math.cos(toRadians(angle)), 0, Math.sin(toRadians(angle)), 0,
-            0, 1, 0, 0,
-            -Math.sin(toRadians(angle)), 0, Math.cos(toRadians(angle)), 0,
-            0, 0, 0, 1
-        ];
-    };
-    
-    const rotateAroundXAxis = (angle) => {
-        return [
-            1, 0, 0, 0,
-            0, Math.cos(toRadians(angle)), -Math.sin(toRadians(angle)), 0,
-            0, Math.sin(toRadians(angle)), Math.cos(toRadians(angle)), 0,
-            0, 0, 0, 1
-        ];
-    };
-  
-    
-  
-    const translate = (x, y, z) => {
-    return [
-        1, 0, 0, 0,
-        0, 1, 0, 0,
-        0, 0, 1, 0,
-        x, y, z, 1
-    ];
-    };
-  
-    const scale = (x, y, z) => {
-    return [
-        x, 0, 0, 0,
-        0, y, 0, 0,
-        0, 0, z, 0,
-        0, 0, 0, 1
-    ];
-    }; 
-
     // ---- BEGIN Primitive drawing section
 
-    //fica com mult matrix
+    //Unit Cube Quad
     this.pushMatrix();
-    this.multMatrix(translate(-0.35, 0.95, 0));
-    this.multMatrix(rotateAroundZAxis(-20));   
-    this.setDiffuse(0, 1, 0, 1);
-    this.setAmbient(0, 1, 0, 1);
-    if(this.displayDiamond) this.diamond.display();
+    this.translate(0, 0, -5.1);
+    this.scale(10, 10, 10);
+    if(this.displayMyUnitCubeQuad) this.MyUnitCubeQuad.display();
+    this.popMatrix();
+      
+
+    this.multMatrix(sca);
+    //this.rotate(-Math.PI/2,1,0,0);
+
+    //Tangram
+    this.pushMatrix();
+    if(this.displayTangram) this.tangram.display();
     this.popMatrix();
 
-    //usar pre definidas
-    this.pushMatrix();
-    this.multMatrix(translate(1.2, 0.25, 0));
-    this.multMatrix(rotateAroundZAxis(25));
-    this.setDiffuse(0.6, 0.2, 0.4, 1.0);
-    this.setAmbient(0.6, 0.2, 0.4, 1.0);
-    if(this.displayTriangle) this.triangle.display();
-    this.popMatrix();
-
-    this.pushMatrix();
-    this.multMatrix(translate(1.6, 1.2, 0));
-    this.multMatrix(rotateAroundZAxis(205));
-    this.setDiffuse(1, 0, 0, 1.0);
-    if(this.displayTriangleSmall) this.triangleSmall.display();
-    this.popMatrix();
-
-    if(this.displayQuad) this.quad.display(); 
-
-    this.pushMatrix()
-    this.translate(2.5, 2.5, 2.5)
-    this.rotate(3 * Math.PI / 2, 1, 0, 0)
-    this.scale(5, 5, 5)
-    if(this.displayMyUnitCubeQuad) this.MyUnitCubeQuad.display()
-    this.popMatrix()
-    /*
-    this.pushMatrix();
-    this.multMatrix(translate(-2.4, 1.4, 0));
-    if(this.displayTriangleSmall) this.triangleSmall.display();
-    this.popMatrix();
-
-    this.pushMatrix();
-    this.multMatrix(translate(-1.4, -1.4, 0));
-    this.multMatrix(rotateAroundZAxis(45));
-    if(this.displayTriangleBig) this.triangleBig.display();
-    this.popMatrix();
-
-    this.pushMatrix();
-    this.multMatrix(translate(1.4, -1.4, 0));
-    this.multMatrix(rotateAroundZAxis(-45));
-    if(this.displayTriangleBig) this.triangleBig.display();
-    this.popMatrix();
-
-    this.pushMatrix();
-    this.multMatrix(translate(-1, -2.8, 0));
-    if(this.displayTriangleSmall) this.triangleSmall.display();
-    this.popMatrix();
-
-    this.pushMatrix();
-    this.multMatrix(translate(0, -2.8, 0));
-    this.multMatrix(rotateAroundZAxis(-90));
-    if(this.displayTriangle) this.triangle.display();
-    this.popMatrix();
-
-    this.pushMatrix();
-    this.multMatrix(translate(1.4, 0, 0));
-    this.multMatrix(rotateAroundYAxis(180));
-    this.multMatrix(rotateAroundZAxis(-135));
-    if(this.displayParallelogram) this.parallelogram.display();
-    this.popMatrix();
-    */
-  }
+}
 }
