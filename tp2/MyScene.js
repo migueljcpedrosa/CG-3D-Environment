@@ -116,7 +116,7 @@ export class MyScene extends CGFscene {
 
     // Apply transformations to both objects together
     this.pushMatrix();
-    this.translate(5, 0, 5);
+    this.translate(5, 10, 5);
     this.rotate(-Math.PI / 2, 1, 0, 0);
 
     //Unit Cube Quad
