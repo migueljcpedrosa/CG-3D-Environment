@@ -12,6 +12,10 @@ export class MyUnitCubeQuad extends CGFobject {
     }
 
     display() {
+        this.scene.pushMatrix();
+        this.scene.setDiffuse(0.1, 0.7, 1, 1.0);
+        this.scene.setAmbient(1, 1, 1, 1.0);
+
         //Front view
         this.scene.pushMatrix();
         this.scene.translate(0, 0, 0.5);
@@ -51,6 +55,8 @@ export class MyUnitCubeQuad extends CGFobject {
         this.scene.translate(-0.5, 0, 0);
         this.scene.rotate(3 * Math.PI / 2, 0, 1, 0);
         this.quad.display();
+        this.scene.popMatrix();
+
         this.scene.popMatrix();
     }
 }
