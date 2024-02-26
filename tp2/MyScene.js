@@ -132,7 +132,7 @@ export class MyScene extends CGFscene {
     
     this.multMatrix(sca);
     this.pushMatrix();
-    this.translate(4, 0, 5);
+    this.translate(4, 0.1, 5);
     this.rotate(-Math.PI / 2, 1, 0, 0);
     
     //Unit Cube Quad
