@@ -31,22 +31,11 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this);
-    this.parallelogram = new MyParallelogram(this);
-    this.triangleSmall = new MyTriangleSmall(this);
-    this.triangleBig = new MyTriangleBig(this);
     this.unitCube = new MyUnitCube(this);
-
     this.tangram = new MyTangram(this);
     
     //Objects connected to MyInterface
     this.displayAxis = true;
-    this.displayDiamond = true;
-    this.displayTriangle = true;
-    this.displayParallelogram = true;
-    this.displayTriangleBig = true;
-    this.displayTriangleSmall = true;
     this.displayUnitCube = true;
     this.displayTangram = true;
     this.scaleFactor = 1;
@@ -110,9 +99,13 @@ export class MyScene extends CGFscene {
 
     this.multMatrix(sca);
 
-
+    this.pushMatrix();
+    this.scale(9, 2, 9);
+    this.translate(0.5, -0.5, 0.5);
+    this.setDiffuse(1, 1, 1, 1);
+    this.setAmbient(1, 1, 1, 1);
     if(this.displayUnitCube) this.unitCube.display();
-
+    this.popMatrix();
     // ---- BEGIN Primitive drawing section
 
     this.multMatrix(sca);
@@ -120,9 +113,10 @@ export class MyScene extends CGFscene {
 
     //Tangram
     this.pushMatrix();
+    this.translate(4, 0.1, 5);
+    this.rotate(90 * Math.PI / 180, -1, 0, 0);
     if(this.displayTangram) this.tangram.display();
     this.popMatrix();
-
     
   }
 }
