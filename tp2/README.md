@@ -212,6 +212,7 @@ After successfully creating the cube with its center in the origin, we were requ
     this.popMatrix();
 
     this.popMatrix();
-    ```
+```
+
 
 ![CubeQuad and Tangram](cg-t03g05-tp2-3.jpg)
