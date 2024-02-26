@@ -6,6 +6,7 @@ import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
 import { MyQuad } from "./MyQuad.js";
 import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
+import { MyUnitCube } from "./MyUnitCube.js";
 import { MyTangram } from "./MyTangram.js";
 
 /**
@@ -32,22 +33,14 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this);
-    this.parallelogram = new MyParallelogram(this);
-    this.triangleSmall = new MyTriangleSmall(this);
-    this.triangleBig = new MyTriangleBig(this);
+    this.unitCube = new MyUnitCube(this);
     this.quad = new MyQuad(this);
     this.MyUnitCubeQuad = new MyUnitCubeQuad(this);
     this.tangram = new MyTangram(this);
     
     //Objects connected to MyInterface
     this.displayAxis = true;
-    this.displayDiamond = true;
-    this.displayTriangle = true;
-    this.displayParallelogram = true;
-    this.displayTriangleBig = true;
-    this.displayTriangleSmall = true;
+    this.displayUnitCube = true;
     this.displayQuad = true;
     this.displayMyUnitCubeQuad = true;
     this.displayTangram = true;
@@ -112,9 +105,31 @@ export class MyScene extends CGFscene {
 
     this.multMatrix(sca);
 
-    // ---- BEGIN Primitive drawing section
+    //Unit Cube As Single Mesh
+    if(this.displayUnitCube){
+      this.pushMatrix();
+      this.scale(9, 2, 9);
+      this.translate(0.5, -0.5, 0.5);
+      this.setDiffuse(1, 1, 1, 1);
+      this.setAmbient(1, 1, 1, 1);
+      this.unitCube.display();
+      this.popMatrix();
+
+      this.multMatrix(sca);
+      //this.rotate(-Math.PI/2,1,0,0);
+
+      //Tangram
+      this.pushMatrix();
+      this.translate(4, 0.1, 5);
+      this.rotate(90 * Math.PI / 180, -1, 0, 0);
+      if(this.displayTangram) this.tangram.display();
+      this.popMatrix();
+    }
+
+    //Unit Cube As Set of Quads
 
     // Apply transformations to both objects together
+    /*
     this.pushMatrix();
     this.translate(5, 10, 5);
     this.rotate(-Math.PI / 2, 1, 0, 0);
@@ -131,9 +146,11 @@ export class MyScene extends CGFscene {
 
     //Tangram
     this.pushMatrix();
+    this.translate(4, 0.1, 5);
+    this.rotate(90 * Math.PI / 180, -1, 0, 0);
     if(this.displayTangram) this.tangram.display();
     this.popMatrix();
-    
-    this.popMatrix();
+        this.popMatrix();
+        */
   }
 }
