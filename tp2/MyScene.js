@@ -130,14 +130,15 @@ export class MyScene extends CGFscene {
 
     // Apply transformations to both objects together
     /*
+    this.multMatrix(sca);
     this.pushMatrix();
-    this.translate(5, 10, 5);
+    this.translate(4, 0, 5);
     this.rotate(-Math.PI / 2, 1, 0, 0);
-
+    */
     //Unit Cube Quad
     this.pushMatrix();
-    this.translate(0, 0, -5.1);
-    this.scale(10, 10, 10);
+    this.translate(0.5, 0.5, -1.1);
+    this.scale(9, 9, 2);
     if(this.displayMyUnitCubeQuad) this.MyUnitCubeQuad.display();
     this.popMatrix();
       
@@ -146,11 +147,10 @@ export class MyScene extends CGFscene {
 
     //Tangram
     this.pushMatrix();
-    this.translate(4, 0.1, 5);
-    this.rotate(90 * Math.PI / 180, -1, 0, 0);
     if(this.displayTangram) this.tangram.display();
     this.popMatrix();
-        this.popMatrix();
-        */
+    /*
+    this.popMatrix();
+    */
   }
 }
