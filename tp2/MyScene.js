@@ -141,9 +141,6 @@ export class MyScene extends CGFscene {
     this.scale(9, 9, 2);
     if(this.displayMyUnitCubeQuad) this.MyUnitCubeQuad.display();
     this.popMatrix();
-      
-
-    this.multMatrix(sca);
 
     //Tangram
     this.pushMatrix();
