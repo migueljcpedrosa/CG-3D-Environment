@@ -81,5 +81,7 @@ Then, using the geometric transformations provided by the WebCGF library, the cu
 *Figure 2. Unit cube base for tangram*
 
 ### Exercise 3
+Exercise 3 involved creating a cube, as in exercise 2, resorting to 6 quads, instead of using a single mesh, as in exercise 2. 
+The first tep was to position the cube behind the tangram, so that we could then rotate the set of objects so that the upper left vertex of the base coincided with the origin of the referential. 
 
 ![CubeQuad and Tangram](cg-t03g05-tp2-3.jpg)
