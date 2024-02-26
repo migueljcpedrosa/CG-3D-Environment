@@ -17,7 +17,7 @@ A new class, MyTangram, was created as a subclass of CGFobject to serve as a com
 In the MyScene class, an instance of MyTangram was created in the init() method, and the display() method was updated to invoke the display() method of the MyTangram object. This ensures that the entire Tangram figure is rendered correctly within the scene.
 
 
-![Tangram](MyTangramG05.png)
+![Tangram](cg-t03g05-tp2-1.png)
 
 *Figure 1. Final Result of Tangram figure after applying geometric transformations*
 
