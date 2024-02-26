@@ -81,7 +81,111 @@ Then, using the geometric transformations provided by the WebCGF library, the cu
 *Figure 2. Unit cube base for tangram*
 
 ### Exercise 3
-Exercise 3 involved creating a cube, as in exercise 2, resorting to 6 quads, instead of using a single mesh, as in exercise 2. 
-The first tep was to position the cube behind the tangram, so that we could then rotate the set of objects so that the upper left vertex of the base coincided with the origin of the referential. 
+Exercise 3 entailed the construction of a cube similar to that in Exercise 2, employing six quads rather than a singular mesh as previously done.
+
+- MyQuad:
+```js
+import { CGFobject } from '../lib/CGF.js';
+/**
+ * MyQuad
+ * @constructor
+ * @param scene - Reference to MyScene object
+ */
+export class MyQuad extends CGFobject {
+    constructor(scene) {
+        super(scene);
+        this.initBuffers();
+    }
+
+    initBuffers() {
+        this.vertices = [
+            0.5, -0.5, 0,	    //0 
+            0.5, 0.5, 0,	    //1
+            -0.5, 0.5, 0,	    //2
+            -0.5, -0.5, 0,	    //3
+        ];
+
+        //Counter-clockwise reference of vertices
+        this.indices = [
+            0, 1, 3,
+            3, 1, 2
+        ];
+
+        //The defined indices (and corresponding vertices)
+        //will be read in groups of three to draw triangles
+        this.primitiveType = this.scene.gl.TRIANGLES;
+
+        this.initGLBuffers();
+    }
+}
+```
+
+- MyUnitCubeQuad
+```js
+import { CGFobject } from '../lib/CGF.js';
+import { MyQuad } from './MyQuad.js';
+/**
+ * MyUnitCubeQuad
+ * @constructor
+ * @param scene - Reference to MyScene object
+ */
+export class MyUnitCubeQuad extends CGFobject {
+    constructor(scene) {
+        super(scene);
+        this.quad = new MyQuad(scene);
+    }
+
+    display() {
+        this.scene.pushMatrix();
+        this.scene.setDiffuse(0.1, 0.7, 1, 1.0);
+        this.scene.setAmbient(1, 1, 1, 1.0);
+
+        //Front view
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, 0.5);
+        //no need to rotate
+        this.quad.display();
+        this.scene.popMatrix();
+
+        //Back view
+        this.scene.pushMatrix();
+        this.scene.translate(0,0,-0.5);
+        this.scene.rotate(Math.PI, 1, 0, 0); //rotate 180 degrees. quad only visible from one side
+        this.quad.display();
+        this.scene.popMatrix();
+
+        //Top view
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0.5, 0);
+        this.scene.rotate(-1 * Math.PI/2, 1, 0, 0);
+        this.quad.display();
+        this.scene.popMatrix();
+
+        //Bottom view
+        this.scene.pushMatrix();
+        this.scene.translate(0, -0.5, 0);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.quad.display();
+        this.scene.popMatrix();
+        //Right view
+        this.scene.pushMatrix();
+        this.scene.translate(0.5, 0, 0);
+        this.scene.rotate(Math.PI / 2, 0, 1, 0); //rotate around y axis
+        this.quad.display();
+        this.scene.popMatrix();
+
+        //Left view
+        this.scene.pushMatrix();
+        this.scene.translate(-0.5, 0, 0);
+        this.scene.rotate(3 * Math.PI / 2, 0, 1, 0);
+        this.quad.display();
+        this.scene.popMatrix();
+
+        this.scene.popMatrix();
+    }
+}
+```
+
+After successfully creating the cube with its center in the origin, we were requested to position it behind the tangram. This setup allowed for the rotation of the object ensemble until the upper left vertex of the cube's base aligned with the origin of the reference coordinate system.
 
 ![CubeQuad and Tangram](cg-t03g05-tp2-3.jpg)
