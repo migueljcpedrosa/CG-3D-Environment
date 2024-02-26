@@ -21,3 +21,61 @@ In the MyScene class, an instance of MyTangram was created in the init() method,
 
 *Figure 1. Final Result of Tangram figure after applying geometric transformations*
 
+### Exercise 2 
+Exercise 2 involved creating a unitary cube centered at the origin with a single mesh of triangles.
+
+The first step was to declare the 8 vertices of the cube:
+```js
+this.vertices = [
+            0.5, 0.5, 0.5, //0
+            0.5, 0.5, -0.5, //1
+            0.5, -0.5, 0.5, //2
+            0.5, -0.5, -0.5, //3
+
+            -0.5, 0.5, 0.5, //4
+            -0.5, 0.5, -0.5, //5
+            -0.5, -0.5, 0.5, //6
+            -0.5, -0.5, -0.5, //7
+		];
+```
+
+and define the triangles, in this case they are all double sided:
+```js
+		this.indices = [
+            1, 0, 2,
+            2, 0, 1,
+            3, 1, 2,
+            2, 1, 3,
+
+            6, 4, 5,
+            5, 4, 6,
+            6, 5, 7,
+            7, 5, 6,
+
+            0, 1, 4,
+            4, 1, 0,
+            1, 5, 4,
+            4, 5, 1,
+
+            0, 4, 2,
+            2, 4, 0,
+            2, 4, 6,
+            6, 4, 2,
+
+            1, 5, 3,
+            3, 5, 1,
+            3, 5, 7, 
+            7, 5, 3,
+
+            2, 3, 6,
+            6, 3, 2,
+            3, 7, 6, 
+            6, 7, 3
+		];
+```
+
+Then, using the geometric transformations provided by the WebCGF library, the cube was placed parallel to the xz axis to be a base for the tangram, with the top left vertex on the origin (0,0,0).
+
+![Cube and Tangram](cg-t03g05-tp2-2.png)
+
+*Figure 2. Unit cube base for tangram*
