@@ -188,4 +188,30 @@ export class MyUnitCubeQuad extends CGFobject {
 
 After successfully creating the cube with its center in the origin, we were requested to position it behind the tangram. This setup allowed for the rotation of the object ensemble until the upper left vertex of the cube's base aligned with the origin of the reference coordinate system.
 
+```js
+// Apply transformations to both objects together
+    
+    this.multMatrix(sca);
+    this.pushMatrix();
+    this.translate(4, 0, 5);
+    this.rotate(-Math.PI / 2, 1, 0, 0);
+    
+    //Unit Cube Quad
+    this.pushMatrix();
+    this.translate(0.5, 0.5, -1.1);
+    this.scale(9, 9, 2);
+    if(this.displayMyUnitCubeQuad) this.MyUnitCubeQuad.display();
+    this.popMatrix();
+      
+
+    this.multMatrix(sca);
+
+    //Tangram
+    this.pushMatrix();
+    if(this.displayTangram) this.tangram.display();
+    this.popMatrix();
+
+    this.popMatrix();
+    ```
+
 ![CubeQuad and Tangram](cg-t03g05-tp2-3.jpg)
