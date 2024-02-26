@@ -79,3 +79,7 @@ Then, using the geometric transformations provided by the WebCGF library, the cu
 ![Cube and Tangram](cg-t03g05-tp2-2.png)
 
 *Figure 2. Unit cube base for tangram*
+
+### Exercise 3
+
+![CubeQuad and Tangram](cg-t03g05-tp2-3.jpg)
