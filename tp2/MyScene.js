@@ -4,6 +4,8 @@ import { MyParallelogram } from "./MyParallelogram.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
+import { MyQuad } from "./MyQuad.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 import { MyUnitCube } from "./MyUnitCube.js";
 import { MyTangram } from "./MyTangram.js";
 
@@ -32,17 +34,21 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.unitCube = new MyUnitCube(this);
+    this.quad = new MyQuad(this);
+    this.MyUnitCubeQuad = new MyUnitCubeQuad(this);
     this.tangram = new MyTangram(this);
     
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayUnitCube = true;
+    this.displayQuad = true;
+    this.displayMyUnitCubeQuad = true;
     this.displayTangram = true;
     this.scaleFactor = 1;
   }
   initLights() {
-    this.lights[0].setPosition(15, 2, 5, 1);
-    this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[0].setPosition(0, 0, 15, 1);
+    this.lights[0].setDiffuse(0.5, 0.5, 0.5, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
   }
@@ -122,5 +128,32 @@ export class MyScene extends CGFscene {
 
     this.popMatrix();
     
+
+    // Apply transformations to both objects (unit cube quad and tangram) together
+    
+    this.multMatrix(sca);
+    this.pushMatrix();
+    this.translate(4, 0.1, 5);
+    this.rotate(-Math.PI / 2, 1, 0, 0);
+    
+    //Unit Cube Quad
+    this.pushMatrix();
+    this.translate(0.5, 0.5, -1.1);
+    this.scale(9, 9, 2);
+    this.setDiffuse(1, 1, 1, 1);
+    this.setAmbient(1, 1, 1, 1);
+    if(this.displayMyUnitCubeQuad) this.MyUnitCubeQuad.display();
+    this.popMatrix();
+      
+
+    this.multMatrix(sca);
+
+    //Tangram
+    this.pushMatrix();
+    if(this.displayTangram) this.tangram.display();
+    this.popMatrix();
+
+    this.popMatrix();
+
   }
 }
