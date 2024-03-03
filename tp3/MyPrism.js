@@ -1,12 +1,14 @@
 import { CGFobject } from '../lib/CGF.js';
 /**
- * MyQuad
+ * MyPrism
  * @constructor
  * @param scene - Reference to MyScene object
  */
-export class MyQuad extends CGFobject {
-    constructor(scene) {
+export class MyPrism extends CGFobject {
+    constructor(scene, slices, stacks) {
         super(scene);
+        this.slices = slices;
+        this.stacks = stacks;
         this.initBuffers();
     }
 
