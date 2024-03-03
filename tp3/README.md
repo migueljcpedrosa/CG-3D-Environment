@@ -8,3 +8,8 @@
 | :-----------: |
 | ![Exercise 1.1](cg-t03g05-tp3-1.png) |
 | ![Exercise 1.2](cg-t03g05-tp3-2.png) |
+
+| **Exercise 2**|
+| :-----------: |
+| ![Exercise 2](cg-t03g05-tp3-3.jpg) |
+
