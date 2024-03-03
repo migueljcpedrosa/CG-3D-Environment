@@ -22,7 +22,7 @@ export class MyPrism extends CGFobject {
         let index = 0;
         let incrementAngle = 2 * Math.PI / this.slices;
 
-        let incrementStacks = 1 / this.stacks; //height of column is 1, so each stack has a height of 1/stacks
+        let incrementStacks = 1 / this.stacks; //height of column is 1, so each stack has a height of 1/stacks 
 
         for (let stackIterator = 0 ; stackIterator < this.stacks ; stackIterator++) {
             for (let sliceIterator = 0 ; sliceIterator < this.slices ; sliceIterator++) {
