@@ -1,6 +1,6 @@
 import { CGFobject } from '../lib/CGF.js';
 /**
- * MyPrism
+ * MyDiamond
  * @constructor
  * @param scene - Reference to MyScene object
  */
@@ -13,16 +13,17 @@ export class MyPrism extends CGFobject {
     }
 
     initBuffers() {
+        
         this.vertices = [];
-
-        //Counter-clockwise reference of vertices
         this.indices = [];
-
         this.normals = [];
-        //The defined indices (and corresponding vertices)
-        //will be read in groups of three to draw triangles
-        this.primitiveType = this.scene.gl.TRIANGLES;
 
+        
+
+        this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
+    }
+
+    updateBuffers(complexity){
     }
 }
