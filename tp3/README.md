@@ -19,3 +19,6 @@ In Constant Shading, each polygon of a 3D model is filled with a single shade of
 
 This approach is different from other shading techniques like Gouraud or Phong shading, where the normals at vertices would be interpolated across the surface of the polygon, resulting in a gradient of color and a more realistic rendering of light and shadow.
 
+| **Exercise 3**|
+| :-----------: |
+| ![Exercise 3](cg-t03g05-tp3-4.png) |
