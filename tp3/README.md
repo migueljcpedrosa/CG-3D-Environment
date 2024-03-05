@@ -22,3 +22,5 @@ This approach is different from other shading techniques like Gouraud or Phong s
 | **Exercise 3**|
 | :-----------: |
 | ![Exercise 3](cg-t03g05-tp3-4.png) |
+
+With this exercise it was possible to confirm that through this method, the lighting transitions on the edges were indeed smoothed and the surface of the cylinder had a curved appearance.
