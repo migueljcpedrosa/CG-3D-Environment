@@ -14,7 +14,8 @@ export class MyTangram extends CGFobject {
         super(scene);
         this.diamond = new MyDiamond(this.scene);
         this.triangle = new MyTriangle(this.scene);
-        this.triangleBig = new MyTriangleBig(this.scene);
+        this.triangleBigBlue = new MyTriangleBig(this.scene);
+        this.triangleBigOrange = new MyTriangleBig(this.scene);
         this.triangleSmall = new MyTriangleSmall(this.scene);
         this.parallelogram = new MyParallelogram(this.scene);
         this.initMaterials();
@@ -74,6 +75,7 @@ export class MyTangram extends CGFobject {
         this.diamondTexture = new CGFappearance(this.scene);
         this.triangleSmallTexture = new CGFappearance(this.scene);
         this.triangleBigTexture = new CGFappearance(this.scene);
+        this.triangleBigOrangeTexture = new CGFappearance(this.scene);
         this.triangleTexture = new CGFappearance(this.scene);
         this.parallelogramTexture = new CGFappearance(this.scene);
     }
@@ -112,7 +114,7 @@ export class MyTangram extends CGFobject {
         this.scene.translate(-0.85, -1.8, 0);
         this.scene.rotate(65 * Math.PI / 180, 0, 0, 1)
         //this.blue.apply();
-        this.triangleBig.display();
+        this.triangleBigBlue.display();
         this.scene.popMatrix();
 
 
@@ -121,7 +123,7 @@ export class MyTangram extends CGFobject {
         this.scene.translate(1.45, 3.1, 0);
         this.scene.rotate(65 * Math.PI / 180, 0, 0, 1);
         //this.orange.apply();    
-        this.triangleBig.display();
+        this.triangleBigOrange.display();
         this.scene.popMatrix();
         
       
