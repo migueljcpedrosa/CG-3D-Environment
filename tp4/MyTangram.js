@@ -71,6 +71,8 @@ export class MyTangram extends CGFobject {
         this.yellow.setSpecular(0.9, 0.9, 0.9, 1.0);
         this.yellow.setShininess(10.0);
 
+        this.diamondTexture = new CGFappearance(this.scene);
+
     }
 
     display() {
