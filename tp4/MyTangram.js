@@ -5,6 +5,7 @@ import { MyTriangle } from "./MyTriangle.js";
 import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTriangleBig2 } from "./MyTriangleBig2.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
+import { MyTriangleSmall2 } from "./MyTriangleSmall2.js";
 /**
  * MyTriangle
  * @constructor
@@ -18,6 +19,7 @@ export class MyTangram extends CGFobject {
         this.triangleBigBlue = new MyTriangleBig(this.scene);
         this.triangleBigOrange = new MyTriangleBig2(this.scene);
         this.triangleSmall = new MyTriangleSmall(this.scene);
+        this.triangleSmallPurple = new MyTriangleSmall2(this.scene);
         this.parallelogram = new MyParallelogram(this.scene);
         this.initMaterials();
     }
@@ -138,7 +140,7 @@ export class MyTangram extends CGFobject {
         this.scene.translate(-2.38, 3.5, 0);
         this.scene.rotate(200 * Math.PI / 180, 0, 0, 1);
         //this.purple.apply();
-        this.triangleSmall.display();
+        this.triangleSmallPurple.display();
         this.scene.popMatrix();
 
         //Small Red Triangle
