@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
 import { MyTangram } from "./MyTangram.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 
 /**
  * MyScene
@@ -45,11 +46,18 @@ export class MyScene extends CGFscene {
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
         this.texture4 = new CGFtexture(this, 'images/tangram-lines.png');
+        this.mineTop = new CGFtexture(this, 'images/mineTop.png');
+        this.mineBottom = new CGFtexture(this, 'images/mineBottom.png');
+        this.mineSide = new CGFtexture(this, 'images/mineSide.png');
         //-------
+
+        this.cube = new MyUnitCubeQuad(this, this.mineTop, this.mineSide, this.mineSide, this.mineSide, this.mineSide, this.mineBottom);
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
         this.displayTangram = false;
+        this.displayQuad = true;
+        this.displayCube = false;
         this.scaleFactor = 5;
         this.selectedTexture = -1;        
         this.wrapS = 0;
@@ -129,10 +137,12 @@ export class MyScene extends CGFscene {
         
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
-        this.quad.display();
         if (this.displayTangram) {
             this.tangram.display();
         }
+
+        if(this.displayQuad) this.quad.display();
+        if(this.displayCube) this.cube.display();
 
         
 
