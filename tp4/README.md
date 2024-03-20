@@ -12,6 +12,6 @@ In this exercise, we had to map each piece of the Tangram to its corresponding s
 ![Exercise 1](cg-t03g05-tp4-1.png)
 
 
-| **Exercise 2**|
-| :-----------: |
-| ![Exercise 2](cg-t03g05-tp4-2.png) |
+**Exercise 2**
+In this exercise, we had to map the corresponding texture to each face of the cube. We also had to set the filtering to NEAREST for the texture not to be blurry.
+![Exercise 2](cg-t03g05-tp4-2.png) 
