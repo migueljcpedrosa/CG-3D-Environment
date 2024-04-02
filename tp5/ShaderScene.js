@@ -118,7 +118,8 @@ export class ShaderScene extends CGFscene {
 			'Convolution': 8,
 			'Yellow/Blue': 9,
 			'Yellow/Blue animation': 10,
-			'Grayscale': 11
+			'Grayscale': 11,
+			'Water': 12
 		};
 
 		// shader code panels references
