@@ -71,11 +71,12 @@ export class ShaderScene extends CGFscene {
 		this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
 		this.appearance.setShininess(120);
 
-		this.texture = new CGFtexture(this, "textures/texture.jpg");
+		this.texture = new CGFtexture(this, "textures/waterTex.jpg");
 		this.appearance.setTexture(this.texture);
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
+		this.texture2 = new CGFtexture(this, "textures/waterMap.jpg");
+
 
 		// shaders initialization
 
@@ -92,6 +93,7 @@ export class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/yellow_blue.vert", "shaders/yellow_blue.frag"),
 			new CGFshader(this.gl, "shaders/new_animation.vert", "shaders/new_animation.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/grayscale.frag"),
+			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag"),
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
