@@ -19,5 +19,5 @@ Exercise 1 focused on applying custom vertex and fragment shaders to color a tea
 
 Exercise 2 extended the shader application to a plane, aiming to create a water effect. Two new shaders were created and applied to the plane, replacing the in-scene textures with water textures. The vertex shader was modified to use the waterMap.jpg as a heightmap, shifting vertices according to the color components of the texture. Additionally, animation was introduced to the plane using the shaders, varying the association of texture coordinates to vertices and fragments over time to create a dynamic water effect.
 
-![2](cg-t03g05-tp5-3.png)
+![2](cg-t03g05-tp5-3.jpeg)
 
