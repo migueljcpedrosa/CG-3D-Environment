@@ -4,6 +4,7 @@ import { CGFobject } from '../lib/CGF.js';
  * @constructor
  * @param scene - Reference to MyScene object
  */
+
 export class MyReceptacle extends CGFobject {
     constructor(scene, slices, stacks) {
         super(scene);

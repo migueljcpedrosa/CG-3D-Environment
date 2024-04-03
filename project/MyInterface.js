@@ -26,6 +26,9 @@ export class MyInterface extends CGFinterface {
         //
         this.gui.add(this.scene, 'displayReceptacle').name('Display Receptacle');
 
+        //
+        this.gui.add(this.scene, 'displayStem').name('Display Stem');
+
         return true;
     }
 }
