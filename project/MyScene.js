@@ -1,5 +1,6 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyReceptacle } from "./MyReceptacle.js";
 
 /**
  * MyScene
@@ -26,9 +27,11 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
+    this.receptacle = new MyReceptacle(this, 30, 30);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
+    this.displayReceptacle = true;
     this.scaleFactor = 1;
 
     this.enableTextures(true);
@@ -73,6 +76,7 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
+    if (this.displayReceptacle) this.receptacle.display();
 
     // ---- BEGIN Primitive drawing section
 
