@@ -3,57 +3,58 @@ import { CGFobject } from '../lib/CGF.js';
  * MyReceptacle
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param radius - Radius of the sphere
+ * @param slices - Number of longitudinal slices (like lines of longitude)
+ * @param stacks - Number of latitudinal stacks (like lines of latitude)
  */
-
 export class MyReceptacle extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, radius, slices, stacks) {
         super(scene);
+        this.radius = radius;
         this.slices = slices;
         this.stacks = stacks;
         this.initBuffers();
     }
 
     initBuffers() {
-        // Initialize arrays
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = [];
 
-        // Angle between each slice
-        let incrementAngle = 2 * Math.PI / this.slices;
-        // Increment along the cylinder's height
-        let incrementStacks = 1 / this.stacks;
+        for (let stack = 0; stack <= this.stacks; stack++) {
+            let phi = stack * Math.PI / this.stacks;
+            let sinPhi = Math.sin(phi);
+            let cosPhi = Math.cos(phi);
 
-        // Loop through each stack
-        for (let stackIterator = 0; stackIterator <= this.stacks; stackIterator++) {
-            // Loop through each slice
-            for (let sliceIterator = 0; sliceIterator < this.slices; sliceIterator++) {
-                // Calculate the x and y coordinates for the vertex on the circle
-                let x = Math.cos(sliceIterator * incrementAngle);
-                let y = Math.sin(sliceIterator * incrementAngle);
+            for (let slice = 0; slice <= this.slices; slice++) {
+                let theta = slice * 2 * Math.PI / this.slices;
+                let sinTheta = Math.sin(theta);
+                let cosTheta = Math.cos(theta);
 
-                // Add the vertex at the current stack level
-                this.vertices.push(x, y, stackIterator * incrementStacks);
-                // Normal is the same as the vertex position on the circle, but normalized (z is 0 because it's along the cylinder's surface)
-                this.normals.push(x, y, 0);
+                let x = this.radius * cosTheta * sinPhi;
+                let y = this.radius * cosPhi;
+                let z = this.radius * sinTheta * sinPhi;
+                let u = 1 - (slice / this.slices);
+                let v = 1 - (stack / this.stacks);
+
+                this.vertices.push(x, y, z);
+                this.normals.push(x, y, z);
+                this.texCoords.push(u, v);
             }
         }
 
-        // Creating two triangles for each face of the cylinder
-        for (let stackIterator = 0; stackIterator < this.stacks; stackIterator++) {
-            for (let sliceIterator = 0; sliceIterator < this.slices; sliceIterator++) {
-                // Current and next slice vertices indices
-                let current = stackIterator * this.slices + sliceIterator;
-                let next = stackIterator * this.slices + ((sliceIterator + 1) % this.slices);
+        for (let stack = 0; stack < this.stacks; stack++) {
+            for (let slice = 0; slice < this.slices; slice++) {
+                let first = (stack * (this.slices + 1)) + slice;
+                let second = first + this.slices + 1;
 
-                // Indices for the quad's two triangles
-                this.indices.push(current, next, current + this.slices);
-                this.indices.push(next, next + this.slices, current + this.slices);
+                this.indices.push(first, second, first + 1);
+                this.indices.push(second, second + 1, first + 1);
             }
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
-} 
-
+}
