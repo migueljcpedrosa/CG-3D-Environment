@@ -39,10 +39,12 @@ export class MyFlower extends CGFobject {
         this.scene.pushMatrix();
         // Transformations for the heart
         this.scene.setDiffuse(1.1, 0.7, 0.3, 1);
+        this.scene.setAmbient(0.3, 0.3, 0.1, 1.0); // A subtle ambient light, softer than the diffuse color
         this.heart.display();
         this.scene.pushMatrix();
         //green color
         this.scene.setDiffuse(0, 1, 0, 1);
+        this.scene.setAmbient(0.1, 0.3, 0.1, 1.0); // A soft green for the ambient reflection
         this.stem.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
@@ -51,6 +53,7 @@ export class MyFlower extends CGFobject {
         this.scene.pushMatrix();
         //white color
         this.scene.setDiffuse(1, 1, 1, 1);
+        this.scene.setAmbient(0.3, 0.3, 0.3, 1.0); // Soft ambient light for the white petals
         let angleBefore = 0;
         /*
         for (let i = 0; i < this.numPetals; i++) {
