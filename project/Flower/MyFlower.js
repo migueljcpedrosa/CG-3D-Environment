@@ -74,13 +74,28 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix();
         }
 
-        let heightBefore = 0;
+        let cumulativeHeight = 0;
+        let cumulativeForwardOffset = 0;
+        const rotationAngleDegrees = 20;
+        const rotationAngleRadians = rotationAngleDegrees * Math.PI / 180;
+    
         for (let i = 0; i < this.numStemSegments-1; i++) {
             this.scene.pushMatrix();
-            this.scene.translate(0, heightBefore, 0);
-            heightBefore += this.stemHeight;
+    
+            // Apply the cumulative transformations
+            this.scene.translate(0, cumulativeHeight, cumulativeForwardOffset);
+            // If the stem is supposed to be tilted, apply the rotation
+            if (i > 0) { // Skip the rotation for the first segment, so it starts at the origin
+                this.scene.rotate(rotationAngleRadians, 1, 0, 0);
+            }
+    
+            // Display the current stem segment
             this.stemSegments[i].display();
             this.scene.popMatrix();
+    
+            // Update the cumulativeHeight and cumulativeForwardOffset for the next segment
+            cumulativeHeight += Math.cos(rotationAngleRadians) * this.stemHeight;
+            cumulativeForwardOffset += Math.sin(rotationAngleRadians) * this.stemHeight;
         }
 
         this.scene.popMatrix();
