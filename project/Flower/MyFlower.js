@@ -1,4 +1,4 @@
-import { CGFobject } from '../lib/CGF.js';
+import { CGFobject } from '../../lib/CGF.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
@@ -55,8 +55,7 @@ export class MyFlower extends CGFobject {
         this.stem.display();
         this.scene.popMatrix();
 
-        // Additional code for leaves and stem subdivisions if needed
     }
 
-    // Additional methods for setting colors and other properties
+
 }
