@@ -28,6 +28,11 @@ export class MyFlower extends CGFobject {
             let randomAngle = Math.random() * (this.maxPetalAngle - this.minPetalAngle) + this.minPetalAngle; // Randomize between minPetalAngle and maxPetalAngle
             this.petals.push(new MyPetal(scene, randomAngle));
         }
+
+        this.stemSegments = [];
+        for (let i = 0; i < this.numStemSegments - 1; i++) {
+            this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks)); //scene, baseRadius, topRadius, height, slices, stacks
+        }
         this.heart = new MyReceptacle(scene, heartRadius, 10, 10);
         console.log(stemRadius, stemRadius, stemHeight, slices, stacks);
         this.stem = new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks);
@@ -35,6 +40,8 @@ export class MyFlower extends CGFobject {
     }
 
     display() {
+        this.scene.pushMatrix();
+        this.scene.translate(0, this.stemHeight+10, 0);
 
         this.scene.pushMatrix();
         // Transformations for the heart
@@ -55,19 +62,6 @@ export class MyFlower extends CGFobject {
         this.scene.setDiffuse(1, 1, 1, 1);
         this.scene.setAmbient(0.3, 0.3, 0.3, 1.0); // Soft ambient light for the white petals
         let angleBefore = 0;
-        /*
-        for (let i = 0; i < this.numPetals; i++) {
-            this.scene.pushMatrix();
-            let randomAngle = Math.random() * (this.maxPetalAngle - this.minPetalAngle) + this.minPetalAngle; // Randomize between minPetalAngle and maxPetalAngle
-            this.scene.rotate(randomAngle * Math.PI / 180, 0, 1, 0);
-            this.scene.rotate((angleBefore+this.angleBetweenPetals) * Math.PI / 180, 0, 1, 0);
-            angleBefore += this.angleBetweenPetals;
-            this.scene.translate(0, 0, -this.heartRadius);
-            this.scene.scale((this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2);
-            this.scene.rotate(Math.PI/4, 1, 0, 0);
-            this.petals[i].display();
-            this.scene.popMatrix();
-        }*/
 
         for (let i = 0; i < this.numPetals; i++) {
             this.scene.pushMatrix();
@@ -80,8 +74,20 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix();
         }
 
+        let heightBefore = 0;
+        for (let i = 0; i < this.numStemSegments-1; i++) {
+            this.scene.pushMatrix();
+            this.scene.translate(0, heightBefore, 0);
+            heightBefore += this.stemHeight;
+            this.stemSegments[i].display();
+            this.scene.popMatrix();
+        }
 
         this.scene.popMatrix();
+
+        this.scene.popMatrix();
+
+
 
     }
 
