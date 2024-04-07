@@ -35,6 +35,10 @@ export class MyFlower extends CGFobject {
     display() {
         // Apply transformations and display the heart
         this.scene.pushMatrix();
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.translate(0, 0, -0.5);
+
+        this.scene.pushMatrix();
         // Transformations for the heart
         this.heart.display();
         this.scene.popMatrix();
@@ -55,6 +59,7 @@ export class MyFlower extends CGFobject {
         this.scene.pushMatrix();
         // Transformations for the stem
         this.stem.display();
+        this.scene.popMatrix();
         this.scene.popMatrix();
 
     }
