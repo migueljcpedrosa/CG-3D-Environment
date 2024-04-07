@@ -33,8 +33,9 @@ export class MyScene extends CGFscene {
     this.receptacle = new MyReceptacle(this, 1, 30, 30);
     this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30);
     this.petal = new MyPetal(this, 100);
-    this.flower = new MyFlower(this, 0.1, 5, [1, 0, 0, 1], 0.1, [1, 0, 0, 1], 0.05, 0.5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 3, 5, 10);
-
+    this.flower = new MyFlower(this, 7, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 2, 3, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 3, 30, 30);
+    //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
+    
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayReceptacle = true;

@@ -11,6 +11,7 @@ import { CGFobject } from '../../lib/CGF.js';
  */
 export class MyStem extends CGFobject {
     constructor(scene, baseRadius, topRadius, height, slices, stacks) {
+        console.log(baseRadius, topRadius, height, slices, stacks);
         super(scene);
         this.baseRadius = baseRadius;
         this.topRadius = topRadius;

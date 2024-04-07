@@ -5,9 +5,9 @@ import { MyStem } from './MyStem.js';
 import { MyLeaf } from './MyLeaf.js';
 
 export class MyFlower extends CGFobject {
-    constructor(scene, petalRadius, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
+    constructor(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
         super(scene);
-        this.petalRadius = petalRadius;
+        this.flowerDiameter = flowerDiameter;
         this.numPetals = numPetals;
         this.petalColor = petalColor;
         this.heartRadius = heartRadius;
@@ -18,6 +18,7 @@ export class MyFlower extends CGFobject {
         this.leafColor = leafColor;
         this.minPetalAngle = minPetalAngle;
         this.maxPetalAngle = maxPetalAngle;
+        this.numStemSegments = numStemSegments;
         this.slices = slices;
         this.stacks = stacks;
 
@@ -27,30 +28,51 @@ export class MyFlower extends CGFobject {
             let randomAngle = Math.random() * (this.maxPetalAngle - this.minPetalAngle) + this.minPetalAngle; // Randomize between minPetalAngle and maxPetalAngle
             this.petals.push(new MyPetal(scene, randomAngle));
         }
-        this.heart = new MyReceptacle(scene, heartRadius, slices, stacks);
+        this.heart = new MyReceptacle(scene, heartRadius, 10, 10);
+        console.log(stemRadius, stemRadius, stemHeight, slices, stacks);
         this.stem = new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks);
-
-        this.stemSegments = [];
-        this.leaves = [];
-        this.numStemSegments = numStemSegments; // Number of stem segments
-
-        // Create stem segments and leaves
-        let segmentHeights = []; // Array to store the heights of each segment
-        for (let i = 0; i < this.numStemSegments; i++) {
-            // Random length for each stem segment, within 70-130% of the average segment height
-            let segmentHeight = stemHeight * ((0.7 + Math.random() * 0.6) / this.numStemSegments);
-            segmentHeights.push(segmentHeight);
-
-            let stemSegment = new MyStem(scene, stemRadius, stemRadius, segmentHeight, slices, 1); // Create a segment with random height
-            this.stemSegments.push(stemSegment);
-
-            let leaf = new MyLeaf(scene); // Create a new leaf
-            this.leaves.push(leaf);
-        }
+       
     }
 
     display() {
+
+        this.scene.pushMatrix();
+        // Transformations for the heart
+        this.heart.display();
+        this.stem.display();
+        this.scene.popMatrix();
+
     
+        this.scene.pushMatrix();
+        let angleBefore = 0;
+        /*
+        for (let i = 0; i < this.numPetals; i++) {
+            this.scene.pushMatrix();
+            let randomAngle = Math.random() * (this.maxPetalAngle - this.minPetalAngle) + this.minPetalAngle; // Randomize between minPetalAngle and maxPetalAngle
+            this.scene.rotate(randomAngle * Math.PI / 180, 0, 1, 0);
+            this.scene.rotate((angleBefore+this.angleBetweenPetals) * Math.PI / 180, 0, 1, 0);
+            angleBefore += this.angleBetweenPetals;
+            this.scene.translate(0, 0, -this.heartRadius);
+            this.scene.scale((this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2);
+            this.scene.rotate(Math.PI/4, 1, 0, 0);
+            this.petals[i].display();
+            this.scene.popMatrix();
+        }*/
+
+        for (let i = 0; i < this.numPetals; i++) {
+            this.scene.pushMatrix();
+            this.scene.rotate((angleBefore+this.angleBetweenPetals) * Math.PI / 180, 0, 1, 0);
+            angleBefore += this.angleBetweenPetals;
+            this.scene.translate(0, 0, -this.heartRadius);
+            this.scene.scale((this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2);
+            this.scene.rotate(Math.PI/4, 1, 0, 0);
+            this.petals[i].display();
+            this.scene.popMatrix();
+        }
+
+
+        this.scene.popMatrix();
+
     }
 
 
