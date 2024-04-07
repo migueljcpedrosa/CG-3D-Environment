@@ -42,9 +42,11 @@ export class MyFlower extends CGFobject {
         // Display each petal with its transformation
         for (let i = 0; i < this.numPetals; i++) {
             this.scene.pushMatrix();
-            // Transformations for the petals
-            this.scene.rotate(i * this.angleBetweenPetals * Math.PI / 180, 0, 0, 1); // Rotate each petal to its position
-            this.scene.translate(0, this.petalRadius, 0); // Position the petal
+            // Rotate each petal to its position around the heart
+            this.scene.rotate(i * this.angleBetweenPetals * Math.PI / 180, 0, 0, 1);
+            // Move the petal so its top vertex is at the edge of the heart
+            this.scene.translate(0, this.heartRadius-0.08, 0); // Move to the edge of the heart
+            this.scene.scale(0.2, 0.2, 0.2); // Scale down the petal
             this.petals[i].display();
             this.scene.popMatrix();
         }
