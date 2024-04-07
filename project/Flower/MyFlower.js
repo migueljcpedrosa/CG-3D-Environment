@@ -38,12 +38,19 @@ export class MyFlower extends CGFobject {
 
         this.scene.pushMatrix();
         // Transformations for the heart
+        this.scene.setDiffuse(1.1, 0.7, 0.3, 1);
         this.heart.display();
+        this.scene.pushMatrix();
+        //green color
+        this.scene.setDiffuse(0, 1, 0, 1);
         this.stem.display();
+        this.scene.popMatrix();
         this.scene.popMatrix();
 
     
         this.scene.pushMatrix();
+        //white color
+        this.scene.setDiffuse(1, 1, 1, 1);
         let angleBefore = 0;
         /*
         for (let i = 0; i < this.numPetals; i++) {
