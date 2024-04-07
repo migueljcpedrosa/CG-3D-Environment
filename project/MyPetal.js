@@ -40,7 +40,6 @@ export class MyPetal extends CGFobject {
             0, 0, -1, // vertex 5
         ];
 
-        // No texture coordinates needed for this example
         this.texCoords = [];
 
         this.primitiveType = this.scene.gl.TRIANGLES;
