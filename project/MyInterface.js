@@ -24,10 +24,13 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
 
         //
-        this.gui.add(this.scene, 'displayReceptacle').name('Display Receptacle');
+        this.gui.add(this.scene, 'displayReceptacle').name('Display Rec');
 
         //
         this.gui.add(this.scene, 'displayStem').name('Display Stem');
+
+        //
+        this.gui.add(this.scene, 'displayPetal').name('Display Petal');
 
         return true;
     }

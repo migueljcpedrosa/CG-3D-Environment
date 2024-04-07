@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MyReceptacle } from "./MyReceptacle.js";
 import { MyStem } from "./MyStem.js";
+import { MyPetal } from "./MyPetal.js";
 
 /**
  * MyScene
@@ -30,11 +31,13 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.receptacle = new MyReceptacle(this, 1, 30, 30);
     this.stem = new MyStem(this, 0.5, 0.1, 1, 30, 30);
+    this.petal = new MyPetal(this, 100);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayReceptacle = true;
     this.displayStem = true;
+    this.displayPetal = true;
     this.scaleFactor = 1;
 
     this.enableTextures(true);
@@ -81,6 +84,7 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     if (this.displayAxis) this.axis.display();
     if (this.displayReceptacle) this.receptacle.display();
     if (this.displayStem) this.stem.display();
+    if (this.displayPetal) this.petal.display();
 
     // ---- BEGIN Primitive drawing section
 
