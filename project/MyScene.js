@@ -91,8 +91,11 @@ export class MyScene extends CGFscene {
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
     this.popMatrix();
+    this.pushMatrix();
+    this.scale(500, 500, 500);
     this.sphereAppearance.apply();
     this.sphere.display();
+    this.popMatrix();
 
     // ---- END Primitive drawing section
   }

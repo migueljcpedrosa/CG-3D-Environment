@@ -43,9 +43,9 @@ export class MySphere extends CGFobject {
                 let v =  (stack / this.stacks);
 
                 // Push the normal, texture coordinate, and vertex to their respective arrays.
-                this.normals.push(x, y, z);
+                this.normals.push(-z, -y, -x);
                 this.texCoords.push(u, v);
-                this.vertices.push(x, y, z);
+                this.vertices.push(z, y, x);
             }
         }
 
@@ -57,8 +57,8 @@ export class MySphere extends CGFobject {
                 let second = first + this.slices + 1;
 
                 // Push the two triangles that form the segment of the sphere's face to the indices array.
-                this.indices.push(first, second, first + 1);
-                this.indices.push(second, second + 1, first + 1);
+                this.indices.push(first + 1, second, first);
+                this.indices.push(first + 1, second + 1, second);
             }
         }
 
