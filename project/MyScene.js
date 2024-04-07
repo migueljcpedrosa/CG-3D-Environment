@@ -35,18 +35,17 @@ export class MyScene extends CGFscene {
 
     this.enableTextures(true);
 
-this.texture = new CGFtexture(this, "images/terrain.jpg");
-this.earth = new CGFtexture(this, "images/earth.jpg");
-this.appearance = new CGFappearance(this);
-this.appearance.setTexture(this.texture);
-this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-this.sphereAppearance = new CGFappearance(this);
-this.sphereAppearance.setTexture(this.earth);
-this.sphereAppearance.setTextureWrap('REPEAT', 'REPEAT');
-this.sphereAppearance.setAmbient(1, 1, 1, 1);
-this.sphereAppearance.setSpecular(1, 1, 1, 1);
-
+    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.earth = new CGFtexture(this, "images/earth.jpg");
+    this.appearance = new CGFappearance(this);
+    this.appearance.setTexture(this.texture);
+    this.appearance.setTextureWrap('REPEAT', 'REPEAT');this.sphereAppearance = new CGFappearance(this);
+    this.sphereAppearance.setTexture(this.earth);
+    this.sphereAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.sphereAppearance.setAmbient(1, 1, 1, 1);
+    this.sphereAppearance.setSpecular(1, 1, 1, 1);
   }
+
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
