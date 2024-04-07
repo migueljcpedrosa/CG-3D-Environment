@@ -2,9 +2,10 @@ import { CGFobject } from '../../lib/CGF.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
+import { MyLeaf } from './MyLeaf.js';
 
 export class MyFlower extends CGFobject {
-    constructor(scene, petalRadius, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, slices, stacks) {
+    constructor(scene, petalRadius, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
         super(scene);
         this.petalRadius = petalRadius;
         this.numPetals = numPetals;
@@ -29,39 +30,27 @@ export class MyFlower extends CGFobject {
         this.heart = new MyReceptacle(scene, heartRadius, slices, stacks);
         this.stem = new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks);
 
-        // Define additional properties and objects for the stem's subdivisions, leaves, and other transformations
+        this.stemSegments = [];
+        this.leaves = [];
+        this.numStemSegments = numStemSegments; // Number of stem segments
+
+        // Create stem segments and leaves
+        let segmentHeights = []; // Array to store the heights of each segment
+        for (let i = 0; i < this.numStemSegments; i++) {
+            // Random length for each stem segment, within 70-130% of the average segment height
+            let segmentHeight = stemHeight * ((0.7 + Math.random() * 0.6) / this.numStemSegments);
+            segmentHeights.push(segmentHeight);
+
+            let stemSegment = new MyStem(scene, stemRadius, stemRadius, segmentHeight, slices, 1); // Create a segment with random height
+            this.stemSegments.push(stemSegment);
+
+            let leaf = new MyLeaf(scene); // Create a new leaf
+            this.leaves.push(leaf);
+        }
     }
 
     display() {
-        // Apply transformations and display the heart
-        this.scene.pushMatrix();
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
-        this.scene.translate(0, 0, -0.5);
-
-        this.scene.pushMatrix();
-        // Transformations for the heart
-        this.heart.display();
-        this.scene.popMatrix();
-
-        // Display each petal with its transformation
-        for (let i = 0; i < this.numPetals; i++) {
-            this.scene.pushMatrix();
-            // Rotate each petal to its position around the heart
-            this.scene.rotate(i * this.angleBetweenPetals * Math.PI / 180, 0, 0, 1);
-            // Move the petal so its top vertex is at the edge of the heart
-            this.scene.translate(0, this.heartRadius-0.08, 0); // Move to the edge of the heart
-            this.scene.scale(0.2, 0.2, 0.2); // Scale down the petal
-            this.petals[i].display();
-            this.scene.popMatrix();
-        }
-
-        // Apply transformations and display the stem
-        this.scene.pushMatrix();
-        // Transformations for the stem
-        this.stem.display();
-        this.scene.popMatrix();
-        this.scene.popMatrix();
-
+    
     }
 
 

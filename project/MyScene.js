@@ -33,7 +33,7 @@ export class MyScene extends CGFscene {
     this.receptacle = new MyReceptacle(this, 1, 30, 30);
     this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30);
     this.petal = new MyPetal(this, 100);
-    this.flower = new MyFlower(this, 0.1, 5, [1, 0, 0, 1], 0.1, [1, 0, 0, 1], 0.05, 0.5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 10);
+    this.flower = new MyFlower(this, 0.1, 5, [1, 0, 0, 1], 0.1, [1, 0, 0, 1], 0.05, 0.5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 3, 5, 10);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -103,3 +103,4 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     // ---- END Primitive drawing section
   }
 }
+

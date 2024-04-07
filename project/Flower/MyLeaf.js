@@ -1,9 +1,8 @@
 import { CGFobject } from '../../lib/CGF.js';
 
-export class MyPetal extends CGFobject {
-    constructor(scene, angle) {
+export class MyLeaf extends CGFobject {
+    constructor(scene) {
         super(scene);
-        this.angle = angle; // Angle in degrees
         this.initBuffers();
     }
 
@@ -48,17 +47,13 @@ export class MyPetal extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
+        this.scene.translate(-0.5, -1, -0.8);
         this.scene.rotate(Math.PI/4, 1, 0, 0); 
-
-        this.scene.pushMatrix();
-        this.scene.rotate(Math.PI/4, 1, 0, 0); 
-        this.scene.translate(-0.5, -1, 0);
+        
         super.display(); // Triangle 1
         // The transformations are still in place for Triangle 2
-        this.scene.rotate(this.angle * Math.PI / 180, 1, 0, 0); // Apply rotation to second triangle
+        this.scene.rotate(20 * Math.PI / 180, 1, 0, 0); // Apply rotation to second triangle
         super.display(); // Triangle 2
-
-        this.scene.popMatrix();
 
         this.scene.popMatrix();
     }
