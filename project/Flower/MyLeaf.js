@@ -1,11 +1,12 @@
 import { CGFobject } from '../../lib/CGF.js';
 
 export class MyLeaf extends CGFobject {
-    constructor(scene, xScale, yScale, zScale) {
+    constructor(scene, xScale, yScale, zScale, stemHeight) {
         super(scene);
         this.xScale = xScale;
         this.yScale = yScale;
         this.zScale = zScale;
+        this.stemHeight = stemHeight;
         this.initBuffers();
     }
 
@@ -51,7 +52,7 @@ export class MyLeaf extends CGFobject {
     display() {
         this.scene.pushMatrix();
         this.scene.scale(this.xScale, this.yScale, this.zScale);
-        this.scene.translate(-0.5, -1, -0.8);
+        this.scene.translate(-0.5, 0, -0.8);
         this.scene.rotate(Math.PI/2, 1, 0, 0); 
         
         super.display(); // Triangle 1

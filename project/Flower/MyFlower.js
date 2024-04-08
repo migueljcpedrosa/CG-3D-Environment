@@ -53,7 +53,7 @@ export class MyFlower extends CGFobject {
 
         this.leaves = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {
-            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z));
+            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight));
         }
     }
 
@@ -84,7 +84,6 @@ export class MyFlower extends CGFobject {
             let leafAngle = this.leafAngles[i];
             this.scene.rotate(leafAngle * Math.PI / 180, 0, 1, 0);
             this.scene.translate(0, 0, -this.stemRadius);
-            this.scene.translate(0, 1, 0);
             this.leaves[i].display();
             this.scene.popMatrix();
     

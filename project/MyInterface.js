@@ -35,6 +35,9 @@ export class MyInterface extends CGFinterface {
         //
         this.gui.add(this.scene, 'displayFlower').name('Display Flower');
 
+        //
+        this.gui.add(this.scene, 'displayLeaf').name('Display Leaf');
+
         return true;
     }
 }
