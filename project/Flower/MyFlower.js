@@ -36,7 +36,25 @@ export class MyFlower extends CGFobject {
         this.heart = new MyReceptacle(scene, heartRadius, 10, 10);
         console.log(stemRadius, stemRadius, stemHeight, slices, stacks);
         this.stem = new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks);
-       
+
+        this.leafAngles = [];
+        for (let i = 0; i < this.numStemSegments - 1; i++) {
+            this.leafAngles.push(Math.random() * 360); // Store the random angle
+        }
+
+        this.leafScales = [];
+        for (let i = 0; i < this.numStemSegments - 1; i++) {
+            this.leafScales.push({
+                x: Math.random() * (3 - 1) + 1, 
+                y: Math.random() * (3 - 1) + 1,
+                z: Math.random() * (3 - 1) + 1
+            });
+        }
+
+        this.leaves = [];
+        for (let i = 0; i < this.numStemSegments - 1; i++) {
+            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z));
+        }
     }
 
     display() {
@@ -55,18 +73,25 @@ export class MyFlower extends CGFobject {
             // Apply the cumulative transformations
             this.scene.translate(0, cumulativeHeight, cumulativeForwardOffset);
             // If the stem is supposed to be tilted, apply the rotation
-            if (i > 0) { // Skip the rotation for the first segment, so it starts at the origin
-                this.scene.rotate(cumulativeRotationAngle, 1, 0, 0);
-                cumulativeRotationAngle += rotationAngleRadians;
-            }
+ 
+            this.scene.rotate(cumulativeRotationAngle, 1, 0, 0);
+            cumulativeRotationAngle += rotationAngleRadians;
+            
     
             // Display the current stem segment
             this.stemSegments[i].display();
+            this.leaf = new MyLeaf(this.scene);
+            let leafAngle = this.leafAngles[i];
+            this.scene.rotate(leafAngle * Math.PI / 180, 0, 1, 0);
+            this.scene.translate(0, 0, -this.stemRadius);
+            this.scene.translate(0, 1, 0);
+            this.leaves[i].display();
             this.scene.popMatrix();
     
             // Update the cumulativeHeight and cumulativeForwardOffset for the next segment
             cumulativeHeight += Math.cos(cumulativeRotationAngle) * this.stemHeight;
             cumulativeForwardOffset += Math.sin(cumulativeRotationAngle) * this.stemHeight;
+
         }
 
         this.scene.pushMatrix();
