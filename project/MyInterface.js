@@ -38,6 +38,8 @@ export class MyInterface extends CGFinterface {
         //
         this.gui.add(this.scene, 'displayLeaf').name('Display Leaf');
 
+        //this.gui.add(this.scene, 'displayRockSet').name('Display RockSet');
+
         return true;
     }
 }

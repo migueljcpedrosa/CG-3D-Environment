@@ -7,6 +7,8 @@ import { MyPetal } from "./Flower/MyPetal.js";
 import { MyFlower } from "./Flower/MyFlower.js";
 import { MyLeaf } from "./Flower/MyLeaf.js";
 
+//import { MyRockSet } from "./Rocks/MyRockSet.js";
+
 /**
  * MyScene
  * @constructor
@@ -39,6 +41,9 @@ export class MyScene extends CGFscene {
     this.leaf = new MyLeaf(this, 1, 1, 1, 3);
     //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
     
+    //this.rockSet = new MyRockSet(this, 10); // Create a new MyRockSet object with 10 rocks
+
+    
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayReceptacle = true;
@@ -46,6 +51,7 @@ export class MyScene extends CGFscene {
     this.displayPetal = true;
     this.displayFlower = true;
     this.displayLeaf = true;
+    //this.displayRockSet = false; //changed here
     this.scaleFactor = 1;
 
     this.enableTextures(true);
@@ -99,7 +105,9 @@ export class MyScene extends CGFscene {
     if (this.displayPetal) this.petal.display();
     if (this.displayFlower) this.flower.display();
     if (this.displayLeaf) this.leaf.display();
+    //if (this.displayRockSet) this.rockSet.display();
     // ---- BEGIN Primitive drawing section
+
 
     this.pushMatrix();
     this.appearance.apply();
@@ -109,6 +117,7 @@ export class MyScene extends CGFscene {
     this.plane.display();
     this.popMatrix();
     this.myPanorama.display();
+
 
     // ---- END Primitive drawing section
   }
