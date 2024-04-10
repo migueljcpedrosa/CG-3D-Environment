@@ -3,7 +3,7 @@ import { MyFlower } from './MyFlower.js';
 
 export class MyGarden extends CGFobject {
     constructor(scene, numRows, numCols) {
-        this.scene = scene;
+        super(scene);
         this.numRows = numRows;
         this.numCols = numCols;
         this.flowers = []; // Matriz para armazenar as flores

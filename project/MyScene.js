@@ -5,6 +5,7 @@ import { MyStem } from "./Flower/MyStem.js";
 import { MyPetal } from "./Flower/MyPetal.js";
 import { MyFlower } from "./Flower/MyFlower.js";
 import { MyLeaf } from "./Flower/MyLeaf.js";
+import { MyGarden } from "./Flower/MyGarden.js";
 
 /**
  * MyScene
@@ -36,6 +37,7 @@ export class MyScene extends CGFscene {
     this.petal = new MyPetal(this, 100);
     this.flower = new MyFlower(this, 7, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30);
     this.leaf = new MyLeaf(this, 1, 1, 1, 3);
+    this.garden = new MyGarden(this, 5, 5);
     //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
     
     //Objects connected to MyInterface
@@ -45,6 +47,7 @@ export class MyScene extends CGFscene {
     this.displayPetal = true;
     this.displayFlower = true;
     this.displayLeaf = true;
+    this.displayGarden = true;
     this.scaleFactor = 1;
 
     this.enableTextures(true);
@@ -94,6 +97,7 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     if (this.displayPetal) this.petal.display();
     if (this.displayFlower) this.flower.display();
     if (this.displayLeaf) this.leaf.display();
+    if (this.displayGarden) this.garden.display();
     // ---- BEGIN Primitive drawing section
 
     this.pushMatrix();
