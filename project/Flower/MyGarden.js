@@ -10,10 +10,25 @@ export class MyGarden extends CGFobject {
     }
 
     display() {
+        const spacing = 5; // Define the spacing between the flowers
+    
         for (let row = 0; row < this.numRows; row++) {
             for (let col = 0; col < this.numCols; col++) {
+                this.scene.pushMatrix(); // Save the current state of the matrix
+    
+                // Calculate the position for each flower based on its row and column
+                let xPosition = col * spacing;
+                let zPosition = row * spacing;
+    
+                // Translate to the correct position
+                this.scene.translate(xPosition, 0, zPosition);
+    
+                // Display the flower at this position
                 this.flower.display();
+    
+                this.scene.popMatrix(); // Restore the matrix state
             }
         }
     }
+    
 }
