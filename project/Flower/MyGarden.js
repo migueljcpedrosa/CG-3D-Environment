@@ -7,9 +7,11 @@ export class MyGarden extends CGFobject {
         this.numRows = numRows;
         this.numCols = numCols;
         this.flowers = []; // Initialize the 2D array
-        
+        this.rotationAngles = []; // 2D array for rotation angles
+
         for (let row = 0; row < numRows; row++) {
             this.flowers[row] = []; // Initialize each row
+            this.rotationAngles[row] = []; // Initialize row for angles
             for (let col = 0; col < numCols; col++) {
                 // Create a new MyFlower instance with random parameters for each position
                 this.flowers[row][col] = new MyFlower(
@@ -29,13 +31,14 @@ export class MyGarden extends CGFobject {
                     30, // slices: Constant in this example
                     30 // stacks: Constant in this example
                 );
+                this.rotationAngles[row][col] = Math.random() * 2 * Math.PI;
             }
         }
     }
 
     display() {
         const spacing = 20; // Define the spacing between the flowers
-        
+
         for (let row = 0; row < this.numRows; row++) {
             for (let col = 0; col < this.numCols; col++) {
                 this.scene.pushMatrix(); // Save the current state of the matrix
@@ -46,10 +49,14 @@ export class MyGarden extends CGFobject {
 
                 // Translate to the correct position
                 this.scene.translate(xPosition, 0, zPosition);
+                
+                // Rotate each flower by its stored random angle around the Y axis
+                let angle = this.rotationAngles[row][col];
+                this.scene.rotate(angle, 0, 1, 0);
 
                 // Display the flower at this position
                 this.flowers[row][col].display();
-                
+
                 this.scene.popMatrix(); // Restore the matrix state
             }
         }
