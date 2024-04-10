@@ -79,6 +79,8 @@ export class MyFlower extends CGFobject {
             
     
             // Display the current stem segment
+            this.scene.setDiffuse(0, 0.3, 0, 1); // Darker green diffuse color
+            this.scene.setAmbient(0.05, 0.2, 0.05, 1); // Even darker green for the ambient color
             this.stemSegments[i].display();
             this.leaf = new MyLeaf(this.scene);
             let leafAngle = this.leafAngles[i];
