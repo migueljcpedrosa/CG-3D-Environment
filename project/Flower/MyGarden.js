@@ -16,15 +16,15 @@ export class MyGarden extends CGFobject {
                 // Create a new MyFlower instance with random parameters for each position
                 this.flowers[row][col] = new MyFlower(
                     scene,
-                    Math.floor(Math.random() * (10 - 3 + 1)) + 3, // numPetals: Random between 3 and 10
-                    5, // Assuming some parameters are constant, adjust as needed
+                    Math.floor(Math.random() * (10 - 3 + 1)) + 3, // flowerDiameter: Random between 3 and 10
+                    Math.floor(Math.random() * (7 - 4 + 1)) + 4, // Assuming some parameters are constant, adjust as needed
                     [Math.random(), Math.random(), Math.random(), 1], // Random petalColor
-                    Math.random() * (3 - 1) + 1, // heartRadius: Random between 1 and 3
+                    Math.random() * (2 - 1) + 1, // heartRadius: Random between 1 and 3
                     [Math.random(), Math.random(), Math.random(), 1], // Random heartColor
-                    0.5, // stemRadius: Constant in this example
+                    Math.random() * (0.7 - 0.4) + 0.4, // stemRadius: Constant in this example
                     Math.random() * (5 - 3) + 3, // stemHeight: Random between 3 and 5
-                    [0, 1, 0, 1], // stemColor: Green, constant in this example
-                    [0, 1, 0, 1], // leafColor: Green, constant in this example
+                    [0, 1, 0, 1], // stemColor
+                    [0, 1, 0, 1], // leafColor
                     100, // minPetalAngle: Constant in this example
                     150, // maxPetalAngle: Constant in this example
                     Math.floor(Math.random() * (7 - 2 + 1)) + 2, // numStemSegments: Random between 2 and 7
