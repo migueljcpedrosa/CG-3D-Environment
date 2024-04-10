@@ -1,4 +1,5 @@
 import { CGFobject } from '../../lib/CGF.js';
+import { MyStem } from './MyStem.js';
 
 export class MyLeaf extends CGFobject {
     constructor(scene, xScale, yScale, zScale, stemHeight) {
