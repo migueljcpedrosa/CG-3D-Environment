@@ -7,10 +7,11 @@ import { CGFobject } from '../lib/CGF.js';
  * @param {number} stacks - The number of subdivisions from the top of the sphere to the bottom (like the layers of an onion).
  */
 export class MySphere extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, slices, stacks, reversed = true) {
         super(scene); // Calls the constructor of the superclass CGFobject with the scene.
         this.slices = slices; // Number of slices (subdivisions around the Z axis).
         this.stacks = stacks; // Number of stacks (subdivisions from top to bottom).
+        this.reversed = reversed; // Boolean to determine if the sphere should be seen from inside or outside.
         this.initBuffers(); // Initialize the buffers for the sphere's geometry.
     }
 
@@ -43,9 +44,15 @@ export class MySphere extends CGFobject {
                 let v =  (stack / this.stacks);
 
                 // Push the normal, texture coordinate, and vertex to their respective arrays.
-                this.normals.push(-z, -y, -x);
-                this.texCoords.push(u, v);
-                this.vertices.push(z, y, x);
+                if(this.reversed){
+                    this.normals.push(-z, -y, -x);
+                    this.texCoords.push(u, v);
+                    this.vertices.push(z, y, x);
+                }else {
+                    this.normals.push(x, y, z);
+                    this.texCoords.push(u, v);
+                    this.vertices.push(x, y, z);
+                }
             }
         }
 
@@ -57,8 +64,13 @@ export class MySphere extends CGFobject {
                 let second = first + this.slices + 1;
 
                 // Push the two triangles that form the segment of the sphere's face to the indices array.
-                this.indices.push(first + 1, second, first);
-                this.indices.push(first + 1, second + 1, second);
+                if(this.reversed){
+                    this.indices.push(first + 1, second, first);
+                    this.indices.push(first + 1, second + 1, second);
+                } else {
+                    this.indices.push(first, second, first + 1);
+                    this.indices.push(second, second + 1, first + 1);
+                }   
             }
         }
 
