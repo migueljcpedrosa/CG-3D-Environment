@@ -37,6 +37,8 @@ export class MyGarden extends CGFobject {
     }
 
     display() {
+        this.scene.pushMatrix(); // Save the current state of the matrix
+        this.scene.translate(-150, -100, -150); // Translate to the center of the garden
         const spacing = 70; // Define the spacing between the flowers
 
         for (let row = 0; row < this.numRows; row++) {
@@ -60,5 +62,6 @@ export class MyGarden extends CGFobject {
                 this.scene.popMatrix(); // Restore the matrix state
             }
         }
+        this.scene.popMatrix(); // Restore the matrix state
     }
 }
