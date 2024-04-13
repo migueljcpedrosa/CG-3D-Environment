@@ -53,11 +53,9 @@ export class MyScene extends CGFscene {
     this.enableTextures(true);
 
 this.texture = new CGFtexture(this, "images/terrain.jpg");
-this.petaltex = new CGFtexture(this, "images/pinkpetal.jpg");
 this.appearance = new CGFappearance(this);
 this.appearance.setTexture(this.texture);
 this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-this.petalAppearance = new CGFappearance(this);
 
   }
   initLights() {
