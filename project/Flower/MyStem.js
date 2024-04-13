@@ -3,11 +3,18 @@ import { CGFobject } from '../../lib/CGF.js';
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
- * @param baseRadius - Radius of the base of the stem
- * @param topRadius - Radius of the top of the stem
- * @param height - Height of the stem
- * @param slices - Number of slices around the stem (for the circular cross section)
- * @param stacks - Number of subdivisions along the stem's height
+ * @param baseRadius - Radius of the base of the stem cylinder
+ * @param topRadius - Radius of the top of the stem cylinder, allowing for tapered stems
+ * @param height - Height of the stem cylinder
+ * @param slices - Number of slices around the z-axis, determining the circular cross-section's resolution
+ * @param stacks - Number of subdivisions along the height of the stem, determining the vertical resolution
+ * 
+ * Constructs a cylindrical representation of a plant's stem, with the ability to define both 
+ * the base and top radii for tapered effects. The stem's geometry is generated with specified 
+ * parameters affecting its overall shape and tessellation, which influences how light interacts 
+ * with the surface. Texture coordinates are calculated for applying a 2D texture around the 
+ * cylindrical surface. The class also handles the rendering transformations required to 
+ * orient the stem vertically in the scene.
  */
 export class MyStem extends CGFobject {
     constructor(scene, baseRadius, topRadius, height, slices, stacks) {

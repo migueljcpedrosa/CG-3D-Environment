@@ -1,6 +1,19 @@
 import { CGFobject } from '../../lib/CGF.js';
 import { MyStem } from './MyStem.js';
-
+/**
+ * MyLeaf
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param xScale - Scaling factor along the X-axis
+ * @param yScale - Scaling factor along the Y-axis
+ * @param zScale - Scaling factor along the Z-axis
+ * @param stemHeight - Height of the stem to which the leaf is connected
+ * 
+ * This class represents a leaf object in the scene. It is composed of two triangles and a cylinder that
+ * can be independently transformed and rotated to form the leaf shape. The class allows
+ * for scaling along the three axes to adjust the leaf's proportions and includes a 
+ * stemHeight variable to define its attachment point.
+ */
 export class MyLeaf extends CGFobject {
     constructor(scene, xScale, yScale, zScale, stemHeight) {
         super(scene);

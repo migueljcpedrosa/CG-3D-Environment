@@ -3,9 +3,15 @@ import { CGFobject } from '../../lib/CGF.js';
  * MyReceptacle
  * @constructor
  * @param scene - Reference to MyScene object
- * @param radius - Radius of the sphere
- * @param slices - Number of longitudinal slices (like lines of longitude)
- * @param stacks - Number of latitudinal stacks (like lines of latitude)
+ * @param radius - Radius of the spherical receptacle
+ * @param slices - Number of slices around the z-axis (similar to lines of longitude)
+ * @param stacks - Number of stacks along the z-axis from the bottom to the top of the sphere (similar to lines of latitude)
+ * 
+ * Creates a spherical object meant to represent the receptacle of a flower, where the petals 
+ * and other parts are attached. This geometry is created with specified radius, slices, and stacks 
+ * to control the level of detail of the sphere. Texture coordinates are calculated to map a 2D 
+ * texture onto the 3D surface. The normals are calculated for each vertex to ensure proper lighting 
+ * effects across the curved surface.
  */
 export class MyReceptacle extends CGFobject {
     constructor(scene, radius, slices, stacks) {

@@ -1,6 +1,18 @@
 import { CGFobject } from '../../lib/CGF.js';
 import { MyFlower } from './MyFlower.js';
-
+/**
+ * MyGarden
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param numRows - The number of rows of flowers in the garden
+ * @param numCols - The number of columns of flowers in the garden
+ * 
+ * This class represents a garden with a grid of flowers. It generates a specified number 
+ * of flowers arranged in rows and columns, each flower being an instance of MyFlower with 
+ * randomly generated attributes for variety. The garden handles the positioning and 
+ * rendering of each flower, placing them at regular intervals and applying a random 
+ * rotation to each for a more natural look.
+ */
 export class MyGarden extends CGFobject {
     constructor(scene, numRows, numCols) {
         super(scene);

@@ -3,7 +3,33 @@ import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
 import { MyLeaf } from './MyLeaf.js';
-
+/**
+ * MyFlower
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param flowerDiameter - Overall diameter of the flower
+ * @param numPetals - Number of petals the flower will have
+ * @param petalColor - RGBA color of the petals
+ * @param heartRadius - Radius of the flower's heart
+ * @param heartColor - RGBA color of the flower's heart
+ * @param stemRadius - Radius of the stem at its base
+ * @param stemHeight - Height of the stem
+ * @param stemColor - RGBA color of the stem
+ * @param leafColor - RGBA color of the leaves
+ * @param minPetalAngle - Minimum angle for the petal's initial rotation
+ * @param maxPetalAngle - Maximum angle for the petal's initial rotation
+ * @param numStemSegments - Number of segments the stem consists of
+ * @param slices - Number of slices for tessellation of the stem and heart
+ * @param stacks - Number of stacks for tessellation of the stem and heart
+ *
+ * This class encapsulates the concept of a flower as a 3D object within a scene.
+ * It composes a flower from various parts such as petals, a central heart, a stem, and leaves.
+ * The flower's properties like size, color, and the number of petals and stem segments are 
+ * customizable. The class manages the creation of these components and handles their spatial
+ * and rotational transformations to assemble the flower in a natural configuration. The 
+ * appearance of each component can be controlled via parameters, allowing for a variety of 
+ * flower types to be instantiated.
+ */
 export class MyFlower extends CGFobject {
     constructor(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
         super(scene);
