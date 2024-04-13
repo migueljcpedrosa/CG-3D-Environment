@@ -37,7 +37,7 @@ export class MyGarden extends CGFobject {
     }
 
     display() {
-        const spacing = 20; // Define the spacing between the flowers
+        const spacing = 70; // Define the spacing between the flowers
 
         for (let row = 0; row < this.numRows; row++) {
             for (let col = 0; col < this.numCols; col++) {

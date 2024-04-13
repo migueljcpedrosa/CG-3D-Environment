@@ -1,10 +1,21 @@
-import { CGFobject } from '../../lib/CGF.js';
+import { CGFappearance, CGFobject } from '../../lib/CGF.js';
 
 export class MyPetal extends CGFobject {
     constructor(scene, angle) {
         super(scene);
         this.angle = angle; // Angle in degrees
         this.initBuffers();
+        this.initMaterial();
+    }
+
+    initMaterial()  {
+        this.petalAppearance = new CGFappearance(this.scene);
+        this.petalAppearance.setAmbient(0.1, 0.1, 0.1, 1);
+        this.petalAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.petalAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.petalAppearance.setShininess(10.0);
+        this.petalAppearance.loadTexture('images/pinkpetal.jpg');
+        this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     initBuffers() {
@@ -40,13 +51,24 @@ export class MyPetal extends CGFobject {
             0, 0, -1, // vertex 5
         ];
 
-        this.texCoords = [];
+        this.texCoords = [
+            // Triangle 1
+            0, 1, // vertex 0
+            1, 1, // vertex 1
+            0.5, 0, // vertex 2
+            
+            // Triangle 2
+            0, 1, // vertex 3
+            1, 1, // vertex 4
+            0.5, 0, // vertex 5
+        ];
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
 
     display() {
+        this.petalAppearance.apply();
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/4, 1, 0, 0); 
 
