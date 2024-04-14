@@ -31,7 +31,7 @@ import { MyLeaf } from './MyLeaf.js';
  * flower types to be instantiated.
  */
 export class MyFlower extends CGFobject {
-    constructor(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks, petalMaterial) {
+    constructor(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks, petalMaterial, stemMaterial) {
         super(scene);
         this.flowerDiameter = flowerDiameter;
         this.numPetals = numPetals;
@@ -48,6 +48,7 @@ export class MyFlower extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
         this.petalMaterial = petalMaterial;
+        this.stemMaterial = stemMaterial;
 
         this.petals = [];
         this.angleBetweenPetals = 360 / this.numPetals;
@@ -59,15 +60,15 @@ export class MyFlower extends CGFobject {
         this.stemSegments = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {
             if (i >= 1){
-                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks)); //scene, baseRadius, topRadius, height, slices, stacks
+                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
             }
             else {
-                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius + 0.5 * stemRadius, stemHeight, slices, stacks)); //scene, baseRadius, topRadius, height, slices, stacks
+                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius + 0.5 * stemRadius, stemHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
             }
         }
         this.heart = new MyReceptacle(scene, heartRadius, 10, 10);
         console.log(stemRadius, stemRadius, stemHeight, slices, stacks);
-        this.stem = new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks);
+        this.stem = new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial);
 
         this.leafAngles = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {

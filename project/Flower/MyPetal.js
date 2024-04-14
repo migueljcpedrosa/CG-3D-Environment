@@ -70,12 +70,13 @@ export class MyPetal extends CGFobject {
     }
 
     display() {
-        console.log(this.petalMaterial);
         if (this.petalMaterial) {
             this.petalMaterial.apply();
-        } else {
-            console.error('Petal material is undefined.');
         }
+        else {
+            this.scene.defaultAppearance.apply();
+        }
+
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/4, 1, 0, 0); 
 
