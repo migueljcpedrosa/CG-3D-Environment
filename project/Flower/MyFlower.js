@@ -31,7 +31,7 @@ import { MyLeaf } from './MyLeaf.js';
  * flower types to be instantiated.
  */
 export class MyFlower extends CGFobject {
-    constructor(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks, petalMaterial, stemMaterial, receptacleMaterial) {
+    constructor(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks, petalMaterial, stemMaterial, receptacleMaterial, leafMaterial) {
         super(scene);
         this.flowerDiameter = flowerDiameter;
         this.numPetals = numPetals;
@@ -50,6 +50,7 @@ export class MyFlower extends CGFobject {
         this.petalMaterial = petalMaterial;
         this.stemMaterial = stemMaterial;
         this.receptacleMaterial = receptacleMaterial;
+        this.leafMaterial = leafMaterial;
 
         this.petals = [];
         this.angleBetweenPetals = 360 / this.numPetals;
@@ -87,7 +88,7 @@ export class MyFlower extends CGFobject {
 
         this.leaves = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {
-            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight));
+            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight, this.leafMaterial));
         }
     }
 

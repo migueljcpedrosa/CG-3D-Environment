@@ -15,12 +15,13 @@ import { MyStem } from './MyStem.js';
  * stemHeight variable to define its attachment point.
  */
 export class MyLeaf extends CGFobject {
-    constructor(scene, xScale, yScale, zScale, stemHeight) {
+    constructor(scene, xScale, yScale, zScale, stemHeight, leafMaterial) {
         super(scene);
         this.xScale = xScale;
         this.yScale = yScale;
         this.zScale = zScale;
         this.stemHeight = stemHeight;
+        this.leafMaterial = leafMaterial;
         this.stem = new MyStem(scene, 0.3, 0.3, 0.4, 10, 4);
         this.initBuffers();
     }
@@ -58,13 +59,26 @@ export class MyLeaf extends CGFobject {
             0, 0, -1, // vertex 5
         ];
 
-        this.texCoords = [];
+        this.texCoords = [
+            // Adjusted for a 90-degree rotation
+            // Triangle 1
+            1, 1, // vertex 0: top right (was bottom left)
+            1, 0, // vertex 1: bottom right (was bottom right)
+            0.5, 0.5, // vertex 2: center (was top center)
+        
+            // Triangle 2
+            1, 1, // vertex 3: top right (was bottom left)
+            1, 0, // vertex 4: bottom right (was bottom right)
+            0.5, 0.5, // vertex 5: center (was top center)
+        ];
+        
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
 
     display() {
+        this.leafMaterial.apply();
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.stem.display();
