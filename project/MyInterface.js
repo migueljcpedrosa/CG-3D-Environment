@@ -23,6 +23,24 @@ export class MyInterface extends CGFinterface {
         //Slider element in GUI
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
 
+        //
+        this.gui.add(this.scene, 'displayReceptacle').name('Display Rec');
+
+        //
+        this.gui.add(this.scene, 'displayStem').name('Display Stem');
+
+        //
+        this.gui.add(this.scene, 'displayPetal').name('Display Petal');
+
+        //
+        this.gui.add(this.scene, 'displayFlower').name('Display Flower');
+
+        //
+        this.gui.add(this.scene, 'displayLeaf').name('Display Leaf');
+
+        //
+        this.gui.add(this.scene, 'displayGarden').name('Display Garden');
+
         return true;
     }
 }
