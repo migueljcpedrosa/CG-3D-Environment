@@ -28,16 +28,6 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
-
-    //Initialize scene objects
-    this.axis = new CGFaxis(this);
-    this.plane = new MyPlane(this,30);
-    this.receptacle = new MyReceptacle(this, 1, 30, 30);
-    this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30);
-    this.petal = new MyPetal(this, 100);
-    this.flower = new MyFlower(this, 7, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30);
-    this.leaf = new MyLeaf(this, 1, 1, 1, 3);
-    this.garden = new MyGarden(this, 5, 5);
     //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
     
     //Objects connected to MyInterface
@@ -52,10 +42,28 @@ export class MyScene extends CGFscene {
 
     this.enableTextures(true);
 
-this.texture = new CGFtexture(this, "images/terrain.jpg");
-this.appearance = new CGFappearance(this);
-this.appearance.setTexture(this.texture);
-this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.appearance = new CGFappearance(this);
+    this.appearance.setTexture(this.texture);
+    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.petalAppearance = new CGFappearance(this);
+    this.petalAppearance.setAmbient(0.1, 0.1, 0.1, 1);
+    this.petalAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+    this.petalAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+    this.petalAppearance.setShininess(10.0);
+    this.petalAppearance.loadTexture('images/pinkpetal.jpg');
+    this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    //Initialize scene objects
+    this.axis = new CGFaxis(this);
+    this.plane = new MyPlane(this,30);
+    this.receptacle = new MyReceptacle(this, 1, 30, 30);
+    this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30);
+    this.petal = new MyPetal(this, 100);
+    this.flower = new MyFlower(this, 7, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance);
+    this.leaf = new MyLeaf(this, 1, 1, 1, 3);
+    this.garden = new MyGarden(this, 5, 5, this.petalAppearance);
 
   }
   initLights() {

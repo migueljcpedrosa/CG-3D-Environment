@@ -26,25 +26,6 @@ export class MyStem extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
         this.initBuffers();
-        this.initMaterial();
-    }
-
-    initMaterial()  {
-        this.stemAppearance = new CGFappearance(this.scene);
-        // Set a darker green for ambient color
-        this.stemAppearance.setAmbient(0.1, 0.3, 0.1, 1);
-        
-        // Set a darker green for diffuse color - this is the primary color under direct light
-        this.stemAppearance.setDiffuse(0.2, 0.5, 0.2, 1);
-        
-        // Specular highlights low, as plants don't typically have a shiny surface
-        this.stemAppearance.setSpecular(0.1, 0.1, 0.1, 1);
-        
-        // Low shininess, a more matte surface
-        this.stemAppearance.setShininess(10.0);
-    
-        this.stemAppearance.loadTexture('images/greenstem.png');
-        this.stemAppearance.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     initBuffers() {
@@ -93,7 +74,6 @@ export class MyStem extends CGFobject {
     }
 
     display() {
-        this.stemAppearance.apply();
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         super.display();

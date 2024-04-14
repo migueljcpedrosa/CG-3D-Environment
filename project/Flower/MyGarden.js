@@ -1,4 +1,4 @@
-import { CGFobject } from '../../lib/CGF.js';
+import { CGFappearance, CGFobject } from '../../lib/CGF.js';
 import { MyFlower } from './MyFlower.js';
 /**
  * MyGarden
@@ -14,12 +14,13 @@ import { MyFlower } from './MyFlower.js';
  * rotation to each for a more natural look.
  */
 export class MyGarden extends CGFobject {
-    constructor(scene, numRows, numCols) {
+    constructor(scene, numRows, numCols, petalMaterial) {
         super(scene);
         this.numRows = numRows;
         this.numCols = numCols;
         this.flowers = []; // Initialize the 2D array
         this.rotationAngles = []; // 2D array for rotation angles
+        this.petalMaterial = petalMaterial;
 
         for (let row = 0; row < numRows; row++) {
             this.flowers[row] = []; // Initialize each row
@@ -42,7 +43,8 @@ export class MyGarden extends CGFobject {
                     150, // maxPetalAngle: Constant in this example
                     Math.floor(Math.random() * (7 - 2 + 1)) + 2, // numStemSegments: Random between 2 and 7
                     30, // slices: Constant in this example
-                    30 // stacks: Constant in this example
+                    30, // stacks: Constant in this example
+                    this.petalMaterial
                 );
                 this.rotationAngles[row][col] = Math.random() * 2 * Math.PI;
             }

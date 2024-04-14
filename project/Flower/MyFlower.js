@@ -1,4 +1,4 @@
-import { CGFobject } from '../../lib/CGF.js';
+import {  CGFappearance, CGFobject } from '../../lib/CGF.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
@@ -31,7 +31,7 @@ import { MyLeaf } from './MyLeaf.js';
  * flower types to be instantiated.
  */
 export class MyFlower extends CGFobject {
-    constructor(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
+    constructor(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks, petalMaterial) {
         super(scene);
         this.flowerDiameter = flowerDiameter;
         this.numPetals = numPetals;
@@ -47,12 +47,13 @@ export class MyFlower extends CGFobject {
         this.numStemSegments = numStemSegments;
         this.slices = slices;
         this.stacks = stacks;
+        this.petalMaterial = petalMaterial;
 
         this.petals = [];
         this.angleBetweenPetals = 360 / this.numPetals;
         for (let i = 0; i < this.numPetals; i++) {
             let randomAngle = Math.random() * (this.maxPetalAngle - this.minPetalAngle) + this.minPetalAngle; // Randomize between minPetalAngle and maxPetalAngle
-            this.petals.push(new MyPetal(scene, randomAngle));
+            this.petals.push(new MyPetal(scene, randomAngle, this.petalMaterial));
         }
 
         this.stemSegments = [];

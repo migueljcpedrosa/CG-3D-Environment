@@ -1,4 +1,4 @@
-import { CGFobject } from '../../lib/CGF.js';
+import { CGFappearance, CGFobject } from '../../lib/CGF.js';
 /**
  * MyReceptacle
  * @constructor
@@ -21,7 +21,6 @@ export class MyReceptacle extends CGFobject {
         this.stacks = stacks;
         this.initBuffers();
     }
-
     initBuffers() {
         this.vertices = [];
         this.indices = [];
@@ -62,5 +61,15 @@ export class MyReceptacle extends CGFobject {
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
+    }
+
+    display() {
+        this.scene.pushMatrix();
+        this.scene.setAmbient(1, 1, 0, 1); // Soft yellow for ambient light
+        this.scene.setDiffuse(1, 1, 0, 1); // Bright yellow for diffuse light
+        this.scene.setSpecular(1, 1, 0, 1); // Shiny yellow highlights
+        this.scene.setShininess(30.0);
+        super.display();
+        this.scene.popMatrix();
     }
 }

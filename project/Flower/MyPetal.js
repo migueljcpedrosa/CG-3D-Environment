@@ -13,21 +13,11 @@ import { CGFappearance, CGFobject } from '../../lib/CGF.js';
  * customized to create different petal appearances.
  */
 export class MyPetal extends CGFobject {
-    constructor(scene, angle) {
+    constructor(scene, angle, petalMaterial) {
         super(scene);
         this.angle = angle; // Angle in degrees
+        this.petalMaterial = petalMaterial;
         this.initBuffers();
-        this.initMaterial();
-    }
-
-    initMaterial()  {
-        this.petalAppearance = new CGFappearance(this.scene);
-        this.petalAppearance.setAmbient(0.1, 0.1, 0.1, 1);
-        this.petalAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.petalAppearance.setSpecular(0.1, 0.1, 0.1, 1);
-        this.petalAppearance.setShininess(10.0);
-        this.petalAppearance.loadTexture('images/pinkpetal.jpg');
-        this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     initBuffers() {
@@ -80,7 +70,12 @@ export class MyPetal extends CGFobject {
     }
 
     display() {
-        this.petalAppearance.apply();
+        console.log(this.petalMaterial);
+        if (this.petalMaterial) {
+            this.petalMaterial.apply();
+        } else {
+            console.error('Petal material is undefined.');
+        }
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/4, 1, 0, 0); 
 
