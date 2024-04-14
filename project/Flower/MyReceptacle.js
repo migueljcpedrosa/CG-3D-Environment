@@ -64,6 +64,7 @@ export class MyReceptacle extends CGFobject {
     }
 
     display() {
+        this.scene.gl.disable(this.scene.gl.CULL_FACE);
         this.scene.pushMatrix();
         this.scene.setAmbient(1, 1, 0, 1); // Soft yellow for ambient light
         this.scene.setDiffuse(1, 1, 0, 1); // Bright yellow for diffuse light
@@ -71,5 +72,6 @@ export class MyReceptacle extends CGFobject {
         this.scene.setShininess(30.0);
         super.display();
         this.scene.popMatrix();
+        this.scene.gl.enable(this.scene.gl.CULL_FACE);
     }
 }
