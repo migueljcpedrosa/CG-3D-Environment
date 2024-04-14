@@ -21,6 +21,7 @@ export class MyLeaf extends CGFobject {
         this.yScale = yScale;
         this.zScale = zScale;
         this.stemHeight = stemHeight;
+        this.stem = new MyStem(scene, 0.3, 0.3, 0.4, 10, 4);
         this.initBuffers();
     }
 
@@ -65,10 +66,13 @@ export class MyLeaf extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.stem.display();
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
         this.scene.scale(this.xScale, this.yScale, this.zScale);
         this.scene.translate(-0.5, 0, -0.8);
         this.scene.rotate(Math.PI/2, 1, 0, 0); 
-        
         super.display(); // Triangle 1
         // The transformations are still in place for Triangle 2
         this.scene.rotate(120 * Math.PI / 180, 1, 0, 0); // Apply rotation to second triangle
