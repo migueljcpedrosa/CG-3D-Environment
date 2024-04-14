@@ -14,11 +14,12 @@ import { CGFappearance, CGFobject } from '../../lib/CGF.js';
  * effects across the curved surface.
  */
 export class MyReceptacle extends CGFobject {
-    constructor(scene, radius, slices, stacks) {
+    constructor(scene, radius, slices, stacks, receptacleMaterial) {
         super(scene);
         this.radius = radius;
         this.slices = slices;
         this.stacks = stacks;
+        this.receptacleMaterial = receptacleMaterial;
         this.initBuffers();
     }
     initBuffers() {
@@ -65,6 +66,7 @@ export class MyReceptacle extends CGFobject {
 
     display() {
         this.scene.gl.disable(this.scene.gl.CULL_FACE);
+        this.receptacleMaterial.apply();
         this.scene.pushMatrix();
         this.scene.scale(1.2, 0.7, 1.2);
         this.scene.setAmbient(1, 1, 0, 1); // Soft yellow for ambient light
