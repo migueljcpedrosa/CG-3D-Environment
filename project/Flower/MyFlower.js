@@ -31,9 +31,10 @@ import { MyLeaf } from './MyLeaf.js';
  * flower types to be instantiated.
  */
 export class MyFlower extends CGFobject {
-    constructor(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks, petalMaterial, stemMaterial, receptacleMaterial, leafMaterial) {
+    constructor(scene, flowerRadius, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks, petalMaterial, stemMaterial, receptacleMaterial, leafMaterial) {
         super(scene);
-        this.flowerDiameter = flowerDiameter;
+        this.flowerRadius = flowerRadius;
+        this.flowerDiameter = 2 * this.flowerRadius;
         this.numPetals = numPetals;
         this.petalColor = petalColor;
         this.heartRadius = heartRadius;

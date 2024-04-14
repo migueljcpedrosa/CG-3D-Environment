@@ -47,13 +47,20 @@ export class MyScene extends CGFscene {
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.petalAppearance = new CGFappearance(this);
-    this.petalAppearance.setAmbient(0.1, 0.1, 0.1, 1);
-    this.petalAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
-    this.petalAppearance.setSpecular(0.1, 0.1, 0.1, 1);
-    this.petalAppearance.setShininess(10.0);
-    this.petalAppearance.loadTexture('images/pinkpetal.jpg');
-    this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.petalAppearance1 = new CGFappearance(this);
+    this.petalAppearance1.setAmbient(0.1, 0.1, 0.1, 1);
+    this.petalAppearance1.setDiffuse(0.9, 0.9, 0.9, 1);
+    this.petalAppearance1.setSpecular(0.1, 0.1, 0.1, 1);
+    this.petalAppearance1.setShininess(10.0);
+    this.petalAppearance1.loadTexture('images/pinkpetal.jpg');
+    this.petalAppearance1.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.petalAppearance2 = new CGFappearance(this);
+    this.petalAppearance2.setAmbient(0.1, 0.1, 0.1, 1);
+    this.petalAppearance2.setDiffuse(0.9, 0.9, 0.9, 1);
+    this.petalAppearance2.setSpecular(0.1, 0.1, 0.1, 1);
+    this.petalAppearance2.setShininess(10.0);
+    this.petalAppearance2.loadTexture('images/bluepetal.jpg');
 
     this.stemAppearance = new CGFappearance(this);
     this.stemAppearance.setAmbient(0.1, 0.3, 0.1, 1);
@@ -84,10 +91,10 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.receptacle = new MyReceptacle(this, 1, 30, 30, this.receptacleAppearance);
     this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30, this.stemAppearance);
-    this.petal = new MyPetal(this, 100, this.petalAppearance);
-    this.flower = new MyFlower(this, 7, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
+    this.petal = new MyPetal(this, 100, this.petalAppearance1);
+    this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
     this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance);
-    this.garden = new MyGarden(this, 5, 5, this.petalAppearance, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
+    this.garden = new MyGarden(this, 5, 5, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
 
   }
   initLights() {
