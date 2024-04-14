@@ -1,4 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
+import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyReceptacle } from "./Flower/MyReceptacle.js";
 import { MyStem } from "./Flower/MyStem.js";
@@ -42,10 +43,11 @@ export class MyScene extends CGFscene {
 
     this.enableTextures(true);
 
-    this.texture = new CGFtexture(this, "images/terrain.jpg");
-    this.appearance = new CGFappearance(this);
-    this.appearance.setTexture(this.texture);
-    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+        this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.panorama = new CGFtexture(this, "images/panorama.png");
+        this.appearance = new CGFappearance(this);
+        this.appearance.setTexture(this.texture);
+        this.appearance.setTextureWrap('REPEAT', 'REPEAT');this.sphereAppearance = new CGFappearance(this);
 
     this.petalAppearance1 = new CGFappearance(this);
     this.petalAppearance1.setAmbient(0.1, 0.1, 0.1, 1);
@@ -96,7 +98,9 @@ export class MyScene extends CGFscene {
     this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance);
     this.garden = new MyGarden(this, 5, 5, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
 
+    this.myPanorama = new MyPanorama(this, this.panorama);
   }
+
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -105,7 +109,7 @@ export class MyScene extends CGFscene {
   }
   initCameras() {
     this.camera = new CGFcamera(
-      1.0,
+      1.5,
       0.1,
       1000,
       vec3.fromValues(50, 10, 15),
@@ -129,6 +133,7 @@ export class MyScene extends CGFscene {
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
 
+    this.setGlobalAmbientLight(1, 1, 1, 1);
     // Draw axis
     if (this.displayAxis) this.axis.display();
     if (this.displayReceptacle) this.receptacle.display();
@@ -146,6 +151,7 @@ export class MyScene extends CGFscene {
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
     this.popMatrix();
+    this.myPanorama.display();
 
     // ---- END Primitive drawing section
   }
