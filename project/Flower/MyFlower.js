@@ -160,6 +160,18 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix();
         }
 
+        for (let i = 0; i < this.numPetals; i++) {
+            this.scene.pushMatrix();
+            this.scene.translate(0, 0, -this.heartRadius + 0.2);
+            this.scene.rotate((angleBefore+this.angleBetweenPetals + this.angleBetweenPetals/2) * Math.PI / 180, 0, 1, 0);
+            angleBefore += this.angleBetweenPetals;
+            this.scene.translate(0, 0, -this.heartRadius + 0.2);
+            this.scene.scale((this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2);
+            this.scene.rotate(Math.PI/4, 1, 0, 0);
+            this.petals[i].display();
+            this.scene.popMatrix();
+        }
+
         this.scene.popMatrix();
 
         this.scene.popMatrix();
