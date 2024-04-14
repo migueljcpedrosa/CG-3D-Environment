@@ -26,12 +26,13 @@ export class MyGarden extends CGFobject {
             this.rotationAngles[row] = []; // Initialize row for angles
             for (let col = 0; col < numCols; col++) {
                 // Create a new MyFlower instance with random parameters for each position
+                let flowerDiameterTemp = Math.floor(Math.random() * (10 - 3 + 1)) + 3;
                 this.flowers[row][col] = new MyFlower(
                     scene,
-                    Math.floor(Math.random() * (10 - 3 + 1)) + 3, // flowerDiameter: Random between 3 and 10
+                    flowerDiameterTemp, // flowerDiameter: Random between 3 and 10
                     Math.floor(Math.random() * (7 - 4 + 1)) + 4, // Assuming some parameters are constant, adjust as needed
                     [Math.random(), Math.random(), Math.random(), 1], // Random petalColor
-                    Math.random() * (2 - 1) + 1, // heartRadius: Random between 1 and 3
+                    Math.random() * (0.25 * flowerDiameterTemp - 1) + 1, // heartRadius: Random between 1 and half the flowerDiameter
                     [Math.random(), Math.random(), Math.random(), 1], // Random heartColor
                     Math.random() * (0.7 - 0.4) + 0.4, // stemRadius: Constant in this example
                     Math.random() * (5 - 3) + 3, // stemHeight: Random between 3 and 5
