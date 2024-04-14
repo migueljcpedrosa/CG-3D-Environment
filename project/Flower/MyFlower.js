@@ -58,17 +58,17 @@ export class MyFlower extends CGFobject {
         }
 
         this.stemSegments = [];
-        for (let i = 0; i < this.numStemSegments - 1; i++) {
-            if (i >= 1){
-                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
+        for (let i = 0; i <= this.numStemSegments - 2; i++) {
+            if (i == 0){
+                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius + 0.5 * stemRadius, stemHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
             }
             else {
-                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius + 0.5 * stemRadius, stemHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
+                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
             }
         }
         this.heart = new MyReceptacle(scene, heartRadius, 10, 10);
         console.log(stemRadius, stemRadius, stemHeight, slices, stacks);
-        this.stem = new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial);
+        this.stem = new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemHeight, slices, stacks, this.stem);
 
         this.leafAngles = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {

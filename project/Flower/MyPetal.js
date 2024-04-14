@@ -73,9 +73,6 @@ export class MyPetal extends CGFobject {
         if (this.petalMaterial) {
             this.petalMaterial.apply();
         }
-        else {
-            this.scene.defaultAppearance.apply();
-        }
 
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/4, 1, 0, 0); 
