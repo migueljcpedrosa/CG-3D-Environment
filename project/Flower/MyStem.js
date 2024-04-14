@@ -1,4 +1,4 @@
-import { CGFobject } from '../../lib/CGF.js';
+import { CGFappearance, CGFobject } from '../../lib/CGF.js';
 /**
  * MyStem
  * @constructor
@@ -26,6 +26,17 @@ export class MyStem extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
         this.initBuffers();
+        this.initMaterial();
+    }
+
+    initMaterial()  {
+        this.stemAppearance = new CGFappearance(this.scene);
+        this.stemAppearance.setAmbient(0.1, 0.1, 0.1, 1);
+        this.stemAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.stemAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.stemAppearance.setShininess(10.0);
+        this.stemAppearance.loadTexture('images/greenstem.png');
+        this.stemAppearance.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     initBuffers() {
@@ -74,6 +85,7 @@ export class MyStem extends CGFobject {
     }
 
     display() {
+        this.stemAppearance.apply();
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         super.display();
