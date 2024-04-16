@@ -31,7 +31,7 @@ export class MyGarden extends CGFobject {
             this.rotationAngles[row] = []; // Initialize row for angles
             for (let col = 0; col < numCols; col++) {
                 // Create a new MyFlower instance with random parameters for each position
-                let flowerRadiusTemp = (Math.random() * (7 - 3)) + 3 / 2;
+                let flowerRadiusTemp = Math.random() * (3.5 - 1.5) + 1.5;
                 let chosenPetalMaterial = Math.random() < 0.5 ? this.petalMaterial1 : this.petalMaterial2;
                 this.flowers[row][col] = new MyFlower(
                     scene,
@@ -41,12 +41,12 @@ export class MyGarden extends CGFobject {
                     Math.random() * (0.35 - 0.3 * flowerRadiusTemp) + 0.3 * flowerRadiusTemp, // heartRadius: Random between 1 and half the flowerDiameter
                     [Math.random(), Math.random(), Math.random(), 1], // Random heartColor
                     Math.random() * (0.7 - 0.4) + 0.4, // stemRadius: Constant in this example
-                    Math.random() * (12 - 10) + 12, // stemHeight: Random between 3 and 5
+                    Math.random() * (12 - 10) + 10, // stemHeight: Random between 10 and 12
                     [0, 1, 0, 1], // stemColor
                     [0, 1, 0, 1], // leafColor
                     100, // minPetalAngle: Constant in this example
                     150, // maxPetalAngle: Constant in this example
-                    Math.floor(Math.random() * (7 - 3)) + 3, // numStemSegments: Random between 3 and 7
+                    Math.floor(Math.random() * (7 - 4)) + 4, // numStemSegments: Random between 4 and 7
                     30, // slices: Constant in this example
                     30, // stacks: Constant in this example
                     chosenPetalMaterial,
@@ -101,22 +101,22 @@ export class MyGarden extends CGFobject {
             this.rotationAngles[row] = [];
             for (let col = 0; col < newNumCols; col++) {
                 // Similar flower creation logic as in the constructor
-                let flowerRadiusTemp = (Math.floor(Math.random() * (10 - 3 + 1)) + 3) / 2;
+                let flowerRadiusTemp = Math.random() * (3.5 - 1.5) + 1.5;
                 let chosenPetalMaterial = Math.random() < 0.5 ? this.petalMaterial1 : this.petalMaterial2;
                 this.flowers[row][col] = new MyFlower(
                     this.scene,
                     flowerRadiusTemp,
                     Math.floor(Math.random() * (7 - 3)) + 3,
                     [Math.random(), Math.random(), Math.random(), 1],
-                    Math.random() * (0.25 * flowerRadiusTemp - 1) + 1,
+                    Math.random() * (0.35 - 0.3* flowerRadiusTemp) + 0.3 * flowerRadiusTemp,
                     [Math.random(), Math.random(), Math.random(), 1],
                     Math.random() * (0.7 - 0.4) + 0.4,
-                    Math.random() * (5 - 3) + 3,
+                    Math.random() * (12 - 10) + 10,
                     [0, 1, 0, 1],
                     [0, 1, 0, 1],
                     100,
                     150,
-                    Math.floor(Math.random() * (7 - 2 + 1)) + 2,
+                    Math.floor(Math.random() * (7 - 4)) + 4,
                     30,
                     30,
                     chosenPetalMaterial,
