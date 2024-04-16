@@ -107,6 +107,8 @@ export class MyFlower extends CGFobject {
         for (let i = 0; i < this.numStemSegments - 1; i++) {
             this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight, this.leafMaterial));
         }
+
+        this.rotationAngleDegrees = Math.random() * (20 - 10) + 10;
     }
 
     display() {
@@ -114,8 +116,8 @@ export class MyFlower extends CGFobject {
 
         let cumulativeHeight = 0;
         let cumulativeForwardOffset = 0;
-        const rotationAngleDegrees = 20;
-        const rotationAngleRadians = rotationAngleDegrees * Math.PI / 180;
+        //const rotationAngleDegrees = 20;
+        const rotationAngleRadians = this.rotationAngleDegrees * Math.PI / 180;
         let cumulativeRotationAngle = 0;
         let finalI = 0;
         this.scene.translate(0, this.stemSegments[0].height, 0);

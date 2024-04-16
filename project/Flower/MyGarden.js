@@ -31,7 +31,7 @@ export class MyGarden extends CGFobject {
             this.rotationAngles[row] = []; // Initialize row for angles
             for (let col = 0; col < numCols; col++) {
                 // Create a new MyFlower instance with random parameters for each position
-                let flowerRadiusTemp = (Math.floor(Math.random() * (10 - 3 + 1)) + 3) / 2;
+                let flowerRadiusTemp = (Math.random() * (7 - 3)) + 3 / 2;
                 let chosenPetalMaterial = Math.random() < 0.5 ? this.petalMaterial1 : this.petalMaterial2;
                 this.flowers[row][col] = new MyFlower(
                     scene,
