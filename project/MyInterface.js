@@ -41,6 +41,11 @@ export class MyInterface extends CGFinterface {
         //
         this.gui.add(this.scene, 'displayGarden').name('Display Garden');
 
+        //
+        this.gui.add(this.scene, 'gardenRowsColumns', 5, 15).step(1).name('Garden Rows/Columns').onChange(value => {
+            this.scene.updateGarden(value, value);
+            //this.scene.redraw();
+        });
         return true;
     }
 }

@@ -40,14 +40,15 @@ export class MyScene extends CGFscene {
     this.displayLeaf = true;
     this.displayGarden = true;
     this.scaleFactor = 1;
+    this.gardenRowsColumns = 5;
 
     this.enableTextures(true);
 
-        this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.panorama = new CGFtexture(this, "images/panorama.png");
-        this.appearance = new CGFappearance(this);
-        this.appearance.setTexture(this.texture);
-        this.appearance.setTextureWrap('REPEAT', 'REPEAT');this.sphereAppearance = new CGFappearance(this);
+    this.appearance = new CGFappearance(this);
+    this.appearance.setTexture(this.texture);
+    this.appearance.setTextureWrap('REPEAT', 'REPEAT');this.sphereAppearance = new CGFappearance(this);
 
     this.petalAppearance1 = new CGFappearance(this);
     this.petalAppearance1.setAmbient(0.1, 0.1, 0.1, 1);
@@ -96,7 +97,7 @@ export class MyScene extends CGFscene {
     this.petal = new MyPetal(this, 100, this.petalAppearance1);
     this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
     this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance);
-    this.garden = new MyGarden(this, 5, 5, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
+    this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
   }
@@ -134,6 +135,8 @@ export class MyScene extends CGFscene {
     this.applyViewMatrix();
 
     this.setGlobalAmbientLight(1, 1, 1, 1);
+
+    //this.garden.updateGarden(this.gardenRowsColumns, this.gardenRowsColumns)
     // Draw axis
     if (this.displayAxis) this.axis.display();
     if (this.displayReceptacle) this.receptacle.display();
@@ -154,6 +157,16 @@ export class MyScene extends CGFscene {
     this.myPanorama.display();
 
     // ---- END Primitive drawing section
+  }
+
+  updateGarden(value) {
+    // Update the garden's rows and columns based on the slider value
+    this.garden.updateGarden(this.gardenRowsColumns, this.gardenRowsColumns); // Update the garden
+    this.redraw(); // Redraw the scene
+  }
+
+  redraw() {
+    this.display();
   }
 }
 
