@@ -60,6 +60,7 @@ export class MyFlower extends CGFobject {
             this.petals.push(new MyPetal(scene, randomAngle, this.petalMaterial));
         }
 
+        /*
         this.stemSegments = [];
         for (let i = 0; i <= this.numStemSegments - 2; i++) {
             if (i == 0){
@@ -69,6 +70,24 @@ export class MyFlower extends CGFobject {
                 this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
             }
         }
+        */
+
+
+        this.stemSegments = [];
+        for (let i = 0; i <= this.numStemSegments - 2; i++) {
+            let stemRandHeight = Math.random() * (stemHeight - 1) + 1;
+            if (i == 0){
+                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius + 0.5 * stemRadius, stemRandHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
+            }
+            else if (i ==  this.numStemSegments - 2) {
+                this.stemSegments.push(new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemRandHeight, slices, stacks, this.stemMaterial));
+            }
+            else {
+                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius, stemRandHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
+            }
+        }
+ 
+
         this.heart = new MyReceptacle(scene, heartRadius, 10, 10, this.receptacleMaterial);
         console.log(stemRadius, stemRadius, stemHeight, slices, stacks);
         this.stem = new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial);
@@ -91,19 +110,23 @@ export class MyFlower extends CGFobject {
         for (let i = 0; i < this.numStemSegments - 1; i++) {
             this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight, this.leafMaterial));
         }
+
+        this.rotationAngleDegrees = Math.random() * (20 - 10) + 10;
     }
 
     display() {
         this.scene.pushMatrix();
-        this.scene.translate(0, this.stemHeight, 0);
 
         let cumulativeHeight = 0;
         let cumulativeForwardOffset = 0;
-        const rotationAngleDegrees = 20;
-        const rotationAngleRadians = rotationAngleDegrees * Math.PI / 180;
+        //const rotationAngleDegrees = 20;
+        const rotationAngleRadians = this.rotationAngleDegrees * Math.PI / 180;
         let cumulativeRotationAngle = 0;
+        let finalI = 0;
+        this.scene.translate(0, this.stemSegments[0].height, 0);
     
-        for (let i = 0; i < this.numStemSegments-1; i++) {
+    
+        for (let i = 0; i < this.numStemSegments-2; i++) {
             this.scene.pushMatrix();
     
             // Apply the cumulative transformations
@@ -112,9 +135,7 @@ export class MyFlower extends CGFobject {
  
             this.scene.rotate(cumulativeRotationAngle, 1, 0, 0);
             cumulativeRotationAngle += rotationAngleRadians;
-            
-    
-            // Display the current stem segment
+
             this.scene.setDiffuse(0, 0.3, 0, 1); // Darker green diffuse color
             this.scene.setAmbient(0.05, 0.2, 0.05, 1); // Even darker green for the ambient color
             this.stemSegments[i].display();
@@ -123,12 +144,14 @@ export class MyFlower extends CGFobject {
             this.scene.rotate(leafAngle * Math.PI / 180, 0, 1, 0);
             this.scene.translate(0, 0, -this.stemRadius);
             this.leaves[i].display();
+
             this.scene.popMatrix();
     
             // Update the cumulativeHeight and cumulativeForwardOffset for the next segment
-            cumulativeHeight += Math.cos(cumulativeRotationAngle) * this.stemHeight;
-            cumulativeForwardOffset += Math.sin(cumulativeRotationAngle) * this.stemHeight;
-
+            console.log(this.stemSegments[i].height);
+            cumulativeHeight += Math.cos(cumulativeRotationAngle) * this.stemSegments[i+1].height;
+            cumulativeForwardOffset += Math.sin(cumulativeRotationAngle) * this.stemSegments[i+1].height;
+            finalI += 1;
         }
 
         this.scene.pushMatrix();
@@ -143,7 +166,7 @@ export class MyFlower extends CGFobject {
         //green color
         this.scene.setDiffuse(0, 0.3, 0, 1); // Darker green diffuse color
         this.scene.setAmbient(0.05, 0.2, 0.05, 1); // Even darker green for the ambient color
-        this.stem.display();
+        this.stemSegments[finalI].display();
         this.scene.popMatrix();
         this.scene.popMatrix();
 
