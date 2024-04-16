@@ -62,7 +62,9 @@ export class MyGarden extends CGFobject {
     display() {
         this.scene.pushMatrix(); // Save the current state of the matrix
         this.scene.translate(-150, -100, -150); // Translate to the center of the garden
-        const spacing = 70; // Define the spacing between the flowers
+        const baseSpacing = 70; // Base spacing for 5x5 grid
+        const baseSize = 5; // Base grid size for which the base spacing was determined
+        const spacing = baseSpacing * (baseSize / Math.max(this.numRows, this.numCols));
 
         for (let row = 0; row < this.numRows; row++) {
             for (let col = 0; col < this.numCols; col++) {
@@ -86,5 +88,44 @@ export class MyGarden extends CGFobject {
             }
         }
         this.scene.popMatrix(); // Restore the matrix state
+    }
+
+    updateGarden(newNumRows, newNumCols) {
+        this.numRows = newNumRows;
+        this.numCols = newNumCols;
+        this.flowers = [];
+        this.rotationAngles = [];
+    
+        for (let row = 0; row < newNumRows; row++) {
+            this.flowers[row] = [];
+            this.rotationAngles[row] = [];
+            for (let col = 0; col < newNumCols; col++) {
+                // Similar flower creation logic as in the constructor
+                let flowerRadiusTemp = (Math.floor(Math.random() * (10 - 3 + 1)) + 3) / 2;
+                let chosenPetalMaterial = Math.random() < 0.5 ? this.petalMaterial1 : this.petalMaterial2;
+                this.flowers[row][col] = new MyFlower(
+                    this.scene,
+                    flowerRadiusTemp,
+                    Math.floor(Math.random() * (7 - 3)) + 3,
+                    [Math.random(), Math.random(), Math.random(), 1],
+                    Math.random() * (0.25 * flowerRadiusTemp - 1) + 1,
+                    [Math.random(), Math.random(), Math.random(), 1],
+                    Math.random() * (0.7 - 0.4) + 0.4,
+                    Math.random() * (5 - 3) + 3,
+                    [0, 1, 0, 1],
+                    [0, 1, 0, 1],
+                    100,
+                    150,
+                    Math.floor(Math.random() * (7 - 2 + 1)) + 2,
+                    30,
+                    30,
+                    chosenPetalMaterial,
+                    this.stemMaterial,
+                    this.receptacleMaterial,
+                    this.leafMaterial
+                );
+                this.rotationAngles[row][col] = Math.random() * 2 * Math.PI;
+            }
+        }
     }
 }
