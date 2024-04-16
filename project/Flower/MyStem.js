@@ -78,7 +78,7 @@ export class MyStem extends CGFobject {
         if (this.stemMaterial) {
             this.stemMaterial.apply();
         }
-
+        //this.scene.translate(0, this.height, 0);
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         super.display();

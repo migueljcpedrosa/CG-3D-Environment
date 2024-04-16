@@ -41,12 +41,12 @@ export class MyGarden extends CGFobject {
                     Math.random() * (0.35 - 0.3 * flowerRadiusTemp) + 0.3 * flowerRadiusTemp, // heartRadius: Random between 1 and half the flowerDiameter
                     [Math.random(), Math.random(), Math.random(), 1], // Random heartColor
                     Math.random() * (0.7 - 0.4) + 0.4, // stemRadius: Constant in this example
-                    Math.random() * (5 - 3) + 3, // stemHeight: Random between 3 and 5
+                    Math.random() * (12 - 10) + 12, // stemHeight: Random between 3 and 5
                     [0, 1, 0, 1], // stemColor
                     [0, 1, 0, 1], // leafColor
                     100, // minPetalAngle: Constant in this example
                     150, // maxPetalAngle: Constant in this example
-                    Math.floor(Math.random() * (7 - 2 + 1)) + 2, // numStemSegments: Random between 2 and 7
+                    Math.floor(Math.random() * (7 - 3)) + 3, // numStemSegments: Random between 3 and 7
                     30, // slices: Constant in this example
                     30, // stacks: Constant in this example
                     chosenPetalMaterial,
