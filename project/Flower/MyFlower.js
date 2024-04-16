@@ -74,12 +74,12 @@ export class MyFlower extends CGFobject {
 
 
         this.stemSegments = [];
-        for (let i = 0; i <= this.numStemSegments - 2; i++) {
+        for (let i = 0; i <= this.numStemSegments - 1; i++) {
             let stemRandHeight = Math.random() * (stemHeight - 1) + 1;
             if (i == 0){
                 this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius + 0.5 * stemRadius, stemRandHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
             }
-            else if (i ==  this.numStemSegments - 2) {
+            else if (i == this.numStemSegments - 2) {
                 this.stemSegments.push(new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemRandHeight, slices, stacks, this.stemMaterial));
             }
             else {
