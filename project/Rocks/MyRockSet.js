@@ -1,9 +1,16 @@
-import { CGFobject } from '../lib/CGF.js';
-import { MySphere } from './MySphere.js';
+import { CGFobject } from '../../lib/CGF.js';
+import { MySphere } from '../MySphere.js';
+
 
 export class MyRock extends MySphere {
+
+    constructor(scene, slices, stacks) {
+        super(scene, slices, stacks, false);
+        this.initBuffers();
+    }
+
     initBuffers() {
-        super.initBuffers();
+        console.log(this.vertices);
 
         // Modify vertices slightly to create protrusions and indentations
         for (let i = 0; i < this.vertices.length; i += 3) {
