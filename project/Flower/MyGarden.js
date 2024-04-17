@@ -36,7 +36,7 @@ export class MyGarden extends CGFobject {
                 this.flowers[row][col] = new MyFlower(
                     scene,
                     flowerRadiusTemp, // flowerDiameter: Random between 3 and 10
-                    Math.floor(Math.random() * (7 - 3)) + 3, // Assuming some parameters are constant, adjust as needed
+                    Math.floor(Math.random() * (14 - 6)) + 6, // Assuming some parameters are constant, adjust as needed
                     [Math.random(), Math.random(), Math.random(), 1], // Random petalColor
                     Math.random() * (0.35 - 0.3 * flowerRadiusTemp) + 0.3 * flowerRadiusTemp, // heartRadius: Random between 1 and half the flowerDiameter
                     [Math.random(), Math.random(), Math.random(), 1], // Random heartColor

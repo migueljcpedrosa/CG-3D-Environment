@@ -183,7 +183,7 @@ export class MyFlower extends CGFobject {
             angleBefore += this.angleBetweenPetals;
             this.scene.translate(0, 0, -this.heartRadius + 0.2 * this.heartRadius);
             this.scene.scale((this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2);
-            this.scene.rotate(Math.PI/4, 1, 0, 0);
+            this.scene.rotate(Math.PI/5, 1, 0, 0);
             this.petals[i].display();
             this.scene.popMatrix();
         }
@@ -195,7 +195,7 @@ export class MyFlower extends CGFobject {
             angleBefore += this.angleBetweenPetals;
             this.scene.translate(0, 0, -this.heartRadius + 0.2);
             this.scene.scale((this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2);
-            this.scene.rotate(Math.PI/3, 1, 0, 0);
+            this.scene.rotate(Math.PI/4, 1, 0, 0);
             this.petals[i].display();
             this.scene.popMatrix();
         }
