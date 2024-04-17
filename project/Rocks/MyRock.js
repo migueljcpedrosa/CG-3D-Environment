@@ -1,11 +1,11 @@
 import { CGFobject } from '../../lib/CGF.js';
 
 export class MyRock extends CGFobject {
-    constructor(scene, slices, stacks, variation = 0.25, rockMaterial) {
+    constructor(scene, slices, stacks, variation = 0.1, rockMaterial) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
-        this.variation = variation;  // Degree of deformation outwards/inwards
+        this.variation = variation; // Reduced variation for subtler effect
         this.rockMaterial = rockMaterial;
         this.initBuffers();
     }
@@ -33,14 +33,15 @@ export class MyRock extends CGFobject {
                 let u = slice / this.slices;
                 let v = stack / this.stacks;
 
-                // Displacement along the normal for each vertex
-                let displacement = (Math.random() * 2 - 1) * this.variation; // Random displacement within the variation limit
-                let nx = x + x * displacement;
-                let ny = y + y * displacement;
-                let nz = z + z * displacement;
+                // Original vertex positions
+                this.vertices.push(x, y, z);
 
-                this.vertices.push(nx, ny, nz);
-                this.normals.push(x, y, z);
+                // Adjust normals for a rough texture
+                let nx = x + Math.random() * this.variation - this.variation / 2;
+                let ny = y + Math.random() * this.variation - this.variation / 2;
+                let nz = z + Math.random() * this.variation - this.variation / 2;
+                
+                this.normals.push(nx, ny, nz);
                 this.texCoords.push(u, v);
             }
         }
