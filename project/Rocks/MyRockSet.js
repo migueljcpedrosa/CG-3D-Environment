@@ -1,10 +1,9 @@
 import { CGFobject } from '../../lib/CGF.js';
 import { MyRock } from './MyRock.js'; 
 
-export class MyRockSet {
+export class MyRockSet extends CGFobject {
     constructor(scene, numRocks, rockBaseSize) {
         super(scene);
-        this.scene = scene;
         this.numRocks = numRocks;
         this.rockBaseSize = rockBaseSize;
         this.rocks = [];
