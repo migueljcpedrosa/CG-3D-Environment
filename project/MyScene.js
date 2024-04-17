@@ -41,9 +41,9 @@ export class MyScene extends CGFscene {
     this.leaf = new MyLeaf(this, 1, 1, 1, 3);
     //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
     
-    this.rockSet = new MyRockSet(this, 10); // Create a new MyRockSet object with 10 rocks
+    //changed here
+    this.rockSet = new MyRockSet(this, 10, 1);
 
-    
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayReceptacle = true;
@@ -51,7 +51,8 @@ export class MyScene extends CGFscene {
     this.displayPetal = true;
     this.displayFlower = true;
     this.displayLeaf = true;
-    this.displayRockSet = false; //changed here
+    //changed here
+    this.displayRockSet = true;
     this.scaleFactor = 1;
 
     this.enableTextures(true);
@@ -105,7 +106,10 @@ export class MyScene extends CGFscene {
     if (this.displayPetal) this.petal.display();
     if (this.displayFlower) this.flower.display();
     if (this.displayLeaf) this.leaf.display();
+
+    //changed here
     if (this.displayRockSet) this.rockSet.display();
+  
     // ---- BEGIN Primitive drawing section
 
 
