@@ -2,10 +2,11 @@ import { CGFobject } from '../../lib/CGF.js';
 import { MyRock } from './MyRock.js'; 
 
 export class MyRockSet extends CGFobject {
-    constructor(scene, numRocks, rockBaseSize) {
+    constructor(scene, numRocks, rockBaseSize, rockMaterial) {
         super(scene);
         this.numRocks = numRocks;
         this.rockBaseSize = rockBaseSize;
+        this.rockMaterial = rockMaterial;
         this.rocks = [];
         this.generateRocks();
     }
@@ -20,7 +21,7 @@ export class MyRockSet extends CGFobject {
             let rockX = (Math.random() - 0.5) * 2;
             let rockZ = (Math.random() - 0.5) * 2;
 
-            let rock = new MyRock(this.scene, 15, 10, rockSize * 0.2); // Adjust slices, stacks as needed
+            let rock = new MyRock(this.scene, 15, 10, rockSize * 0.2, this.rockMaterial); // Adjust slices, stacks as needed
             this.scene.translate(rockX, baseY + rockSize / 2, rockZ);
 
             // Random rotations

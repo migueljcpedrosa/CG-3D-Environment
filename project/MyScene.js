@@ -40,9 +40,7 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this, 7, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 3, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30);
     this.leaf = new MyLeaf(this, 1, 1, 1, 3);
     //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
-    
-    //changed here
-    this.rockSet = new MyRockSet(this, 10, 3);
+  
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -71,6 +69,7 @@ export class MyScene extends CGFscene {
     this.rockAppearance1.loadTexture('images/rock.jpg'); // Path to a rock texture image
 
     this.myPanorama = new MyPanorama(this, this.panorama);
+    this.rockSet = new MyRockSet(this, 10, 3, this.rockAppearance1);
   }
 
   initLights() {

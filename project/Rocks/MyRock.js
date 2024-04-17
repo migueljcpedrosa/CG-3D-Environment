@@ -1,11 +1,12 @@
 import { CGFobject } from '../../lib/CGF.js';
 
 export class MyRock extends CGFobject {
-    constructor(scene, slices, stacks, variation = 0.25) {
+    constructor(scene, slices, stacks, variation = 0.25, rockMaterial) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
         this.variation = variation;  // Degree of deformation outwards/inwards
+        this.rockMaterial = rockMaterial;
         this.initBuffers();
     }
 
@@ -56,5 +57,10 @@ export class MyRock extends CGFobject {
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
+    }
+
+    display() {
+        this.rockMaterial.apply();
+        super.display();
     }
 }
