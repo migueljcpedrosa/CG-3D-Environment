@@ -33,8 +33,10 @@ export class MyRockSet extends CGFobject {
     }
 
     display() {
+        this.scene.gl.disable(this.scene.gl.CULL_FACE);
         for (let rock of this.rocks) {
             rock.display();
         }
+        this.scene.gl.enable(this.scene.gl.CULL_FACE);
     }
 }
