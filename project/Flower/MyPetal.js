@@ -1,9 +1,22 @@
-import { CGFobject } from '../../lib/CGF.js';
-
+import { CGFappearance, CGFobject } from '../../lib/CGF.js';
+/**
+ * MyPetal
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param angle - Angle for the petal's rotation around its base, in degrees
+ *
+ * Represents a single petal of a flower with the ability to be rotated to a specified angle, 
+ * which allows for the creation of varied flower shapes when combined with other petal instances. 
+ * The petal's appearance, including its texture, is initialized in this class, and it 
+ * is composed of two triangles that share a common base and are defined in 3D space. 
+ * The petal material properties and texture are set in the initMaterial method, which can be 
+ * customized to create different petal appearances.
+ */
 export class MyPetal extends CGFobject {
-    constructor(scene, angle) {
+    constructor(scene, angle, petalMaterial) {
         super(scene);
         this.angle = angle; // Angle in degrees
+        this.petalMaterial = petalMaterial;
         this.initBuffers();
     }
 
@@ -40,13 +53,27 @@ export class MyPetal extends CGFobject {
             0, 0, -1, // vertex 5
         ];
 
-        this.texCoords = [];
+        this.texCoords = [
+            // Triangle 1
+            0, 1, // vertex 0
+            1, 1, // vertex 1
+            0.5, 0, // vertex 2
+            
+            // Triangle 2
+            0, 1, // vertex 3
+            1, 1, // vertex 4
+            0.5, 0, // vertex 5
+        ];
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
 
     display() {
+        if (this.petalMaterial) {
+            this.petalMaterial.apply();
+        }
+
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/4, 1, 0, 0); 
 

@@ -6,6 +6,7 @@ import { MyStem } from "./Flower/MyStem.js";
 import { MyPetal } from "./Flower/MyPetal.js";
 import { MyFlower } from "./Flower/MyFlower.js";
 import { MyLeaf } from "./Flower/MyLeaf.js";
+import { MyGarden } from "./Flower/MyGarden.js";
 
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 
@@ -30,15 +31,6 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
-
-    //Initialize scene objects
-    this.axis = new CGFaxis(this);
-    this.plane = new MyPlane(this,30);
-    this.receptacle = new MyReceptacle(this, 1, 30, 30);
-    this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30);
-    this.petal = new MyPetal(this, 100);
-    this.flower = new MyFlower(this, 7, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 3, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30);
-    this.leaf = new MyLeaf(this, 1, 1, 1, 3);
     //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
   
 
@@ -51,7 +43,9 @@ export class MyScene extends CGFscene {
     this.displayLeaf = true;
     //changed here
     this.displayRockSet = true;
+    this.displayGarden = true;
     this.scaleFactor = 1;
+    this.gardenRowsColumns = 5;
 
     this.enableTextures(true);
 
@@ -67,6 +61,54 @@ export class MyScene extends CGFscene {
     this.rockAppearance1.setSpecular(0.3, 0.3, 0.3, 1); // Slightly higher specular reflectance
     this.rockAppearance1.setShininess(20.0);            // more shininess, for rough surfaces
     this.rockAppearance1.loadTexture('images/rock.jpg'); // rock texture image
+    this.petalAppearance1 = new CGFappearance(this);
+    this.petalAppearance1.setAmbient(0.1, 0.1, 0.1, 1);
+    this.petalAppearance1.setDiffuse(0.9, 0.9, 0.9, 1);
+    this.petalAppearance1.setSpecular(0.1, 0.1, 0.1, 1);
+    this.petalAppearance1.setShininess(10.0);
+    this.petalAppearance1.loadTexture('images/pinkpetal.jpg');
+    this.petalAppearance1.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.petalAppearance2 = new CGFappearance(this);
+    this.petalAppearance2.setAmbient(0.1, 0.1, 0.1, 1);
+    this.petalAppearance2.setDiffuse(0.9, 0.9, 0.9, 1);
+    this.petalAppearance2.setSpecular(0.1, 0.1, 0.1, 1);
+    this.petalAppearance2.setShininess(10.0);
+    this.petalAppearance2.loadTexture('images/bluepetal.jpg');
+
+    this.stemAppearance = new CGFappearance(this);
+    this.stemAppearance.setAmbient(0.1, 0.3, 0.1, 1);
+    this.stemAppearance.setDiffuse(0.2, 0.5, 0.2, 1);
+    this.stemAppearance.setSpecular(0.1, 0.1, 0.1, 1)
+    this.stemAppearance.setShininess(10.0);
+    this.stemAppearance.loadTexture('images/greenstem.png');
+    this.stemAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.receptacleAppearance = new CGFappearance(this);
+    this.receptacleAppearance.setAmbient(0.1, 0.3, 0.1, 1);
+    this.receptacleAppearance.setDiffuse(0.2, 0.5, 0.2, 1);
+    this.receptacleAppearance.setSpecular(0.1, 0.1, 0.1, 1)
+    this.receptacleAppearance.setShininess(10.0);
+    this.receptacleAppearance.loadTexture('images/yellowreceptacle.png');
+    this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.leafAppearance = new CGFappearance(this);
+    this.leafAppearance.setAmbient(0.1, 0.3, 0.1, 1);
+    this.leafAppearance.setDiffuse(0.2, 0.5, 0.2, 1);
+    this.leafAppearance.setSpecular(0.1, 0.1, 0.1, 1)
+    this.leafAppearance.setShininess(10.0);
+    this.leafAppearance.loadTexture('images/greenleaf.jpg');
+    this.leafAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    //Initialize scene objects
+    this.axis = new CGFaxis(this);
+    this.plane = new MyPlane(this,30);
+    this.receptacle = new MyReceptacle(this, 1, 30, 30, this.receptacleAppearance);
+    this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30, this.stemAppearance);
+    this.petal = new MyPetal(this, 100, this.petalAppearance1);
+    this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
+    this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance);
+    this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
     this.rockSet = new MyRockSet(this, 10, 3, this.rockAppearance1);
@@ -105,6 +147,8 @@ export class MyScene extends CGFscene {
     this.applyViewMatrix();
 
     this.setGlobalAmbientLight(1, 1, 1, 1);
+
+    //this.garden.updateGarden(this.gardenRowsColumns, this.gardenRowsColumns)
     // Draw axis
     if (this.displayAxis) this.axis.display();
     if (this.displayReceptacle) this.receptacle.display();
@@ -116,6 +160,7 @@ export class MyScene extends CGFscene {
     //changed here
     if (this.displayRockSet) this.rockSet.display();
   
+    if (this.displayGarden) this.garden.display();
     // ---- BEGIN Primitive drawing section
 
 
@@ -130,6 +175,16 @@ export class MyScene extends CGFscene {
 
 
     // ---- END Primitive drawing section
+  }
+
+  updateGarden(value) {
+    // Update the garden's rows and columns based on the slider value
+    this.garden.updateGarden(this.gardenRowsColumns, this.gardenRowsColumns); // Update the garden
+    this.redraw(); // Redraw the scene
+  }
+
+  redraw() {
+    this.display();
   }
 }
 
