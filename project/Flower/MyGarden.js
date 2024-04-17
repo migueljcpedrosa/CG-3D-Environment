@@ -47,8 +47,8 @@ export class MyGarden extends CGFobject {
                     100, // minPetalAngle: Constant in this example
                     150, // maxPetalAngle: Constant in this example
                     Math.floor(Math.random() * (7 - 4)) + 4, // numStemSegments: Random between 4 and 7
-                    30, // slices: Constant in this example
-                    30, // stacks: Constant in this example
+                    6, // slices: Constant in this example
+                    1, // stacks: Constant in this example
                     chosenPetalMaterial,
                     this.stemMaterial,
                     this.receptacleMaterial,
