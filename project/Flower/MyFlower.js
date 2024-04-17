@@ -88,7 +88,7 @@ export class MyFlower extends CGFobject {
         }
  
 
-        this.heart = new MyReceptacle(scene, heartRadius, 10, 10, this.receptacleMaterial);
+        this.heart = new MyReceptacle(scene, heartRadius, 5, 5, this.receptacleMaterial);
         console.log(stemRadius, stemRadius, stemHeight, slices, stacks);
         this.stem = new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial);
 
