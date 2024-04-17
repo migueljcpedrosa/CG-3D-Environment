@@ -1,11 +1,11 @@
 import { CGFobject } from '../../lib/CGF.js';
 
 export class MyRock extends CGFobject {
-    constructor(scene, slices, stacks, variation = 0.1, rockMaterial) {
+    constructor(scene, slices, stacks, variation = 0.05, rockMaterial) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
-        this.variation = variation; // Reduced variation for subtler effect
+        this.variation = variation;  // Lowered the variation for a more subtle effect
         this.rockMaterial = rockMaterial;
         this.initBuffers();
     }
@@ -15,6 +15,9 @@ export class MyRock extends CGFobject {
         this.indices = [];
         this.normals = [];
         this.texCoords = [];
+
+        // Add some noise based on vertex position to get a more natural look
+        const noise = (x, y, z) => Math.random() * 0.5 - 0.25;
 
         for (let stack = 0; stack <= this.stacks; stack++) {
             let theta = stack * Math.PI / this.stacks;
@@ -33,19 +36,24 @@ export class MyRock extends CGFobject {
                 let u = slice / this.slices;
                 let v = stack / this.stacks;
 
-                // Original vertex positions
-                this.vertices.push(x, y, z);
+                // Normal vector for the vertex
+                let normalX = x;
+                let normalY = y;
+                let normalZ = z;
 
-                // Adjust normals for a rough texture
-                let nx = x + Math.random() * this.variation - this.variation / 2;
-                let ny = y + Math.random() * this.variation - this.variation / 2;
-                let nz = z + Math.random() * this.variation - this.variation / 2;
-                
-                this.normals.push(nx, ny, nz);
+                // Adding some noise to the vertex position
+                let noiseValue = noise(x, y, z) * this.variation;
+                let displacedX = x + normalX * noiseValue;
+                let displacedY = y + normalY * noiseValue;
+                let displacedZ = z + normalZ * noiseValue;
+
+                this.vertices.push(displacedX, displacedY, displacedZ);
+                this.normals.push(normalX, normalY, normalZ);
                 this.texCoords.push(u, v);
             }
         }
 
+        // Create indices for the vertices to form triangles
         for (let stack = 0; stack < this.stacks; stack++) {
             for (let slice = 0; slice < this.slices; slice++) {
                 let first = (stack * (this.slices + 1)) + slice;
