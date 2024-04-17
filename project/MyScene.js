@@ -63,6 +63,13 @@ export class MyScene extends CGFscene {
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');this.sphereAppearance = new CGFappearance(this);
 
+    this.rockAppearance1 = new CGFappearance(this);
+    this.rockAppearance1.setAmbient(0.2, 0.2, 0.2, 1);  // Slightly brighter ambient reflectance
+    this.rockAppearance1.setDiffuse(0.6, 0.6, 0.6, 1);  // Moderate diffuse reflectance
+    this.rockAppearance1.setSpecular(0.3, 0.3, 0.3, 1); // Slightly higher specular reflectance
+    this.rockAppearance1.setShininess(20.0);            // A bit more shininess than petals, typical for rough surfaces
+    this.rockAppearance1.loadTexture('images/rock.jpg'); // Path to a rock texture image
+
     this.myPanorama = new MyPanorama(this, this.panorama);
   }
 
