@@ -42,7 +42,7 @@ export class MyScene extends CGFscene {
     //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
     
     //changed here
-    this.rockSet = new MyRockSet(this, 10, 1);
+    this.rockSet = new MyRockSet(this, 10, 3);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
