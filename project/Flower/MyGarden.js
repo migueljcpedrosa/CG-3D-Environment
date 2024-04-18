@@ -44,9 +44,9 @@ export class MyGarden extends CGFobject {
                 this.flowers[row][col] = new MyFlower(
                     this.scene,
                     flowerRadiusTemp,
-                    Math.floor(Math.random() * (7 - 3)) + 3,
+                    Math.floor(Math.random() * (5 - 3)) + 3,
                     [Math.random(), Math.random(), Math.random(), 1],
-                    Math.random() * (0.35 - 0.3 * flowerRadiusTemp) + 0.3 * flowerRadiusTemp,
+                    Math.random() * (0.35 - 0.33 * flowerRadiusTemp) + 0.33 * flowerRadiusTemp,
                     [Math.random(), Math.random(), Math.random(), 1],
                     Math.random() * (0.4 - 0.2) + 0.2,
                     Math.random() * (10 - 8) + 8,

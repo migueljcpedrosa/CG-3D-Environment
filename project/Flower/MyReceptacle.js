@@ -61,7 +61,7 @@ export class MyReceptacle extends CGFobject {
         this.scene.gl.disable(this.scene.gl.CULL_FACE);
         this.receptacleMaterial.apply();
         this.scene.pushMatrix();
-        this.scene.scale(1.2, 0.2, 1.2); // Adjust scaling if necessary
+        this.scene.scale(1.2, 0.2, 1.2);
         this.scene.setAmbient(1, 1, 0, 1); // Soft yellow for ambient light
         this.scene.setDiffuse(1, 1, 0, 1); // Bright yellow for diffuse light
         this.scene.setSpecular(1, 1, 0, 1); // Shiny yellow highlights
