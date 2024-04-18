@@ -52,7 +52,6 @@ export class MyScene extends CGFscene {
 
     this.petalAppearance1 = new CGFappearance(this);
     this.petalAppearance1.setAmbient(0.1, 0.1, 0.1, 1);
-    this.petalAppearance1.setDiffuse(0.9, 0.9, 0.9, 1);
     this.petalAppearance1.setSpecular(0.1, 0.1, 0.1, 1);
     this.petalAppearance1.setShininess(10.0);
     this.petalAppearance1.loadTexture('images/pinkpetal.jpg');
@@ -60,7 +59,6 @@ export class MyScene extends CGFscene {
 
     this.petalAppearance2 = new CGFappearance(this);
     this.petalAppearance2.setAmbient(0.1, 0.1, 0.1, 1);
-    this.petalAppearance2.setDiffuse(0.9, 0.9, 0.9, 1);
     this.petalAppearance2.setSpecular(0.1, 0.1, 0.1, 1);
     this.petalAppearance2.setShininess(10.0);
     this.petalAppearance2.loadTexture('images/bluepetal.jpg');
@@ -93,9 +91,9 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.receptacle = new MyReceptacle(this, 1, 30, 30, this.receptacleAppearance);
     this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30, this.stemAppearance, [0, 1, 0, 1]);
-    this.petal = new MyPetal(this, 100, this.petalAppearance1);
+    this.petal = new MyPetal(this, 100, this.petalAppearance1, [1, 0, 0, 1]);
     this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
-    this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.stemAppearance, this.leafAppearance, [0, 1, 0, 1]);
+    this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance, [0, 1, 0, 1]);
     this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
@@ -106,6 +104,11 @@ export class MyScene extends CGFscene {
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
+
+    this.lights[1].setPosition(0, 15, 5, 1);
+    this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[1].enable();
+    this.lights[1].update();
   }
   initCameras() {
     this.camera = new CGFcamera(
@@ -153,7 +156,7 @@ export class MyScene extends CGFscene {
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
     this.popMatrix();
-    //this.myPanorama.display();
+    this.myPanorama.display();
 
     // ---- END Primitive drawing section
   }

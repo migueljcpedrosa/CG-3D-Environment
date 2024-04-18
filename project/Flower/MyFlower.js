@@ -53,17 +53,24 @@ export class MyFlower extends CGFobject {
         this.receptacleMaterial = receptacleMaterial;
         this.leafMaterial = leafMaterial;
 
+        //different colors for flower components
+        this.shadesOfGreen = [[0.13, 0.2, 0.13, 1], [0.1, 0.35, 0.1, 1], [0, 0, 0, 1], [0.0, 0.25, 0.0, 1]];
+        this.petalColors = [[1, 0.4, 0.8, 1], [0.8, 0.6, 1, 1], [1, 0.7, 0.8, 1], [0.4, 0.7, 1, 1], [1, 1, 0.8, 1], [1, 0.5, 0.6, 1], [1, 1, 1, 1], [0.7, 0.5, 1, 1]];
+        
+        //random values to choose flower colors
+        let chooseColor = Math.floor(Math.random() * (3 - 0 + 0));
+        let chooseColorPetal = Math.floor(Math.random() * 8);
+
+        //generate petals with adequate parameters
         this.petals = [];
         this.angleBetweenPetals = 360 / this.numPetals;
         for (let i = 0; i < this.numPetals; i++) {
             let randomAngle = Math.random() * (this.maxPetalAngle - this.minPetalAngle) + this.minPetalAngle; // Randomize between minPetalAngle and maxPetalAngle
-            this.petals.push(new MyPetal(scene, randomAngle, this.petalMaterial));
+            this.petals.push(new MyPetal(scene, randomAngle, this.petalMaterial, this.petalColors[chooseColorPetal]));
         }
 
-        this.shadesOfGreen = [[0.13, 0.2, 0.13, 1], [0.1, 0.35, 0.1, 1], [0, 0, 0, 1], [0.0, 0.25, 0.0, 1]];
-
+        //generate stem segments with adequate parameters
         this.stemSegments = [];
-        let chooseColor = Math.floor(Math.random() * (3 - 0 + 0));
         for (let i = 0; i <= this.numStemSegments - 1; i++) {
             let stemRandHeight = Math.random() * (stemHeight - 1) + 1;
             if (i == 0){
@@ -77,11 +84,12 @@ export class MyFlower extends CGFobject {
             }
         }
  
-
+        //generate heart and top stem
         this.heart = new MyReceptacle(scene, heartRadius, 5, 1, this.receptacleMaterial);
         console.log(stemRadius, stemRadius, stemHeight, slices, stacks);
         this.stem = new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial, this.shadesOfGreen[chooseColor]);
 
+        //store lead angles and scales
         this.leafAngles = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {
             this.leafAngles.push(Math.random() * 360); // Store the random angle
@@ -96,25 +104,28 @@ export class MyFlower extends CGFobject {
             });
         }
 
+        //generate leaves with adequate parameters
         this.leaves = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {
-            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight, this.stemMaterial, this.leafMaterial, this.shadesOfGreen[chooseColor]));
+            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight, this.leafMaterial, this.shadesOfGreen[chooseColor]));
         }
 
+        //generate middle stems (these are used in the junctions of bigger stem segments)
         this.middleStems = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {
             this.middleStems.push(new MyStem(scene, stemRadius, stemRadius, 0.4, slices, stacks, this.stemMaterial, this.shadesOfGreen[chooseColor]));
         }
 
+        //random rotation angle between stem segments to simulate curvature of the flower
         this.rotationAngleDegrees = Math.random() * (20 - 0) + 0;
     }
 
     display() {
         this.scene.pushMatrix();
 
+        // Apply the cumulative transformations
         let cumulativeHeight = 0;
         let cumulativeForwardOffset = 0;
-        //const rotationAngleDegrees = 20;
         const rotationAngleRadians = this.rotationAngleDegrees * Math.PI / 180;
         let cumulativeRotationAngle = 0;
         let finalI = 0;
@@ -161,7 +172,7 @@ export class MyFlower extends CGFobject {
         this.scene.setAmbient(0.6, 0.6, 0.1, 1.0); // Bright yellow ambient light
         this.heart.display();
         this.scene.pushMatrix();
-        //green color
+
         this.scene.setDiffuse(0, 0.3, 0, 1); // Darker green diffuse color
         this.scene.setAmbient(0.05, 0.2, 0.05, 1); // Even darker green for the ambient color
         this.stemSegments[finalI].display();
@@ -170,11 +181,11 @@ export class MyFlower extends CGFobject {
 
     
         this.scene.pushMatrix();
-        //white color
         this.scene.setDiffuse(1, 1, 1, 1);
         this.scene.setAmbient(0.3, 0.3, 0.3, 1.0); // Soft ambient light for the white petals
         let angleBefore = 0;
 
+        // Display the petals (lower layer)
         for (let i = 0; i < this.numPetals; i++) {
             this.scene.pushMatrix();
             this.scene.rotate((angleBefore+this.angleBetweenPetals) * Math.PI / 180, 0, 1, 0);
@@ -186,6 +197,7 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix();
         }
 
+        // Display the petals (upper layer)
         for (let i = 0; i < this.numPetals; i++) {
             this.scene.pushMatrix();
             this.scene.translate(0, 0.1 * this.heartRadius, -0.1 *this.heartRadius);

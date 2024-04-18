@@ -13,10 +13,11 @@ import { CGFappearance, CGFobject } from '../../lib/CGF.js';
  * customized to create different petal appearances.
  */
 export class MyPetal extends CGFobject {
-    constructor(scene, angle, petalMaterial) {
+    constructor(scene, angle, petalMaterial, petalColor) {
         super(scene);
         this.angle = angle; // Angle in degrees
         this.petalMaterial = petalMaterial;
+        this.petalColor = petalColor;
         this.randomInsertionAngle = Math.random() * (10 - 5) + 5;
         this.randomInsertionAngleRad = this.randomInsertionAngle * Math.PI / 180;
         this.initBuffers();
@@ -77,6 +78,7 @@ export class MyPetal extends CGFobject {
         }
 
         this.scene.pushMatrix();
+        this.scene.setDiffuse(this.petalColor[0], this.petalColor[1], this.petalColor[2], this.petalColor[3]);
         this.scene.rotate(Math.PI/4, 1, 0, 0); 
 
         this.scene.pushMatrix();

@@ -28,6 +28,7 @@ export class MyGarden extends CGFobject {
         this.initRandomValuesAndFlowers();
     }
 
+    // Generate flower anywhere within their matrix square
     initRandomValuesAndFlowers() {
         this.flowers = [];
         this.rotationAngles = [];
@@ -67,6 +68,7 @@ export class MyGarden extends CGFobject {
         }
     }
 
+    // Update the number of rows and columns in the garden
     updateGarden(newNumRows, newNumCols) {
         this.numRows = newNumRows;
         this.numCols = newNumCols;
@@ -74,6 +76,7 @@ export class MyGarden extends CGFobject {
         this.initRandomValuesAndFlowers();
     }
 
+    // Display the garden
     display() {
         this.scene.pushMatrix(); // Save the current state of the matrix
         this.scene.translate(-185, -100, -185); // Center the garden
@@ -81,11 +84,12 @@ export class MyGarden extends CGFobject {
         const baseSize = 5;
         const spacing = baseSpacing * (baseSize / Math.max(this.numRows, this.numCols));
 
+        // Loop through each flower in the garden
         for (let row = 0; row < this.numRows; row++) {
             for (let col = 0; col < this.numCols; col++) {
                 this.scene.pushMatrix();
-                let xPosition = col * spacing + spacing / this.randomDivisors[row * this.numCols + col];
-                let zPosition = row * spacing + spacing / this.randomDivisors[row * this.numCols + col];
+                let xPosition = col * spacing + spacing / this.randomDivisors[row * this.numCols + col]; // Random offset within each flower's matrix square limits
+                let zPosition = row * spacing + spacing / this.randomDivisors[row * this.numCols + col]; // Random offset within each flower's matrix square limits
                 this.scene.translate(xPosition, 0, zPosition);
                 this.scene.rotate(this.rotationAngles[row][col], 0, 1, 0);
                 this.flowers[row][col].display();
