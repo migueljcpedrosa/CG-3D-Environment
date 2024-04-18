@@ -53,17 +53,19 @@ export class MyFlower extends CGFobject {
         this.receptacleMaterial = receptacleMaterial;
         this.leafMaterial = leafMaterial;
 
+        this.shadesOfGreen = [[0.13, 0.2, 0.13, 1], [0.1, 0.35, 0.1, 1], [0, 0, 0, 1], [0.0, 0.25, 0.0, 1]];
+        this.petalColors = [[1, 0, 0, 1], [1, 0.1, 0, 1], [1, 1, 1, 1], [0, 0.1, 1, 1], [0, 0, 1, 1], [1, 0, 1, 1], [1, 0.2, 0.5, 1]];
+        let chooseColor = Math.floor(Math.random() * (3 - 0 + 0));
+        let chooseColorPetal = Math.floor(Math.random() * (6 - 0 + 0));
+
         this.petals = [];
         this.angleBetweenPetals = 360 / this.numPetals;
         for (let i = 0; i < this.numPetals; i++) {
             let randomAngle = Math.random() * (this.maxPetalAngle - this.minPetalAngle) + this.minPetalAngle; // Randomize between minPetalAngle and maxPetalAngle
-            this.petals.push(new MyPetal(scene, randomAngle, this.petalMaterial));
+            this.petals.push(new MyPetal(scene, randomAngle, this.petalMaterial, this.petalColors[chooseColorPetal]));
         }
 
-        this.shadesOfGreen = [[0.13, 0.2, 0.13, 1], [0.1, 0.35, 0.1, 1], [0, 0, 0, 1], [0.0, 0.25, 0.0, 1]];
-
         this.stemSegments = [];
-        let chooseColor = Math.floor(Math.random() * (3 - 0 + 0));
         for (let i = 0; i <= this.numStemSegments - 1; i++) {
             let stemRandHeight = Math.random() * (stemHeight - 1) + 1;
             if (i == 0){
