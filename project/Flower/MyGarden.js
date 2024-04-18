@@ -76,7 +76,7 @@ export class MyGarden extends CGFobject {
 
     display() {
         this.scene.pushMatrix(); // Save the current state of the matrix
-        this.scene.translate(-150, -100, -150); // Center the garden
+        this.scene.translate(-185, -100, -185); // Center the garden
         const baseSpacing = 70;
         const baseSize = 5;
         const spacing = baseSpacing * (baseSize / Math.max(this.numRows, this.numCols));
