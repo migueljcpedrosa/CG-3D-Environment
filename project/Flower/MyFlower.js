@@ -98,7 +98,7 @@ export class MyFlower extends CGFobject {
 
         this.leaves = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {
-            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight, this.stemMaterial, this.leafMaterial, this.shadesOfGreen[chooseColor]));
+            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight, this.leafMaterial, this.shadesOfGreen[chooseColor]));
         }
 
         this.middleStems = [];
