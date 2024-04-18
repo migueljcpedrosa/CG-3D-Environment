@@ -14,50 +14,43 @@ import { CGFappearance, CGFobject } from '../../lib/CGF.js';
  * effects across the curved surface.
  */
 export class MyReceptacle extends CGFobject {
-    constructor(scene, radius, slices, stacks, receptacleMaterial) {
+    constructor(scene, radius, slices, height, receptacleMaterial) {
         super(scene);
         this.radius = radius;
         this.slices = slices;
-        this.stacks = stacks;
+        this.height = height; // Height of the center vertex above the plane
         this.receptacleMaterial = receptacleMaterial;
         this.initBuffers();
     }
+
     initBuffers() {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
         this.texCoords = [];
 
-        for (let stack = 0; stack <= this.stacks; stack++) {
-            let phi = stack * Math.PI / this.stacks;
-            let sinPhi = Math.sin(phi);
-            let cosPhi = Math.cos(phi);
+        // Center vertex
+        this.vertices.push(0, this.height, 0); // Center vertex at a height
+        this.normals.push(0, 1, 0); // Normal pointing up
+        this.texCoords.push(0.5, 0.5); // Texture coordinate for the center
 
-            for (let slice = 0; slice <= this.slices; slice++) {
-                let theta = slice * 2 * Math.PI / this.slices;
-                let sinTheta = Math.sin(theta);
-                let cosTheta = Math.cos(theta);
+        // Perimeter vertices
+        for (let slice = 0; slice <= this.slices; slice++) {
+            let angle = slice * 2 * Math.PI / this.slices;
+            let x = this.radius * Math.cos(angle);
+            let z = this.radius * Math.sin(angle);
+            let y = 0; // All perimeter vertices lie on the plane
 
-                let x = this.radius * cosTheta * sinPhi;
-                let y = this.radius * cosPhi;
-                let z = this.radius * sinTheta * sinPhi;
-                let u = 1 - (slice / this.slices);
-                let v = 1 - (stack / this.stacks);
-
-                this.vertices.push(x, y, z);
-                this.normals.push(x, y, z);
-                this.texCoords.push(u, v);
-            }
+            this.vertices.push(x, y, z);
+            this.normals.push(0, 1, 0); // Normals pointing up
+            let u = 0.5 + 0.5 * Math.cos(angle); // Adjust texture coordinates
+            let v = 0.5 + 0.5 * Math.sin(angle);
+            this.texCoords.push(u, v);
         }
 
-        for (let stack = 0; stack < this.stacks; stack++) {
-            for (let slice = 0; slice < this.slices; slice++) {
-                let first = (stack * (this.slices + 1)) + slice;
-                let second = first + this.slices + 1;
-
-                this.indices.push(first, second, first + 1);
-                this.indices.push(second, second + 1, first + 1);
-            }
+        // Indices
+        for (let i = 1; i <= this.slices; i++) {
+            this.indices.push(0, i, i % this.slices + 1);
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;
@@ -68,7 +61,7 @@ export class MyReceptacle extends CGFobject {
         this.scene.gl.disable(this.scene.gl.CULL_FACE);
         this.receptacleMaterial.apply();
         this.scene.pushMatrix();
-        this.scene.scale(1.2, 0.7, 1.2);
+        this.scene.scale(1.2, 0.2, 1.2); // Adjust scaling if necessary
         this.scene.setAmbient(1, 1, 0, 1); // Soft yellow for ambient light
         this.scene.setDiffuse(1, 1, 0, 1); // Bright yellow for diffuse light
         this.scene.setSpecular(1, 1, 0, 1); // Shiny yellow highlights
