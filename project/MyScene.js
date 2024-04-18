@@ -66,9 +66,8 @@ export class MyScene extends CGFscene {
     this.petalAppearance2.loadTexture('images/bluepetal.jpg');
 
     this.stemAppearance = new CGFappearance(this);
-    this.stemAppearance.setAmbient(0.1, 0.3, 0.1, 1);
-    this.stemAppearance.setDiffuse(0.2, 0.5, 0.2, 1);
-    this.stemAppearance.setSpecular(0.1, 0.1, 0.1, 1)
+    this.stemAppearance.setDiffuse(0.1, 0.35, 0.1, 1);
+    this.stemAppearance.setSpecular(0.1, 0.1, 0.1, 0.5)
     this.stemAppearance.setShininess(10.0);
     this.stemAppearance.loadTexture('images/greenstem.png');
     this.stemAppearance.setTextureWrap('REPEAT', 'REPEAT');

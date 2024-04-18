@@ -60,7 +60,7 @@ export class MyFlower extends CGFobject {
             this.petals.push(new MyPetal(scene, randomAngle, this.petalMaterial));
         }
 
-        this.shadesOfGreen = [[0.13, 0.55, 0.13, 1], [0.21, 0.37, 0.23, 1], [0, 0.26, 0.15, 1], [0.19, 0.47, 0.45, 1]];
+        this.shadesOfGreen = [[0.13, 0.2, 0.13, 1], [0.1, 0.35, 0.1, 1], [0, 0, 0, 1], [0.0, 0.25, 0.0, 1]];
         /*
         this.stemSegments = [];
         for (let i = 0; i <= this.numStemSegments - 2; i++) {
