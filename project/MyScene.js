@@ -66,9 +66,8 @@ export class MyScene extends CGFscene {
     this.petalAppearance2.loadTexture('images/bluepetal.jpg');
 
     this.stemAppearance = new CGFappearance(this);
-    this.stemAppearance.setAmbient(0.1, 0.3, 0.1, 1);
-    this.stemAppearance.setDiffuse(0.2, 0.5, 0.2, 1);
-    this.stemAppearance.setSpecular(0.1, 0.1, 0.1, 1)
+    this.stemAppearance.setDiffuse(0.1, 0.35, 0.1, 1);
+    this.stemAppearance.setSpecular(0.1, 0.1, 0.1, 0.5)
     this.stemAppearance.setShininess(10.0);
     this.stemAppearance.loadTexture('images/greenstem.png');
     this.stemAppearance.setTextureWrap('REPEAT', 'REPEAT');
@@ -93,10 +92,10 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.receptacle = new MyReceptacle(this, 1, 30, 30, this.receptacleAppearance);
-    this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30, this.stemAppearance);
+    this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30, this.stemAppearance, [0, 1, 0, 1]);
     this.petal = new MyPetal(this, 100, this.petalAppearance1);
     this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
-    this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance);
+    this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.stemAppearance, this.leafAppearance, [0, 1, 0, 1]);
     this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
 
     this.myPanorama = new MyPanorama(this, this.panorama);

@@ -17,7 +17,7 @@ import { CGFappearance, CGFobject } from '../../lib/CGF.js';
  * orient the stem vertically in the scene.
  */
 export class MyStem extends CGFobject {
-    constructor(scene, baseRadius, topRadius, height, slices, stacks, stemMaterial) {
+    constructor(scene, baseRadius, topRadius, height, slices, stacks, stemMaterial, stemColor) {
         console.log(baseRadius, topRadius, height, slices, stacks);
         super(scene);
         this.baseRadius = baseRadius;
@@ -26,6 +26,7 @@ export class MyStem extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
         this.stemMaterial = stemMaterial;
+        this.stemColor = stemColor;
         this.initBuffers();
     }
 
@@ -79,6 +80,7 @@ export class MyStem extends CGFobject {
             this.stemMaterial.apply();
         }
         //this.scene.translate(0, this.height, 0);
+        this.scene.setDiffuse(this.stemColor[0], this.stemColor[1], this.stemColor[2], this.stemColor[3]);
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         super.display();

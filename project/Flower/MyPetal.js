@@ -17,6 +17,8 @@ export class MyPetal extends CGFobject {
         super(scene);
         this.angle = angle; // Angle in degrees
         this.petalMaterial = petalMaterial;
+        this.randomInsertionAngle = Math.random() * (10 - 5) + 5;
+        this.randomInsertionAngleRad = this.randomInsertionAngle * Math.PI / 180;
         this.initBuffers();
     }
 
@@ -79,7 +81,8 @@ export class MyPetal extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/4, 1, 0, 0); 
-        this.scene.translate(-0.5, -1, 0);
+        this.scene.rotate (this.randomInsertionAngleRad, 1, 1, 0);
+        this.scene.translate(-0.5, -0.8, 0);
         super.display(); // Triangle 1
         // The transformations are still in place for Triangle 2
         this.scene.rotate(this.angle * Math.PI / 180, 1, 0, 0); // Apply rotation to second triangle
