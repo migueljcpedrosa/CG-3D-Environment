@@ -95,7 +95,7 @@ export class MyScene extends CGFscene {
     this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30, this.stemAppearance, [0, 1, 0, 1]);
     this.petal = new MyPetal(this, 100, this.petalAppearance1);
     this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
-    this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance);
+    this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.stemAppearance, this.leafAppearance, [0, 1, 0, 1]);
     this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
 
     this.myPanorama = new MyPanorama(this, this.panorama);

@@ -15,14 +15,16 @@ import { MyStem } from './MyStem.js';
  * stemHeight variable to define its attachment point.
  */
 export class MyLeaf extends CGFobject {
-    constructor(scene, xScale, yScale, zScale, stemHeight, leafMaterial) {
+    constructor(scene, xScale, yScale, zScale, stemHeight, stemMaterial, leafMaterial, leafColor) {
         super(scene);
         this.xScale = xScale;
         this.yScale = yScale;
         this.zScale = zScale;
         this.stemHeight = stemHeight;
+        this.stemMaterial = stemMaterial;
         this.leafMaterial = leafMaterial;
-        this.stem = new MyStem(scene, 0.3, 0.3, 0.4, 3, 1, leafMaterial, [0.1, 0.6, 0.1, 1]);
+        this.leafColor = leafColor;
+        this.stem = new MyStem(scene, 0.3, 0.3, 0.4, 3, 1, stemMaterial, leafColor);
         this.initBuffers();
     }
 
@@ -80,8 +82,11 @@ export class MyLeaf extends CGFobject {
     display() {
         this.leafMaterial.apply();
         this.scene.pushMatrix();
+        this.scene.setDiffuse(this.leafColor[0], this.leafColor[1], this.leafColor[2], this.leafColor[3]);  
         this.scene.rotate(Math.PI/2, 1, 0, 0);
-        this.stem.display();
+        this.scene.pushMatrix();
+        //this.stem.display();
+        this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.pushMatrix();
         this.scene.scale(this.xScale, this.yScale, this.zScale);

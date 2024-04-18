@@ -61,18 +61,6 @@ export class MyFlower extends CGFobject {
         }
 
         this.shadesOfGreen = [[0.13, 0.2, 0.13, 1], [0.1, 0.35, 0.1, 1], [0, 0, 0, 1], [0.0, 0.25, 0.0, 1]];
-        /*
-        this.stemSegments = [];
-        for (let i = 0; i <= this.numStemSegments - 2; i++) {
-            if (i == 0){
-                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius + 0.5 * stemRadius, stemHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
-            }
-            else {
-                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
-            }
-        }
-        */
-
 
         this.stemSegments = [];
         let chooseColor = Math.floor(Math.random() * (3 - 0 + 0));
@@ -110,7 +98,12 @@ export class MyFlower extends CGFobject {
 
         this.leaves = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {
-            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight, this.leafMaterial));
+            this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight, this.stemMaterial, this.leafMaterial, this.shadesOfGreen[chooseColor]));
+        }
+
+        this.middleStems = [];
+        for (let i = 0; i < this.numStemSegments - 1; i++) {
+            this.middleStems.push(new MyStem(scene, stemRadius, stemRadius, 0.4, slices, stacks, this.stemMaterial, this.shadesOfGreen[chooseColor]));
         }
 
         this.rotationAngleDegrees = Math.random() * (20 - 0) + 0;
@@ -143,6 +136,10 @@ export class MyFlower extends CGFobject {
             this.leaf = new MyLeaf(this.scene);
             let leafAngle = this.leafAngles[i];
             this.scene.rotate(leafAngle * Math.PI / 180, 0, 1, 0);
+            this.scene.pushMatrix();
+            this.scene.translate(0, 0.2, 0);
+            this.middleStems[i].display();
+            this.scene.popMatrix();
             this.scene.translate(0, 0, -this.stemRadius);
             this.leaves[i].display();
 
