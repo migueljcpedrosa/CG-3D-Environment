@@ -52,7 +52,6 @@ export class MyScene extends CGFscene {
 
     this.petalAppearance1 = new CGFappearance(this);
     this.petalAppearance1.setAmbient(0.1, 0.1, 0.1, 1);
-    this.petalAppearance1.setDiffuse(0.9, 0.9, 0.9, 1);
     this.petalAppearance1.setSpecular(0.1, 0.1, 0.1, 1);
     this.petalAppearance1.setShininess(10.0);
     this.petalAppearance1.loadTexture('images/pinkpetal.jpg');
@@ -60,7 +59,6 @@ export class MyScene extends CGFscene {
 
     this.petalAppearance2 = new CGFappearance(this);
     this.petalAppearance2.setAmbient(0.1, 0.1, 0.1, 1);
-    this.petalAppearance2.setDiffuse(0.9, 0.9, 0.9, 1);
     this.petalAppearance2.setSpecular(0.1, 0.1, 0.1, 1);
     this.petalAppearance2.setShininess(10.0);
     this.petalAppearance2.loadTexture('images/bluepetal.jpg');
