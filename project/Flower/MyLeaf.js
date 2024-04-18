@@ -22,7 +22,7 @@ export class MyLeaf extends CGFobject {
         this.zScale = zScale;
         this.stemHeight = stemHeight;
         this.leafMaterial = leafMaterial;
-        this.stem = new MyStem(scene, 0.3, 0.3, 0.4, 3, 1);
+        this.stem = new MyStem(scene, 0.3, 0.3, 0.4, 3, 1, leafMaterial, [0.1, 0.6, 0.1, 1]);
         this.initBuffers();
     }
 

@@ -60,6 +60,7 @@ export class MyFlower extends CGFobject {
             this.petals.push(new MyPetal(scene, randomAngle, this.petalMaterial));
         }
 
+        this.shadesOfGreen = [[0.13, 0.55, 0.13, 1], [0.21, 0.37, 0.23, 1], [0, 0.26, 0.15, 1], [0.19, 0.47, 0.45, 1]];
         /*
         this.stemSegments = [];
         for (let i = 0; i <= this.numStemSegments - 2; i++) {
@@ -74,23 +75,24 @@ export class MyFlower extends CGFobject {
 
 
         this.stemSegments = [];
+        let chooseColor = Math.floor(Math.random() * (3 - 0 + 0));
         for (let i = 0; i <= this.numStemSegments - 1; i++) {
             let stemRandHeight = Math.random() * (stemHeight - 1) + 1;
             if (i == 0){
-                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius + 0.5 * stemRadius, stemRandHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
+                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius + 0.5 * stemRadius, stemRandHeight, slices, stacks, this.stemMaterial, this.shadesOfGreen[chooseColor])); //scene, baseRadius, topRadius, height, slices, stacks
             }
             else if (i == this.numStemSegments - 2) {
-                this.stemSegments.push(new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemRandHeight, slices, stacks, this.stemMaterial));
+                this.stemSegments.push(new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemRandHeight, slices, stacks, this.stemMaterial, this.shadesOfGreen[chooseColor]));
             }
             else {
-                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius, stemRandHeight, slices, stacks, this.stemMaterial)); //scene, baseRadius, topRadius, height, slices, stacks
+                this.stemSegments.push(new MyStem(scene, stemRadius, stemRadius, stemRandHeight, slices, stacks, this.stemMaterial, this.shadesOfGreen[chooseColor])); //scene, baseRadius, topRadius, height, slices, stacks
             }
         }
  
 
         this.heart = new MyReceptacle(scene, heartRadius, 5, 1, this.receptacleMaterial);
         console.log(stemRadius, stemRadius, stemHeight, slices, stacks);
-        this.stem = new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial);
+        this.stem = new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial, this.shadesOfGreen[chooseColor]);
 
         this.leafAngles = [];
         for (let i = 0; i < this.numStemSegments - 1; i++) {
@@ -124,7 +126,6 @@ export class MyFlower extends CGFobject {
         let cumulativeRotationAngle = 0;
         let finalI = 0;
         this.scene.translate(0, this.stemSegments[0].height, 0);
-    
     
         for (let i = 0; i < this.numStemSegments-2; i++) {
             this.scene.pushMatrix();
