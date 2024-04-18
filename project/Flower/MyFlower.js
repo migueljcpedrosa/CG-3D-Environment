@@ -111,7 +111,7 @@ export class MyFlower extends CGFobject {
             this.leaves.push(new MyLeaf(scene, this.leafScales[i].x, this.leafScales[i].y, this.leafScales[i].z, stemHeight, this.leafMaterial));
         }
 
-        this.rotationAngleDegrees = Math.random() * (20 - 10) + 10;
+        this.rotationAngleDegrees = Math.random() * (20 - 0) + 0;
     }
 
     display() {
@@ -183,7 +183,7 @@ export class MyFlower extends CGFobject {
             angleBefore += this.angleBetweenPetals;
             this.scene.translate(0, 0, -this.heartRadius + 0.2 * this.heartRadius);
             this.scene.scale((this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2, (this.flowerDiameter-this.heartRadius)/2);
-            this.scene.rotate(Math.PI/5, 1, 0, 0);
+            this.scene.rotate(Math.PI/6, 1, 0, 0);
             this.petals[i].display();
             this.scene.popMatrix();
         }

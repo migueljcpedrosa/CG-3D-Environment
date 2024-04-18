@@ -154,7 +154,7 @@ export class MyScene extends CGFscene {
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
     this.popMatrix();
-    this.myPanorama.display();
+    //this.myPanorama.display();
 
     // ---- END Primitive drawing section
   }

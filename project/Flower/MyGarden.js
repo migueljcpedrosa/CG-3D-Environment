@@ -18,89 +18,27 @@ export class MyGarden extends CGFobject {
         super(scene);
         this.numRows = numRows;
         this.numCols = numCols;
-        this.flowers = []; // Initialize the 2D array
-        this.rotationAngles = []; // 2D array for rotation angles
         this.petalMaterial1 = petalMaterial1;
         this.petalMaterial2 = petalMaterial2;
         this.stemMaterial = stemMaterial;
         this.receptacleMaterial = receptacleMaterial;
         this.leafMaterial = leafMaterial;
 
-        for (let row = 0; row < numRows; row++) {
-            this.flowers[row] = []; // Initialize each row
-            this.rotationAngles[row] = []; // Initialize row for angles
-            for (let col = 0; col < numCols; col++) {
-                // Create a new MyFlower instance with random parameters for each position
-                let flowerRadiusTemp = Math.random() * (3.5 - 1.5) + 1.5;
-                let chosenPetalMaterial = Math.random() < 0.5 ? this.petalMaterial1 : this.petalMaterial2;
-                this.flowers[row][col] = new MyFlower(
-                    scene,
-                    flowerRadiusTemp, // flowerDiameter: Random between 3 and 10
-                    Math.floor(Math.random() * (14 - 6)) + 6, // Assuming some parameters are constant, adjust as needed
-                    [Math.random(), Math.random(), Math.random(), 1], // Random petalColor
-                    Math.random() * (0.35 - 0.3 * flowerRadiusTemp) + 0.3 * flowerRadiusTemp, // heartRadius: Random between 1 and half the flowerDiameter
-                    [Math.random(), Math.random(), Math.random(), 1], // Random heartColor
-                    Math.random() * (0.7 - 0.4) + 0.4, // stemRadius: Constant in this example
-                    Math.random() * (12 - 10) + 10, // stemHeight: Random between 10 and 12
-                    [0, 1, 0, 1], // stemColor
-                    [0, 1, 0, 1], // leafColor
-                    100, // minPetalAngle: Constant in this example
-                    150, // maxPetalAngle: Constant in this example
-                    Math.floor(Math.random() * (7 - 4)) + 4, // numStemSegments: Random between 4 and 7
-                    6, // slices: Constant in this example
-                    1, // stacks: Constant in this example
-                    chosenPetalMaterial,
-                    this.stemMaterial,
-                    this.receptacleMaterial,
-                    this.leafMaterial
-                );
-                this.rotationAngles[row][col] = Math.random() * 2 * Math.PI;
-            }
-        }
+        // Initialize arrays for random values and flowers
+        this.initRandomValuesAndFlowers();
     }
 
-    display() {
-        this.scene.pushMatrix(); // Save the current state of the matrix
-        this.scene.translate(-150, -100, -150); // Translate to the center of the garden
-        const baseSpacing = 70; // Base spacing for 5x5 grid
-        const baseSize = 5; // Base grid size for which the base spacing was determined
-        const spacing = baseSpacing * (baseSize / Math.max(this.numRows, this.numCols));
-
-        for (let row = 0; row < this.numRows; row++) {
-            for (let col = 0; col < this.numCols; col++) {
-                this.scene.pushMatrix(); // Save the current state of the matrix
-
-                // Calculate the position for each flower based on its row and column
-                let xPosition = col * spacing;
-                let zPosition = row * spacing;
-
-                // Translate to the correct position
-                this.scene.translate(xPosition, 0, zPosition);
-                
-                // Rotate each flower by its stored random angle around the Y axis
-                let angle = this.rotationAngles[row][col];
-                this.scene.rotate(angle, 0, 1, 0);
-
-                // Display the flower at this position
-                this.flowers[row][col].display();
-
-                this.scene.popMatrix(); // Restore the matrix state
-            }
-        }
-        this.scene.popMatrix(); // Restore the matrix state
-    }
-
-    updateGarden(newNumRows, newNumCols) {
-        this.numRows = newNumRows;
-        this.numCols = newNumCols;
+    initRandomValuesAndFlowers() {
         this.flowers = [];
         this.rotationAngles = [];
-    
-        for (let row = 0; row < newNumRows; row++) {
+        this.randomDivisors = [];
+
+        for (let row = 0; row < this.numRows; row++) {
             this.flowers[row] = [];
             this.rotationAngles[row] = [];
-            for (let col = 0; col < newNumCols; col++) {
-                // Similar flower creation logic as in the constructor
+            for (let col = 0; col < this.numCols; col++) {
+                this.randomDivisors.push(Math.random() * (2 - 1) + 1);
+
                 let flowerRadiusTemp = Math.random() * (3.5 - 1.5) + 1.5;
                 let chosenPetalMaterial = Math.random() < 0.5 ? this.petalMaterial1 : this.petalMaterial2;
                 this.flowers[row][col] = new MyFlower(
@@ -108,7 +46,7 @@ export class MyGarden extends CGFobject {
                     flowerRadiusTemp,
                     Math.floor(Math.random() * (7 - 3)) + 3,
                     [Math.random(), Math.random(), Math.random(), 1],
-                    Math.random() * (0.35 - 0.3* flowerRadiusTemp) + 0.3 * flowerRadiusTemp,
+                    Math.random() * (0.35 - 0.3 * flowerRadiusTemp) + 0.3 * flowerRadiusTemp,
                     [Math.random(), Math.random(), Math.random(), 1],
                     Math.random() * (0.7 - 0.4) + 0.4,
                     Math.random() * (12 - 10) + 10,
@@ -117,8 +55,8 @@ export class MyGarden extends CGFobject {
                     100,
                     150,
                     Math.floor(Math.random() * (7 - 4)) + 4,
-                    30,
-                    30,
+                    6,
+                    1,
                     chosenPetalMaterial,
                     this.stemMaterial,
                     this.receptacleMaterial,
@@ -127,5 +65,33 @@ export class MyGarden extends CGFobject {
                 this.rotationAngles[row][col] = Math.random() * 2 * Math.PI;
             }
         }
+    }
+
+    updateGarden(newNumRows, newNumCols) {
+        this.numRows = newNumRows;
+        this.numCols = newNumCols;
+        // Regenerate random values and flowers
+        this.initRandomValuesAndFlowers();
+    }
+
+    display() {
+        this.scene.pushMatrix(); // Save the current state of the matrix
+        this.scene.translate(-150, -100, -150); // Center the garden
+        const baseSpacing = 70;
+        const baseSize = 5;
+        const spacing = baseSpacing * (baseSize / Math.max(this.numRows, this.numCols));
+
+        for (let row = 0; row < this.numRows; row++) {
+            for (let col = 0; col < this.numCols; col++) {
+                this.scene.pushMatrix();
+                let xPosition = col * spacing + spacing / this.randomDivisors[row * this.numCols + col];
+                let zPosition = row * spacing + spacing / this.randomDivisors[row * this.numCols + col];
+                this.scene.translate(xPosition, 0, zPosition);
+                this.scene.rotate(this.rotationAngles[row][col], 0, 1, 0);
+                this.flowers[row][col].display();
+                this.scene.popMatrix();
+            }
+        }
+        this.scene.popMatrix();
     }
 }
