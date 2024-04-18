@@ -104,6 +104,11 @@ export class MyScene extends CGFscene {
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
+
+    this.lights[1].setPosition(0, 15, 5, 1);
+    this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[1].enable();
+    this.lights[1].update();
   }
   initCameras() {
     this.camera = new CGFcamera(
@@ -151,7 +156,7 @@ export class MyScene extends CGFscene {
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
     this.popMatrix();
-    //this.myPanorama.display();
+    this.myPanorama.display();
 
     // ---- END Primitive drawing section
   }
