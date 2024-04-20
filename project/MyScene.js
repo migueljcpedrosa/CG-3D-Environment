@@ -106,6 +106,12 @@ export class MyScene extends CGFscene {
     this.toraxAppearence2.setShininess(10.0);
     this.toraxAppearence2.loadTexture('images/abdomentexture.jpg');
     this.toraxAppearence2.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.wingAppearence = new CGFappearance(this);
+    
+    this.wingAppearence.setShininess(10.0);
+    this.wingAppearence.loadTexture('images/wing.jpg');
+    this.wingAppearence.setTextureWrap('REPEAT', 'REPEAT');
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
@@ -115,7 +121,7 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
     this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance, [0, 1, 0, 1]);
     this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
-    this.bee = new Mybee(this, this.thoraxAppearence, this.toraxAppearence2);
+    this.bee = new Mybee(this, this.thoraxAppearence, this.toraxAppearence2, this.wingAppearence);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
   }

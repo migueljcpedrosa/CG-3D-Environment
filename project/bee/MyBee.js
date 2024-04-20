@@ -8,10 +8,11 @@ import { BeeLeg } from "./BeeLeg.js";
 import { BeeWing } from "./BeeWing.js";
 
 export class Mybee extends CGFobject{
-    constructor(scene, thoraxMaterial, torsoMaterial){
+    constructor(scene, thoraxMaterial, torsoMaterial, wingMaterial){
         super(scene);
         this.thoraxMaterial = thoraxMaterial;
         this.torsoMaterial = torsoMaterial;
+        this.wingMaterial = wingMaterial;
         this.initMaterials();
         this.head = new BeeHead(scene, 20, 10, this.yellow);
         this.eye1 = new BeeEye(scene, this.black);
@@ -26,10 +27,10 @@ export class Mybee extends CGFobject{
         this.leg4 = new BeeLeg(scene, false);
         this.leg5 = new BeeLeg(scene, true);
         this.leg6 = new BeeLeg(scene, false);
-        this.wing1 = new BeeWing(scene, true);
-        this.wing2 = new BeeWing(scene, false);
-        this.wing3 = new BeeWing(scene, true);
-        this.wing4 = new BeeWing(scene, false);
+        this.wing1 = new BeeWing(scene, true, this.wingMaterial);
+        this.wing2 = new BeeWing(scene, false, this.wingMaterial);
+        this.wing3 = new BeeWing(scene, true, this.wingMaterial);
+        this.wing4 = new BeeWing(scene, false, this.wingMaterial);
     }
 
     initMaterials(){
