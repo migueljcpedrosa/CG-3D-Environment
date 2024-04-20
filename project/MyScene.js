@@ -108,10 +108,14 @@ export class MyScene extends CGFscene {
     this.toraxAppearence2.setTextureWrap('REPEAT', 'REPEAT');
 
     this.wingAppearence = new CGFappearance(this);
-    
+    this.wingAppearence.setAmbient(0.9, 0.8, 0.1, 0.1); // Bright, to reflect more ambient light
+    this.wingAppearence.setDiffuse(0.9, 0.8, 0.1, 0.1); // Primary color of the texture, assuming yellow is dominant
+    this.wingAppearence.setSpecular(0.5, 0.5, 0.1, 0.1); // Slightly reflective, giving a sheen to the bee's thorax 
+    this.wingAppearence.setEmission(0.9, 0.8, 0.1, 0.1);
     this.wingAppearence.setShininess(10.0);
     this.wingAppearence.loadTexture('images/wing.jpg');
     this.wingAppearence.setTextureWrap('REPEAT', 'REPEAT');
+
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
