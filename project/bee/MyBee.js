@@ -50,12 +50,14 @@ export class Mybee extends CGFobject{
         this.head.display();
 
         this.scene.pushMatrix();
-        this.scene.translate(.5, .35, .7);     
+        this.scene.translate(.5, .35, .7);  
+        this.scene.translate(0, -0.1, 0);   
         this.eye1.display();
         this.scene.popMatrix(); 
 
         this.scene.pushMatrix();
         this.scene.translate(-.5, .35, .7);
+        this.scene.translate(0, -0.1, 0);   
         this.scene.scale(-1, 1, 1);
         this.eye2.display();
         this.scene.popMatrix(); 
@@ -76,12 +78,12 @@ export class Mybee extends CGFobject{
 
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, -1.8);
-        this.scene.scale(1.2, 1.2, 1.2);
+        this.scene.scale(1.2, 1.2, 1.4);
         this.torax.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, -0.5, -3.5);
+        this.scene.translate(0, -0.5, -3.7);
         this.abdomen.display();
         this.scene.popMatrix();
 
