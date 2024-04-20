@@ -1,1 +1,3 @@
-# [COPY FROM PREVIOUS TP AND ADJUST]
+![Project Screenshot](screenshots/project-t03g05-1.1.png)
+![Project Screenshot](screenshots/project-t03g05-1.2.png)
+![Project Screenshot](screenshots/project-t03g05-2.jpg)
