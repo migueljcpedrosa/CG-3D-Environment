@@ -33,6 +33,7 @@ export class BeeLeg extends CGFobject{
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.scene.translate(0, 0, 1.35);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.scale(1, 2, 1);
         this.part3.display();
         this.scene.popMatrix();
     }
