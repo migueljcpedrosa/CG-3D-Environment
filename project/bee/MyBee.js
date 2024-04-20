@@ -56,6 +56,7 @@ export class Mybee extends CGFobject{
 
         this.scene.pushMatrix();
         this.scene.translate(-.5, .35, .7);
+        this.scene.scale (-1, 1, 1);
         this.eye2.display();
         this.scene.popMatrix(); 
 
