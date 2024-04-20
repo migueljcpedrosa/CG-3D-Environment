@@ -52,6 +52,7 @@ export class Mybee extends CGFobject{
         this.scene.pushMatrix();
         this.scene.translate(.5, .35, .7);  
         this.scene.translate(0, -0.1, 0);   
+        this.scene.scale(1.7, 1, 1);
         this.eye1.display();
         this.scene.popMatrix(); 
 
@@ -59,6 +60,7 @@ export class Mybee extends CGFobject{
         this.scene.translate(-.5, .35, .7);
         this.scene.translate(0, -0.1, 0);   
         this.scene.scale(-1, 1, 1);
+        this.scene.scale(1.7, 1, 1);
         this.eye2.display();
         this.scene.popMatrix(); 
 
@@ -84,6 +86,7 @@ export class Mybee extends CGFobject{
 
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, -3.7);
+        this.scene.scale(1, 1.2, 1.2);
         this.abdomen.display();
         this.scene.popMatrix();
 
@@ -105,21 +108,31 @@ export class Mybee extends CGFobject{
         
         this.scene.pushMatrix();
         this.scene.translate(.5, -.5, -3);
+        this.scene.rotate(-Math.PI/5, 1, 0, 0);
+        this.scene.rotate(Math.PI/5, 0, 1, 0);
         this.leg3.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-.5, -.5, -3);
+        this.scene.rotate(-Math.PI/5, 1, 0, 0);
+        this.scene.rotate(-Math.PI/5, 0, 1, 0);
         this.leg4.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(.5, -.5, -4);
+        this.scene.translate(.5, -.7, -4);
+        this.scene.rotate(-Math.PI/6, 1, 0, 0);
+        this.scene.rotate(Math.PI/5, 0, 1, 0);
+        this.scene.scale(1, 1, 1.2);
         this.leg5.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-.5, -.5, -4);
+        this.scene.translate(-.5, -.7, -4);
+        this.scene.rotate(-Math.PI/6, 1, 0, 0);
+        this.scene.rotate(-Math.PI/5, 0, 1, 0);
+        this.scene.scale(1, 1, 1.2);
         this.leg6.display();
         this.scene.popMatrix();
 
