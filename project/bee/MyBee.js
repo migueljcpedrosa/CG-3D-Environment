@@ -7,6 +7,7 @@ import { BeeAbdomen } from "./BeeAbdomen.js";
 import { BeeLeg } from "./BeeLeg.js";
 import { BeeWing } from "./BeeWing.js";
 import { BeeStinger } from "./BeeStinger.js";
+import { MyEllipsoid } from "../shapes/MyEllipsoid.js";
  
 export class Mybee extends CGFobject{
     constructor(scene, headMaterial, eyeMaterial, thoraxMaterial, torsoMaterial, wingMaterial, stingerMaterial){
@@ -36,6 +37,8 @@ export class Mybee extends CGFobject{
         this.wing3 = new BeeWing(scene, true, this.wingMaterial);
         this.wing4 = new BeeWing(scene, false, this.wingMaterial);
         this.stinger = new BeeStinger(scene, 1, 0.5, 5, this.stingerMaterial);
+        this.tooth1 = new MyEllipsoid(scene, 10, 5, .2, .2, .2);
+        this.tooth2 = new MyEllipsoid(scene, 10, 5, .2, .2, .2);
     }
 
     initMaterials(){
@@ -178,6 +181,18 @@ export class Mybee extends CGFobject{
         this.scene.translate(0, -0.5, -5);
         this.scene.rotate(Math.PI - Math.PI/5, 1, 0, 0);
         this.stinger.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, -1.2, 0.8);
+        this.scene.scale(1, 3, 1);
+        this.tooth1.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.3, -1.2, 0.8);
+        this.scene.scale(1, 3, 1);
+        this.tooth2.display();
         this.scene.popMatrix();
     }
 }
