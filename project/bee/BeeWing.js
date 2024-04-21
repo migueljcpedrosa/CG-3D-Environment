@@ -1,25 +1,26 @@
 import { CGFobject } from "../../lib/CGF.js";
 
 export class BeeWing extends CGFobject {
-    constructor(scene, left) {
+    constructor(scene, left, wingMaterial) {
         super(scene);
         this.left = left;
+        this.wingMaterial = wingMaterial;
         this.initBuffers();
     }
 
     initBuffers() {
         this.vertices = [
             0, 0, 0, // 0
-            .6, 0, 2, // 1
-            -.6, 0, 2, // 2
-            0, .3, 3, // 3
-            .7, 0, 2.5, // 4
-            -.7, 0, 2.5, // 5
-            .5, 0, 4, // 6
-            -.5, 0, 4, // 7
+            0.6, 0, 2, // 1
+            -0.6, 0, 2, // 2
+            0, 0.3, 3, // 3
+            0.7, 0, 2.5, // 4
+            -0.7, 0, 2.5, // 5
+            0.5, 0, 4, // 6
+            -0.5, 0, 4, // 7
             0, 0, 4.5 // 8
         ];
-
+    
         this.indices = [
             3, 1, 0,
             0, 1, 3,
@@ -31,19 +32,34 @@ export class BeeWing extends CGFobject {
             4, 3, 1,
             5, 3, 7,
             7, 3, 5,
-            4, 3, 6, 
+            4, 3, 6,
             6, 3, 4,
             6, 3, 8,
             8, 3, 6,
             7, 3, 8,
             8, 3, 7,
         ];
-
-        this.primitiveType = this.scene.gl.TRIANGLES; // Define primitive type as triangles
-        this.initGLBuffers(); // Initialize WebGL buffers
+    
+        // Texture coordinates
+        this.texCoords = [
+            0.5, 0.5, // 0
+            1, 0, // 1
+            0, 0, // 2
+            0.5, 1, // 3
+            1, 0.5, // 4
+            0, 0.5, // 5
+            1, 1, // 6
+            0, 1, // 7
+            0.5, 1.5  // 8
+        ];
+    
+        this.primitiveType = this.scene.gl.TRIANGLES;
+        this.initGLBuffers(); // Initialize WebGL buffers including texture coordinates
     }
+    
 
     display(){
+        this.wingMaterial.apply();
         this.scene.pushMatrix();
         this.scene.rotate(this.left ? Math.PI/12 : -Math.PI/12, 0, 0, 1);
         this.scene.rotate(this.left ? Math.PI/2 : -Math.PI/2, 0, 1, 0);

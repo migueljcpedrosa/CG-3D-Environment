@@ -91,13 +91,48 @@ export class MyScene extends CGFscene {
     this.leafAppearance.loadTexture('images/greenleaf.jpg');
     this.leafAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.toraxAppearence = new CGFappearance(this);
-    this.toraxAppearence.setAmbient(0.1, 0.3, 0.1, 1);
-    this.toraxAppearence.setDiffuse(0.2, 0.5, 0.2, 1);
-    this.toraxAppearence.setSpecular(0.1, 0.1, 0.1, 1)
-    this.toraxAppearence.setShininess(10.0);
-    this.toraxAppearence.loadTexture('images/beetexture.jpg');
-    this.toraxAppearence.setTextureWrap('REPEAT', 'REPEAT');
+    this.thoraxAppearence = new CGFappearance(this);
+    this.thoraxAppearence.setAmbient(0.9, 0.8, 0.1, 1); // Bright, to reflect more ambient light
+    this.thoraxAppearence.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
+    this.thoraxAppearence.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax    
+    this.thoraxAppearence.setShininess(10.0);
+    this.thoraxAppearence.loadTexture('images/beetexture.png');
+    this.thoraxAppearence.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.toraxAppearence2 = new CGFappearance(this);
+    this.toraxAppearence2.setAmbient(0.9, 0.8, 0.1, 1); // Bright, to reflect more ambient light
+    this.toraxAppearence2.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
+    this.toraxAppearence2.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax    
+    this.toraxAppearence2.setShininess(10.0);
+    this.toraxAppearence2.loadTexture('images/abdomentexture.jpg');
+    this.toraxAppearence2.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.wingAppearence = new CGFappearance(this);
+    this.wingAppearence.setAmbient(0.9, 0.8, 0.1, 0.1); // Bright, to reflect more ambient light
+    this.wingAppearence.setDiffuse(0.9, 0.8, 0.1, 0.1); // Primary color of the texture, assuming yellow is dominant
+    this.wingAppearence.setSpecular(0.5, 0.5, 0.1, 0.1); // Slightly reflective, giving a sheen to the bee's thorax 
+    this.wingAppearence.setEmission(0.9, 0.8, 0.1, 0.1);
+    this.wingAppearence.setShininess(10.0);
+    this.wingAppearence.loadTexture('images/wing.jpg');
+    this.wingAppearence.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.headAppearence = new CGFappearance(this);
+    this.headAppearence.setAmbient(0.7, 0.7, 0.1, 1); // Bright, to reflect more ambient light
+    this.headAppearence.setDiffuse(0.4, 0.4, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
+    this.headAppearence.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax
+    this.headAppearence.setShininess(10.0);
+    this.headAppearence.loadTexture('images/head.jpg');
+    this.headAppearence.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.eyeAppearence = new CGFappearance(this);
+    this.eyeAppearence.setAmbient(0.1, 0.1, 0.1, 1); // Bright, to reflect more ambient light
+    this.eyeAppearence.setDiffuse(0.1, 0.1, 0.1, 1); 
+    this.eyeAppearence.setSpecular(0.5, 0.5, 0.5, 1); 
+    this.eyeAppearence.setShininess(10.0);
+    this.eyeAppearence.loadTexture('images/eye.png');
+    this.eyeAppearence.setTextureWrap('REPEAT', 'REPEAT');
+
+
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
@@ -107,7 +142,7 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
     this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance, [0, 1, 0, 1]);
     this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
-    this.bee = new Mybee(this, this.toraxAppearence);
+    this.bee = new Mybee(this, this.headAppearence, this.eyeAppearence, this.thoraxAppearence, this.toraxAppearence2, this.wingAppearence);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
   }

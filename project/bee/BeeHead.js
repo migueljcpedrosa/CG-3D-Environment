@@ -63,6 +63,7 @@ export class BeeHead extends CGFobject{
         this.scene.pushMatrix();
         this.material.apply();
         this.scene.rotate(-Math.PI / 4, 1, 1, 0);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
         super.display();
         this.scene.popMatrix();
         this.scene.gl.enable(this.scene.gl.CULL_FACE);
