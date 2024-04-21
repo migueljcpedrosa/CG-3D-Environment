@@ -93,8 +93,10 @@ export class Mybee extends CGFobject{
 
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, -3.7);
-        this.scene.scale(1, 1.2, 1.2);
-        this.abdomen.display();
+        this.scene.rotate(-Math.PI/2, 0, 1, 0);
+        this.scene.rotate(-Math.PI/3, 0, 0, 1);
+        this.scene.scale(1.2, 1.4, 1.2);
+        this.torax.display();
         this.scene.popMatrix();
 
         this.black.apply();

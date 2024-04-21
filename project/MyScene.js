@@ -96,7 +96,7 @@ export class MyScene extends CGFscene {
     this.thoraxAppearence.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
     this.thoraxAppearence.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax    
     this.thoraxAppearence.setShininess(10.0);
-    this.thoraxAppearence.loadTexture('images/beetexture.jpg');
+    this.thoraxAppearence.loadTexture('images/beetexture.png');
     this.thoraxAppearence.setTextureWrap('REPEAT', 'REPEAT');
 
     this.toraxAppearence2 = new CGFappearance(this);
@@ -121,7 +121,7 @@ export class MyScene extends CGFscene {
     this.headAppearence.setDiffuse(0.4, 0.4, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
     this.headAppearence.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax
     this.headAppearence.setShininess(10.0);
-    this.headAppearence.loadTexture('images/head.png');
+    this.headAppearence.loadTexture('images/head.jpg');
     this.headAppearence.setTextureWrap('REPEAT', 'REPEAT');
 
     this.eyeAppearence = new CGFappearance(this);
