@@ -9,13 +9,14 @@ import { BeeWing } from "./BeeWing.js";
 import { BeeStinger } from "./BeeStinger.js";
  
 export class Mybee extends CGFobject{
-    constructor(scene, headMaterial, eyeMaterial, thoraxMaterial, torsoMaterial, wingMaterial){
+    constructor(scene, headMaterial, eyeMaterial, thoraxMaterial, torsoMaterial, wingMaterial, stingerMaterial){
         super(scene);
         this.headMaterial = headMaterial;
         this.eyeMaterial = eyeMaterial;
         this.thoraxMaterial = thoraxMaterial;
         this.torsoMaterial = torsoMaterial;
         this.wingMaterial = wingMaterial;
+        this.stingerMaterial = stingerMaterial;
         this.initMaterials();
         this.head = new BeeHead(scene, 20, 10, this.headMaterial);
         this.eye1 = new BeeEye(scene, this.eyeMaterial);
@@ -34,7 +35,7 @@ export class Mybee extends CGFobject{
         this.wing2 = new BeeWing(scene, false, this.wingMaterial);
         this.wing3 = new BeeWing(scene, true, this.wingMaterial);
         this.wing4 = new BeeWing(scene, false, this.wingMaterial);
-        this.stinger = new BeeStinger(scene, 1, 0.5, 5);
+        this.stinger = new BeeStinger(scene, 1, 0.5, 5, this.stingerMaterial);
     }
 
     initMaterials(){

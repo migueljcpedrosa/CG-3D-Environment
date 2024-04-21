@@ -13,11 +13,12 @@ import { CGFappearance, CGFobject } from '../../lib/CGF.js';
  * The appearance of the cone including texture can be set using a material that is initialized elsewhere.
  */
 export class BeeStinger extends CGFobject {
-    constructor(scene, height, baseRadius, slices) {
+    constructor(scene, height, baseRadius, slices, material) {
         super(scene);
         this.height = height;
         this.baseRadius = baseRadius;
         this.slices = slices;
+        this.material = material;
         this.initBuffers();
     }
 
