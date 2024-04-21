@@ -117,17 +117,17 @@ export class MyScene extends CGFscene {
     this.wingAppearence.setTextureWrap('REPEAT', 'REPEAT');
 
     this.headAppearence = new CGFappearance(this);
-    this.headAppearence.setAmbient(0.9, 0.8, 0.1, 1); // Bright, to reflect more ambient light
-    this.headAppearence.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
+    this.headAppearence.setAmbient(0.7, 0.7, 0.1, 1); // Bright, to reflect more ambient light
+    this.headAppearence.setDiffuse(0.4, 0.4, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
     this.headAppearence.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax
     this.headAppearence.setShininess(10.0);
-    this.headAppearence.loadTexture('images/head.jpg');
+    this.headAppearence.loadTexture('images/head.png');
     this.headAppearence.setTextureWrap('REPEAT', 'REPEAT');
 
     this.eyeAppearence = new CGFappearance(this);
     this.eyeAppearence.setAmbient(0.1, 0.1, 0.1, 1); // Bright, to reflect more ambient light
     this.eyeAppearence.setDiffuse(0.1, 0.1, 0.1, 1); 
-    this.eyeAppearence.setSpecular(0.1, 0.1, 0.1, 1); 
+    this.eyeAppearence.setSpecular(0.5, 0.5, 0.5, 1); 
     this.eyeAppearence.setShininess(10.0);
     this.eyeAppearence.loadTexture('images/eye.png');
     this.eyeAppearence.setTextureWrap('REPEAT', 'REPEAT');
