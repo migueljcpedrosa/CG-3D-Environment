@@ -53,7 +53,8 @@ export class MyScene extends CGFscene {
     this.panorama = new CGFtexture(this, "images/panorama.png");
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
-    this.appearance.setTextureWrap('REPEAT', 'REPEAT');this.sphereAppearance = new CGFappearance(this);
+    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.sphereAppearance = new CGFappearance(this);
 
     this.rockAppearance1 = new CGFappearance(this);
     this.rockAppearance1.setAmbient(0.2, 0.2, 0.2, 1);  // Slightly brighter ambient reflectance
