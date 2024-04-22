@@ -17,16 +17,20 @@ export class MyRockSet extends CGFobject {
         for (let i = 0; i < this.numRocks; i++) {
             let rockSize = this.rockBaseSize * (Math.random() * 0.5 + 0.75); // Variation in size
 
-            // Random position with some jittering for natural placement
-            let rockX = (Math.random() - 0.5) * 2;
-            let rockZ = (Math.random() - 0.5) * 2;
+            //updated here:
+            let rock = new MyRock(this.scene, 15, 10, rockSize * 0.2, this.rockMaterial);
 
-            let rock = new MyRock(this.scene, 15, 10, rockSize * 0.2, this.rockMaterial); // Adjust slices, stacks as needed
+            // Random position with some jittering for natural placement
+            let rockX = (Math.random() - 0.5) * 10; //2 prior
+            let rockZ = (Math.random() - 0.5) * 10;
+
+            //let rock = new MyRock(this.scene, 15, 10, rockSize * 0.2, this.rockMaterial); // Adjust slices, stacks as needed
             this.scene.translate(rockX, baseY + rockSize / 2, rockZ);
 
             // Random rotations
-            this.scene.rotate(Math.random() * 2 * Math.PI, 0, Math.random() * 2 * Math.PI);
-
+            //this.scene.rotate(Math.random() * 2 * Math.PI, 0, Math.random() * 2 * Math.PI);
+            this.scene.rotate(Math.random() * 2 * Math.PI, 0, 1, 0);
+            
             this.rocks.push(rock);
             baseY += rockSize; // Update for the next rock
         }
