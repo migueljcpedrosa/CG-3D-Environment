@@ -15,13 +15,13 @@ export class MyRockSet extends CGFobject {
     generateRocks() {
 
         for (let i = 0; i < this.numRocks; i++) {
-            let rockSize = this.rockBaseSize * (Math.random() * 0.5 + 0.75); // Variation in size
-            let scaleX = (2 - 0.5) * Math.random() + 0.5;
-            let scaleY = (2 - 0.5) * Math.random() + 0.5;
-            let scaleZ = (2 - 0.5) * Math.random() + 0.5;
+            let rockSize = this.rockBaseSize; // Variation in size
+            let scaleX = (3 - 2) * Math.random() + 2;
+            //let scaleY = (2 - 0.5) * Math.random() + 0.5;
+            let scaleZ = (3 - 2) * Math.random() + 2;
 
             //updated here:
-            let rock = new MyRock(this.scene, 15, 10, rockSize * 0.2, scaleX, scaleY, scaleZ, this.rockMaterial);
+            let rock = new MyRock(this.scene, 15, 10, rockSize * 0.2, scaleX, 1, scaleZ, this.rockMaterial);
             
             this.rocks.push(rock);
         }
