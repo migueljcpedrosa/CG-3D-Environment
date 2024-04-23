@@ -113,7 +113,7 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
-    this.rockSet = new MyRockSet(this, 10, 6, this.rockAppearance1);
+    this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance1);
   }
 
   initLights() {
