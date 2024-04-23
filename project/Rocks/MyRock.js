@@ -1,12 +1,15 @@
 import { CGFobject } from '../../lib/CGF.js';
 
 export class MyRock extends CGFobject {
-    constructor(scene, slices, stacks, variation = 0.05, rockMaterial) {
+    constructor(scene, slices, stacks, variation = 0.05, scaleX, scaleY, scaleZ, rockMaterial) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
         this.variation = variation;  // Lowered the variation for a more subtle effect
         this.rockMaterial = rockMaterial;
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+        this.scaleZ = scaleZ;
         this.initBuffers();
     }
 
@@ -70,6 +73,7 @@ export class MyRock extends CGFobject {
 
     display() {
         this.rockMaterial.apply();
+        this.scene.scale(this.scaleX, this.scaleY, this.scaleZ);
         super.display();
     }
 }

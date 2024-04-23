@@ -62,6 +62,7 @@ export class MyScene extends CGFscene {
     this.rockAppearance1.setSpecular(0.3, 0.3, 0.3, 1); // Slightly higher specular reflectance
     this.rockAppearance1.setShininess(20.0);            // more shininess, for rough surfaces
     this.rockAppearance1.loadTexture('images/rock.jpg'); // rock texture image
+
     this.petalAppearance1 = new CGFappearance(this);
     this.petalAppearance1.setAmbient(0.1, 0.1, 0.1, 1);
     this.petalAppearance1.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -112,7 +113,7 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
-    this.rockSet = new MyRockSet(this, 10, 3, this.rockAppearance1);
+    this.rockSet = new MyRockSet(this, 10, 6, this.rockAppearance1);
   }
 
   initLights() {
