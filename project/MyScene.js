@@ -37,6 +37,8 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
     //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
   
+    this.speedFactor = 1;
+    this.scaleFactor = 1;
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -257,10 +259,21 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyW")) {
       text += " W ";
       keysPressed = true;
+      this.bee.accelerate(0.001);
     }
     if (this.gui.isKeyPressed("KeyS")) {
       text += " S ";
       keysPressed = true;
+      this.bee.accelerate(-0.001);
+    }
+    if (this.gui.isKeyPressed("KeyA")) {
+      this.bee.turn(Math.PI/32);
+    }
+    if (this.gui.isKeyPressed("KeyD")){
+      this.bee.turn(-Math.PI/32);
+    }
+    if (this.gui.isKeyPressed("KeyR")){
+      this.bee.reset();
     }
     if(keysPressed){
       console.log(text);
@@ -271,7 +284,7 @@ export class MyScene extends CGFscene {
     var delta = t - this.previousTime;
     this.previousTime = t;
     this.checkKeys();
-    //this.bee.update(delta);
+    this.bee.update(delta);
   }
 }
 

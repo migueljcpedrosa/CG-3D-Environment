@@ -12,6 +12,11 @@ import { MyEllipsoid } from "../shapes/MyEllipsoid.js";
 export class Mybee extends CGFobject{
     constructor(scene, headMaterial, eyeMaterial, thoraxMaterial, torsoMaterial, wingMaterial, stingerMaterial){
         super(scene);
+        this.speedCap = 0.1 * this.scene.speedFactor;
+        this.position = vec3.fromValues(0, 0, 0);
+        this.orientation = 0;
+        this.velocity = vec3.fromValues(0, 0, 0);
+        this.speed = 0;
         this.headMaterial = headMaterial;
         this.eyeMaterial = eyeMaterial;
         this.thoraxMaterial = thoraxMaterial;
@@ -42,22 +47,17 @@ export class Mybee extends CGFobject{
     }
 
     initMaterials(){
-        this.yellow = new CGFappearance(this.scene);
-        this.yellow.setAmbient(1, 1, 0, 1);
-        this.yellow.setDiffuse(1, 1, 0, 1);
-
         this.black = new CGFappearance(this.scene);
         this.black.setAmbient(0, 0, 0, 1);
         this.black.setDiffuse(0, 0, 0, 1);
-
-        this.cyan = new CGFappearance(this.scene);
-        this.cyan.setAmbient(0, 1, 1, .1);
-        this.cyan.setDiffuse(0, 1, 1, .1);
-        this.cyan.setSpecular(0, 1, 1, .1);
-        this.cyan.setEmission(0, 1, 1, .1);
     }
 
     display(){
+        this.scene.pushMatrix();
+        this.scene.translate(this.position[0], this.position[1], this.position[2]);
+        this.scene.rotate(this.orientation, 0, 1, 0);
+        this.scene.scale(this.scene.scaleFactor, this.scene.scaleFactor, this.scene.scaleFactor);
+
         this.head.display();
 
         this.scene.pushMatrix();
@@ -150,7 +150,6 @@ export class Mybee extends CGFobject{
         this.leg6.display();
         this.scene.popMatrix();
 
-        this.cyan.apply();
 
         this.scene.pushMatrix();
         this.scene.translate(.5, 1.45, -1.6);
@@ -194,5 +193,31 @@ export class Mybee extends CGFobject{
         this.scene.scale(1, 3, 1);
         this.tooth2.display();
         this.scene.popMatrix();
+        this.scene.popMatrix();
+    }
+
+    update(t){
+        this.velocity[0] = this.speed * Math.sin(this.orientation);
+        this.velocity[2] = this.speed * Math.cos(this.orientation);
+        this.position[0] += this.velocity[0] * t;
+        this.position[1] += this.velocity[1] * t;
+        this.position[2] += this.velocity[2] * t;
+    }
+
+    turn(v){
+        this.orientation += v * this.scene.speedFactor;
+    }
+
+    accelerate(v){
+        this.speed += v * this.scene.speedFactor;
+        if(this.speed >= this.speedCap) this.speed = this.speedCap;
+        else if(this.speed <= 0) this.speed = 0;
+    }
+
+    reset(){
+        this.position = vec3.fromValues(0, 0, 0);
+        this.orientation = 0;
+        this.velocity = vec3.fromValues(0, 0, 0);
+        this.speed = 0;
     }
 }
