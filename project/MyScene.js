@@ -9,6 +9,8 @@ import { MyLeaf } from "./Flower/MyLeaf.js";
 import { MyGarden } from "./Flower/MyGarden.js";
 import { Mybee } from "./bee/MyBee.js";
 
+import { MyRockSet } from "./Rocks/MyRockSet.js";
+
 /**
  * MyScene
  * @constructor
@@ -34,7 +36,8 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
     //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
-    
+  
+
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayReceptacle = true;
@@ -42,6 +45,8 @@ export class MyScene extends CGFscene {
     this.displayPetal = true;
     this.displayFlower = true;
     this.displayLeaf = true;
+    //changed here
+    this.displayRockSet = true;
     this.displayGarden = true;
     this.displayBee = true;
     this.scaleFactor = 1;
@@ -53,7 +58,15 @@ export class MyScene extends CGFscene {
     this.panorama = new CGFtexture(this, "images/panorama4.jpg");
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
-    this.appearance.setTextureWrap('REPEAT', 'REPEAT');this.sphereAppearance = new CGFappearance(this);
+    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.sphereAppearance = new CGFappearance(this);
+
+    this.rockAppearance1 = new CGFappearance(this);
+    this.rockAppearance1.setAmbient(0.2, 0.2, 0.2, 1);  // Slightly brighter ambient reflectance
+    this.rockAppearance1.setDiffuse(0.6, 0.6, 0.6, 1);  // Moderate diffuse reflectance
+    this.rockAppearance1.setSpecular(0.3, 0.3, 0.3, 1); // Slightly higher specular reflectance
+    this.rockAppearance1.setShininess(20.0);            // more shininess, for rough surfaces
+    this.rockAppearance1.loadTexture('images/rock.jpg'); // rock texture image
 
     this.petalAppearance1 = new CGFappearance(this);
     this.petalAppearance1.setAmbient(0.1, 0.1, 0.1, 1);
@@ -152,6 +165,7 @@ export class MyScene extends CGFscene {
     this.bee = new Mybee(this, this.headAppearence, this.eyeAppearence, this.thoraxAppearence, this.toraxAppearence2, this.wingAppearence, this.stingerAppearence);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
+    this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance1);
   }
 
   initLights() {
@@ -201,9 +215,14 @@ export class MyScene extends CGFscene {
     //if (this.displayPetal) this.petal.display();
     //if (this.displayFlower) this.flower.display();
     //if (this.displayLeaf) this.leaf.display();
+
+    //changed here
+    if (this.displayRockSet) this.rockSet.display();
+  
     if (this.displayGarden) this.garden.display();
     if (this.displayBee) this.bee.display();
     // ---- BEGIN Primitive drawing section
+
 
     this.pushMatrix();
     this.appearance.apply();
@@ -213,6 +232,7 @@ export class MyScene extends CGFscene {
     this.plane.display();
     this.popMatrix();
     this.myPanorama.display();
+
 
     // ---- END Primitive drawing section
   }
