@@ -11,6 +11,8 @@ import { Mybee } from "./bee/MyBee.js";
 
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 
+import { MyPollen } from "./Pollen/MyPollen.js";
+
 /**
  * MyScene
  * @constructor
@@ -51,6 +53,8 @@ export class MyScene extends CGFscene {
     this.displayBee = true;
     this.scaleFactor = 1;
     this.gardenRowsColumns = 5;
+
+    this.displayPollen = true;
 
     this.enableTextures(true);
 
@@ -166,6 +170,8 @@ export class MyScene extends CGFscene {
 
     this.myPanorama = new MyPanorama(this, this.panorama);
     this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance1);
+
+    this.pollen = new MyPollen(this, 5, 5, 1);
   }
 
   initLights() {
@@ -220,7 +226,9 @@ export class MyScene extends CGFscene {
     if (this.displayRockSet) this.rockSet.display();
   
     if (this.displayGarden) this.garden.display();
-    if (this.displayBee) this.bee.display();
+    //if (this.displayBee) this.bee.display();
+
+    if (this.displayPollen) this.pollen.display();
     // ---- BEGIN Primitive drawing section
 
 
