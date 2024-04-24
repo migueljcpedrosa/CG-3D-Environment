@@ -274,6 +274,7 @@ export class MyScene extends CGFscene {
     }
     if (this.gui.isKeyPressed("KeyR")){
       this.bee.reset();
+      this.resetCamera();
     }
     if(keysPressed){
       console.log(text);
@@ -285,6 +286,34 @@ export class MyScene extends CGFscene {
     this.previousTime = t;
     this.checkKeys();
     this.bee.update(delta);
+    this.updateCamera();
+  }
+
+  normalizeVector(vector) {
+    const length = Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2]);
+    return [vector[0] / length, vector[1] / length, vector[2] / length];
+  }
+
+  updateCamera(){
+    const normalized = this.normalizeVector(vec3.fromValues(-Math.sin(this.bee.orientation), 0, -Math.cos(this.bee.orientation)));
+
+    this.camera.position[0] = this.bee.position[0] + normalized[0] * 10;
+    this.camera.position[1] = this.bee.position[1] + 4;
+    this.camera.position[2] = this.bee.position[2] + normalized[2] * 10;
+
+    this.camera.target[0] = this.bee.position[0];
+    this.camera.target[1] = this.bee.position[1];
+    this.camera.target[2] = this.bee.position[2];
+  }
+
+  resetCamera(){
+    this.camera.position[0] = 0;
+    this.camera.position[1] = 4;
+    this.camera.position[2] = -10;
+
+    this.camera.target[0] = 0;
+    this.camera.target[1] = 0;
+    this.camera.target[2] = 0;
   }
 }
 
