@@ -52,6 +52,9 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
     this.gardenRowsColumns = 5;
 
+    this.setUpdatePeriod(30);
+    this.previousTime = Date.now();
+
     this.enableTextures(true);
 
     this.texture = new CGFtexture(this, "images/terrain.jpg");
@@ -184,7 +187,7 @@ export class MyScene extends CGFscene {
       1.5,
       0.1,
       1000,
-      vec3.fromValues(50, 10, 15),
+      vec3.fromValues(0, 4, -10),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -217,7 +220,7 @@ export class MyScene extends CGFscene {
     //if (this.displayLeaf) this.leaf.display();
 
     //changed here
-    if (this.displayRockSet) this.rockSet.display();
+    //if (this.displayRockSet) this.rockSet.display();
   
     if (this.displayGarden) this.garden.display();
     if (this.displayBee) this.bee.display();
@@ -245,6 +248,30 @@ export class MyScene extends CGFscene {
 
   redraw() {
     this.display();
+  }
+
+  checkKeys(){
+    var text = "Keys Pressed: ";
+    var keysPressed = false;
+
+    if (this.gui.isKeyPressed("KeyW")) {
+      text += " W ";
+      keysPressed = true;
+    }
+    if (this.gui.isKeyPressed("KeyS")) {
+      text += " S ";
+      keysPressed = true;
+    }
+    if(keysPressed){
+      console.log(text);
+    }
+  }
+
+  update(t){
+    var delta = t - this.previousTime;
+    this.previousTime = t;
+    this.checkKeys();
+    //this.bee.update(delta);
   }
 }
 
