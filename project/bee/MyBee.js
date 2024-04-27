@@ -61,16 +61,17 @@ export class Mybee extends CGFobject{
 
     update(deltaTime) {
         this.time += deltaTime;
-        console.log("Bee time:", this.time); // Check if time is increasing
+        console.log("Bee time:", this.time);
         this.oscillatePosition();
     }
     
     oscillatePosition() {
-        this.verticalOscillation = Math.sin(this.time * 2 * Math.PI) * 0.5; // Oscillation amplitude of 0.5
-        console.log("Vertical Oscillation:", this.verticalOscillation); // Check the oscillation values
+        this.verticalOscillation = Math.sin(this.time * 2 * Math.PI) * 0.5; // oscillation amplitude of 0.5
+        console.log("Vertical Oscillation:", this.verticalOscillation); 
     }
 
     display(){
+        //added here
         this.scene.pushMatrix();
         this.scene.translate(0, this.verticalOscillation, 0);
 

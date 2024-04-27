@@ -198,6 +198,7 @@ export class MyScene extends CGFscene {
     this.setShininess(10.0);
   }
 
+  //for bee and wings animation
   update(currTime) {
     console.log("Update called");
     if (this.lastUpdate === 0) {
@@ -209,10 +210,11 @@ export class MyScene extends CGFscene {
     // update bee animation
     if (this.displayBee) {
         this.bee.update(deltaTime);
+        // update the bee's wings
+        this.bee.wing1.update(deltaTime);
+        this.bee.wing2.update(deltaTime);
     }
-    // Update the bee's wings
-    this.bee.wing1.update(deltaTime);
-    this.bee.wing2.update(deltaTime);
+    
   }
 
 

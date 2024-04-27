@@ -5,7 +5,7 @@ export class BeeWing extends CGFobject {
         super(scene);
         this.left = left;
         this.wingMaterial = wingMaterial;
-        this.time = 0;  // Time property to manage animation
+        this.time = 0;  // time to manage animation
         this.initBuffers();
     }
 
@@ -59,15 +59,15 @@ export class BeeWing extends CGFobject {
     }
     
     update(deltaTime) {
-        this.time += deltaTime; // Increase time
-        this.wingAngle = Math.sin(this.time * 10) * Math.PI / 8; // Wing flapping effect
+        this.time += deltaTime; 
+        this.wingAngle = Math.sin(this.time * 10) * Math.PI / 8; // for wing flapping effect
     }
     
 
     display(){
         this.wingMaterial.apply();
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, 0); // Translate to the rotation point if necessary
+        this.scene.translate(0, 0, 0); // ttranslate to the rotation point if necessary
         this.scene.rotate(this.left ? this.wingAngle : -this.wingAngle, 0, 0, 1);
         this.scene.rotate(this.left ? Math.PI/2 : -Math.PI/2, 0, 1, 0);
         super.display();
