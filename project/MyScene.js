@@ -213,6 +213,8 @@ export class MyScene extends CGFscene {
         // update the bee's wings
         this.bee.wing1.update(deltaTime);
         this.bee.wing2.update(deltaTime);
+        this.bee.wing3.update(deltaTime);
+        this.bee.wing4.update(deltaTime);
     }
     
   }
