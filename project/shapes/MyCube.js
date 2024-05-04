@@ -117,4 +117,11 @@ export class MyCube extends CGFobject {
         // Initialize buffers
         this.initGLBuffers();
     }
+
+    display() {
+        this.scene.pushMatrix();
+        this.scene.scale(2, 0.8, 0.2);
+        super.display();
+        this.scene.popMatrix();
+    }
 }
