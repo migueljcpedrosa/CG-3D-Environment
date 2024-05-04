@@ -94,6 +94,19 @@ export class MyHive extends CGFobject{
         this.scene.translate(0, 0.2, -0.4);
         this.honey.display();
         this.scene.popMatrix();
-       
+
+        //lid
+        this.scene.pushMatrix();
+        this.scene.translate(0, 1.6, 0);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, -0.9);
+        this.board.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0.8, -0.9);
+        this.board.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
     }
 }
