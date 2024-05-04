@@ -13,7 +13,7 @@ export class MyPollen extends CGFobject{
         this.scene.gl.disable(this.scene.gl.CULL_FACE);
         this.scene.pushMatrix();
         this.material.apply();
-        this.scene.scale(0.5, 1, 0.5);
+        this.scene.scale(0.7, 1, 0.7);
         this.grain.display();
         this.scene.popMatrix();
         this.scene.gl.enable(this.scene.gl.CULL_FACE);
