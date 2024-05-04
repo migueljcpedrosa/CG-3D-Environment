@@ -161,11 +161,19 @@ export class MyScene extends CGFscene {
     this.woodappearance.setAmbient(0.2, 0.2, 0.2, 1); // Dim ambient light to simulate indirect lighting
     this.woodappearance.setDiffuse(0.6, 0.4, 0.2, 1); // Adjust diffuse to simulate wood color
     this.woodappearance.setSpecular(0.1, 0.1, 0.1, 1); // Reduce specular to make it less shiny
-    this.woodappearance.setShininess(5); // Lower shininess for a more rough surface
+    this.woodappearance.setShininess(10); // Lower shininess for a more rough surface
     this.woodappearance.loadTexture('images/wood.png'); // Load wood texture
     this.woodappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
 
+    this.honeyappearance = new CGFappearance(this);
+    this.honeyappearance.setAmbient(0.4, 0.2, 0, 1); // Adjust ambient color to a warm tone
+    this.honeyappearance.setDiffuse(0.8, 0.4, 0, 1); // Adjust diffuse color to a deeper tone of honey
+    this.honeyappearance.setSpecular(0.5, 0.3, 0, 1); // Adjust specular color to resemble honey
+    this.honeyappearance.setShininess(10); // Set a moderate shininess for a glossy effect
+    this.honeyappearance.loadTexture('images/honey.png'); // Load honey texture
+    this.honeyappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
 
+    
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
@@ -182,7 +190,7 @@ export class MyScene extends CGFscene {
 
     this.pollen = new MyPollen(this, 5, 5, 1);
     this.cube = new MyCube(this, this.woodappearance);
-    this.hive = new MyHive(this, this.woodappearance);
+    this.hive = new MyHive(this, this.woodappearance, this.honeyappearance);
   }
 
   initLights() {
