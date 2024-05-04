@@ -21,6 +21,9 @@ export class MyRock extends CGFobject {
     
         // Add some noise based on vertex position to get a more natural look
         const noise = (x, y, z) => Math.random() * 0.5 - 0.25;
+
+        // Add some noise to texture coordinates for a more randomized appearance
+        const textureNoise = () => Math.random() * 0.5 - 0.25;
     
         for (let stack = 0; stack <= this.stacks; stack++) {
             let theta = stack * Math.PI / this.stacks;
@@ -36,8 +39,8 @@ export class MyRock extends CGFobject {
                 let y = cosTheta;
                 let z = sinPhi * sinTheta;
     
-                let u = slice / this.slices;
-                let v = stack / this.stacks;
+                let u = slice / this.slices + textureNoise();
+                let v = stack / this.stacks + textureNoise();
     
                 // Normal vector for the vertex
                 let normalX = x;
@@ -55,7 +58,7 @@ export class MyRock extends CGFobject {
     
                 this.vertices.push(displacedX, displacedY, displacedZ);
                 this.normals.push(normalX, normalY, normalZ);
-                this.texCoords.push(u, v);
+                this.texCoords.push(u, v); //HERE
             }
         }
     

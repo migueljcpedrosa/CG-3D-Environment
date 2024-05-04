@@ -39,6 +39,8 @@ export class Mybee extends CGFobject{
         this.stinger = new BeeStinger(scene, 1, 0.5, 5, this.stingerMaterial);
         this.tooth1 = new MyEllipsoid(scene, 10, 5, .2, .2, .2);
         this.tooth2 = new MyEllipsoid(scene, 10, 5, .2, .2, .2);
+
+        this.time = 0; // Add this line
     }
 
     initMaterials(){
@@ -57,7 +59,22 @@ export class Mybee extends CGFobject{
         this.cyan.setEmission(0, 1, 1, .1);
     }
 
+    update(deltaTime) {
+        this.time += deltaTime;
+        console.log("Bee time:", this.time);
+        this.oscillatePosition();
+    }
+    
+    oscillatePosition() {
+        this.verticalOscillation = Math.sin(this.time * 2 * Math.PI) * 0.5; // oscillation amplitude of 0.5
+        console.log("Vertical Oscillation:", this.verticalOscillation); 
+    }
+
     display(){
+        //added here
+        this.scene.pushMatrix();
+        this.scene.translate(0, this.verticalOscillation, 0);
+
         this.head.display();
 
         this.scene.pushMatrix();
@@ -194,5 +211,7 @@ export class Mybee extends CGFobject{
         this.scene.scale(1, 3, 1);
         this.tooth2.display();
         this.scene.popMatrix();
+
+        this.scene.popMatrix(); // added here
     }
 }

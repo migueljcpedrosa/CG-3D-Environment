@@ -22,9 +22,12 @@ import { MyHive } from "./Pollen/MyHive.js";
 export class MyScene extends CGFscene {
   constructor() {
     super();
+    this.lastUpdate = 0;
   }
   init(application) {
     super.init(application);
+
+    this.setUpdatePeriod(50); // Update every 50 milliseconds
 
     this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
     this.gl.enable(this.gl.BLEND);
@@ -226,6 +229,29 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+
+  //for bee and wings animation
+  update(currTime) {
+    console.log("Update called");
+    if (this.lastUpdate === 0) {
+        this.lastUpdate = currTime; // to avoid large deltaTime on the first frame
+    }
+    let deltaTime = (currTime - this.lastUpdate) / 1000.0; // to convert time to seconds
+    this.lastUpdate = currTime;
+
+    // update bee animation
+    if (this.displayBee) {
+        this.bee.update(deltaTime);
+        // update the bee's wings
+        this.bee.wing1.update(deltaTime);
+        this.bee.wing2.update(deltaTime);
+        this.bee.wing3.update(deltaTime);
+        this.bee.wing4.update(deltaTime);
+    }
+    
+  }
+
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -239,6 +265,10 @@ export class MyScene extends CGFscene {
 
     this.setGlobalAmbientLight(1, 1, 1, 1);
 
+
+    this.setUpdatePeriod(50);
+
+
     //this.garden.updateGarden(this.gardenRowsColumns, this.gardenRowsColumns)
     // Draw axis
     if (this.displayAxis) this.axis.display();
@@ -248,7 +278,6 @@ export class MyScene extends CGFscene {
     //if (this.displayFlower) this.flower.display();
     //if (this.displayLeaf) this.leaf.display();
 
-    //changed here
     //if (this.displayRockSet) this.rockSet.display();
   
     if (this.displayGarden) this.garden.display();
