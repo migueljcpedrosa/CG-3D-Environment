@@ -178,7 +178,7 @@ export class MyScene extends CGFscene {
     this.polenappearance.setDiffuse(0.8, 0.4, 0, 1); // Adjust diffuse color to a deeper tone of honey
     this.polenappearance.setSpecular(0.5, 0.3, 0, 1); // Adjust specular color to resemble honey
     this.polenappearance.setShininess(10); // Set a moderate shininess for a glossy effect
-    this.polenappearance.loadTexture('images/honey.png'); // Load honey texture
+    this.polenappearance.loadTexture('images/pollen.png'); // Load honey texture
     this.polenappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
     
     //Initialize scene objects
