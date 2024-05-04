@@ -110,60 +110,60 @@ export class MyScene extends CGFscene {
     this.leafAppearance.loadTexture('images/greenleaf.jpg');
     this.leafAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.thoraxAppearence = new CGFappearance(this);
-    this.thoraxAppearence.setAmbient(0.9, 0.8, 0.1, 1); // Bright, to reflect more ambient light
-    this.thoraxAppearence.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
-    this.thoraxAppearence.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax    
-    this.thoraxAppearence.setShininess(10.0);
-    this.thoraxAppearence.loadTexture('images/beetexture.png');
-    this.thoraxAppearence.setTextureWrap('REPEAT', 'REPEAT');
+    this.thoraxappearance = new CGFappearance(this);
+    this.thoraxappearance.setAmbient(0.9, 0.8, 0.1, 1); // Bright, to reflect more ambient light
+    this.thoraxappearance.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
+    this.thoraxappearance.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax    
+    this.thoraxappearance.setShininess(10.0);
+    this.thoraxappearance.loadTexture('images/beetexture.png');
+    this.thoraxappearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.toraxAppearence2 = new CGFappearance(this);
-    this.toraxAppearence2.setAmbient(0.9, 0.8, 0.1, 1); // Bright, to reflect more ambient light
-    this.toraxAppearence2.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
-    this.toraxAppearence2.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax    
-    this.toraxAppearence2.setShininess(10.0);
-    this.toraxAppearence2.loadTexture('images/abdomentexture.jpg');
-    this.toraxAppearence2.setTextureWrap('REPEAT', 'REPEAT');
+    this.toraxappearance2 = new CGFappearance(this);
+    this.toraxappearance2.setAmbient(0.9, 0.8, 0.1, 1); // Bright, to reflect more ambient light
+    this.toraxappearance2.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
+    this.toraxappearance2.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax    
+    this.toraxappearance2.setShininess(10.0);
+    this.toraxappearance2.loadTexture('images/abdomentexture.jpg');
+    this.toraxappearance2.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.wingAppearence = new CGFappearance(this);
-    this.wingAppearence.setAmbient(0.9, 0.8, 0.1, 0.1); // Bright, to reflect more ambient light
-    this.wingAppearence.setDiffuse(0.9, 0.8, 0.1, 0.1); // Primary color of the texture, assuming yellow is dominant
-    this.wingAppearence.setSpecular(0.5, 0.5, 0.1, 0.1); // Slightly reflective, giving a sheen to the bee's thorax 
-    this.wingAppearence.setEmission(0.9, 0.8, 0.1, 0.1);
-    this.wingAppearence.setShininess(10.0);
-    this.wingAppearence.loadTexture('images/wing.jpg');
-    this.wingAppearence.setTextureWrap('REPEAT', 'REPEAT');
+    this.wingappearance = new CGFappearance(this);
+    this.wingappearance.setAmbient(0.9, 0.8, 0.1, 0.1); // Bright, to reflect more ambient light
+    this.wingappearance.setDiffuse(0.9, 0.8, 0.1, 0.1); // Primary color of the texture, assuming yellow is dominant
+    this.wingappearance.setSpecular(0.5, 0.5, 0.1, 0.1); // Slightly reflective, giving a sheen to the bee's thorax 
+    this.wingappearance.setEmission(0.9, 0.8, 0.1, 0.1);
+    this.wingappearance.setShininess(10.0);
+    this.wingappearance.loadTexture('images/wing.jpg');
+    this.wingappearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.headAppearence = new CGFappearance(this);
-    this.headAppearence.setAmbient(0.7, 0.7, 0.1, 1); // Bright, to reflect more ambient light
-    this.headAppearence.setDiffuse(0.4, 0.4, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
-    this.headAppearence.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax
-    this.headAppearence.setShininess(10.0);
-    this.headAppearence.loadTexture('images/head.jpg');
-    this.headAppearence.setTextureWrap('REPEAT', 'REPEAT');
+    this.headappearance = new CGFappearance(this);
+    this.headappearance.setAmbient(0.7, 0.7, 0.1, 1); // Bright, to reflect more ambient light
+    this.headappearance.setDiffuse(0.4, 0.4, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
+    this.headappearance.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax
+    this.headappearance.setShininess(10.0);
+    this.headappearance.loadTexture('images/head.jpg');
+    this.headappearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.eyeAppearence = new CGFappearance(this);
-    this.eyeAppearence.setAmbient(0.1, 0.1, 0.1, 1); // Bright, to reflect more ambient light
-    this.eyeAppearence.setDiffuse(0.1, 0.1, 0.1, 1); 
-    this.eyeAppearence.setSpecular(0.5, 0.5, 0.5, 1); 
-    this.eyeAppearence.setShininess(10.0);
-    this.eyeAppearence.loadTexture('images/eye.png');
-    this.eyeAppearence.setTextureWrap('REPEAT', 'REPEAT');
+    this.eyeappearance = new CGFappearance(this);
+    this.eyeappearance.setAmbient(0.1, 0.1, 0.1, 1); // Bright, to reflect more ambient light
+    this.eyeappearance.setDiffuse(0.1, 0.1, 0.1, 1); 
+    this.eyeappearance.setSpecular(0.5, 0.5, 0.5, 1); 
+    this.eyeappearance.setShininess(10.0);
+    this.eyeappearance.loadTexture('images/eye.png');
+    this.eyeappearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.stingerAppearence = new CGFappearance(this);
-    this.stingerAppearence.setAmbient(0, 0, 0, 1); // Bright, to reflect more ambient light
-    this.stingerAppearence.setDiffuse(0, 0, 0, 1);
-    this.stingerAppearence.setSpecular(0.5, 0.5, 0.5, 1);
-    this.stingerAppearence.setShininess(10.0);
+    this.stingerappearance = new CGFappearance(this);
+    this.stingerappearance.setAmbient(0, 0, 0, 1); // Bright, to reflect more ambient light
+    this.stingerappearance.setDiffuse(0, 0, 0, 1);
+    this.stingerappearance.setSpecular(0.5, 0.5, 0.5, 1);
+    this.stingerappearance.setShininess(10.0);
 
-    this.woodAppearence = new CGFappearance(this);
-    this.woodAppearence.setAmbient(0.2, 0.2, 0.2, 1); // Dim ambient light to simulate indirect lighting
-    this.woodAppearence.setDiffuse(0.6, 0.4, 0.2, 1); // Adjust diffuse to simulate wood color
-    this.woodAppearence.setSpecular(0.1, 0.1, 0.1, 1); // Reduce specular to make it less shiny
-    this.woodAppearence.setShininess(5); // Lower shininess for a more rough surface
-    this.woodAppearence.loadTexture('images/wood.png'); // Load wood texture
-    this.woodAppearence.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
+    this.woodappearance = new CGFappearance(this);
+    this.woodappearance.setAmbient(0.2, 0.2, 0.2, 1); // Dim ambient light to simulate indirect lighting
+    this.woodappearance.setDiffuse(0.6, 0.4, 0.2, 1); // Adjust diffuse to simulate wood color
+    this.woodappearance.setSpecular(0.1, 0.1, 0.1, 1); // Reduce specular to make it less shiny
+    this.woodappearance.setShininess(5); // Lower shininess for a more rough surface
+    this.woodappearance.loadTexture('images/wood.png'); // Load wood texture
+    this.woodappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
 
 
     //Initialize scene objects
@@ -175,14 +175,14 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
     this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance, [0, 1, 0, 1]);
     this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
-    this.bee = new Mybee(this, this.headAppearence, this.eyeAppearence, this.thoraxAppearence, this.toraxAppearence2, this.wingAppearence, this.stingerAppearence);
+    this.bee = new Mybee(this, this.headappearance, this.eyeappearance, this.thoraxappearance, this.toraxappearance2, this.wingappearance, this.stingerappearance);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
     this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance1);
 
     this.pollen = new MyPollen(this, 5, 5, 1);
-    this.cube = new MyCube(this, this.woodAppearence);
-    this.hive = new MyHive(this, this.woodAppearence);
+    this.cube = new MyCube(this, this.woodappearance);
+    this.hive = new MyHive(this, this.woodappearance);
   }
 
   initLights() {
