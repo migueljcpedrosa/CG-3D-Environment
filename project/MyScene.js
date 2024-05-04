@@ -158,12 +158,13 @@ export class MyScene extends CGFscene {
     this.stingerAppearence.setShininess(10.0);
 
     this.woodAppearence = new CGFappearance(this);
-    this.woodAppearence.setAmbient(0.8, 0.8, 0.8, 1); // Bright, to reflect more ambient light
-    this.woodAppearence.setDiffuse(0.1, 0.1, 0.1, 1); 
-    this.woodAppearence.setSpecular(0.5, 0.5, 0.5, 1); 
-    this.woodAppearence.setShininess(10.0);
-    this.woodAppearence.loadTexture('images/wood.png');
-    this.woodAppearence.setTextureWrap('REPEAT', 'REPEAT');
+    this.woodAppearence.setAmbient(0.2, 0.2, 0.2, 1); // Dim ambient light to simulate indirect lighting
+    this.woodAppearence.setDiffuse(0.6, 0.4, 0.2, 1); // Adjust diffuse to simulate wood color
+    this.woodAppearence.setSpecular(0.1, 0.1, 0.1, 1); // Reduce specular to make it less shiny
+    this.woodAppearence.setShininess(5); // Lower shininess for a more rough surface
+    this.woodAppearence.loadTexture('images/wood.png'); // Load wood texture
+    this.woodAppearence.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
+
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
