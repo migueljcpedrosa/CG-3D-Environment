@@ -157,7 +157,13 @@ export class MyScene extends CGFscene {
     this.stingerAppearence.setSpecular(0.5, 0.5, 0.5, 1);
     this.stingerAppearence.setShininess(10.0);
 
-
+    this.woodAppearence = new CGFappearance(this);
+    this.woodAppearence.setAmbient(0.8, 0.8, 0.8, 1); // Bright, to reflect more ambient light
+    this.woodAppearence.setDiffuse(0.1, 0.1, 0.1, 1); 
+    this.woodAppearence.setSpecular(0.5, 0.5, 0.5, 1); 
+    this.woodAppearence.setShininess(10.0);
+    this.woodAppearence.loadTexture('images/wood.png');
+    this.woodAppearence.setTextureWrap('REPEAT', 'REPEAT');
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -174,8 +180,8 @@ export class MyScene extends CGFscene {
     this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance1);
 
     this.pollen = new MyPollen(this, 5, 5, 1);
-    this.cube = new MyCube(this);
-    this.hive = new MyHive(this);
+    this.cube = new MyCube(this, this.woodAppearence);
+    this.hive = new MyHive(this, this.woodAppearence);
   }
 
   initLights() {

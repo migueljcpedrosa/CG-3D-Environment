@@ -1,9 +1,10 @@
 import { CGFobject } from '../../lib/CGF.js';
 
 export class MyCube extends CGFobject {
-    constructor(scene) {
+    constructor(scene, material) {
         super(scene);
         this.initBuffers();
+        this.material = material;
     }
 
     initBuffers() {
@@ -119,6 +120,7 @@ export class MyCube extends CGFobject {
     }
 
     display() {
+        this.material.apply();
         this.scene.pushMatrix();
         this.scene.scale(2, 0.8, 0.2);
         super.display();
