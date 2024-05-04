@@ -27,20 +27,20 @@ export class MyCube extends CGFobject {
             0, 1, 2,
             2, 3, 0,
             // Back face
-            4, 5, 6,
-            6, 7, 4,
+            4, 6, 5,
+            4, 7, 6,
             // Top face
             3, 2, 6,
-            6, 7, 3,
+            3, 6, 7,
             // Bottom face
-            0, 1, 5,
-            5, 4, 0,
+            0, 5, 1,
+            0, 4, 5,
             // Right face
-            1, 5, 6,
-            6, 2, 1,
+            1, 5, 2,
+            2, 5, 6,
             // Left face
-            0, 4, 7,
-            7, 3, 0
+            0, 3, 7,
+            0, 7, 4
         ];
 
         // Define the normals for each vertex
@@ -85,25 +85,25 @@ export class MyCube extends CGFobject {
             1, 0,
             0, 0,
             // Back face
-            1, 1,
             0, 1,
-            0, 0,
+            1, 1,
             1, 0,
+            0, 0,
             // Top face
             0, 0,
             1, 0,
             1, 1,
             0, 1,
             // Bottom face
-            1, 1,
             0, 1,
-            0, 0,
+            1, 1,
             1, 0,
+            0, 0,
             // Right face
-            1, 0,
             0, 0,
-            0, 1,
+            1, 0,
             1, 1,
+            0, 1,
             // Left face
             0, 0,
             1, 0,
