@@ -13,6 +13,7 @@ import { MyRockSet } from "./Rocks/MyRockSet.js";
 
 import { MyPollen } from "./Pollen/MyPollen.js";
 import { MyCube } from "./shapes/MyCube.js";
+import { MyHive } from "./Pollen/MyHive.js";
 
 /**
  * MyScene
@@ -174,6 +175,7 @@ export class MyScene extends CGFscene {
 
     this.pollen = new MyPollen(this, 5, 5, 1);
     this.cube = new MyCube(this);
+    this.hive = new MyHive(this);
   }
 
   initLights() {
@@ -232,7 +234,8 @@ export class MyScene extends CGFscene {
 
     if (this.displayPollen) this.pollen.display();
 
-    this.cube.display();
+    //this.cube.display();
+    this.hive.display();
     // ---- BEGIN Primitive drawing section
 
 
