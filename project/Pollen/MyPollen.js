@@ -19,16 +19,10 @@ export class MyPollen extends MySphere {
     initScaledBuffers() {
         // Apply scaling to the vertices calculated by the parent class's initBuffers method
         for (let i = 0; i < this.vertices.length; i += 3) {
-            this.vertices[i] *= this.scale;   // Scale x coordinate
+            //this.vertices[i] *= this.scale;   // Scale x coordinate
             this.vertices[i+1] *= this.scale; // Scale y coordinate
-            this.vertices[i+2] *= this.scale; // Scale z coordinate
+            //this.vertices[i+2] *= this.scale; // Scale z coordinate
         }
-
-        // Since normals are directional and should not be affected by scaling in terms of length,
-        // they are recalculated only to ensure they are normalized if scaling non-uniformly. 
-        // This example uses uniform scaling, so we do not need to normalize them here.
-
-        // The indices, texCoords, and other properties do not need to be changed.
 
         // Update WebGL buffers with the new scaled vertices
         this.initGLBuffers();

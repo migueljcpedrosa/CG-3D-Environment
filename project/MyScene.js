@@ -223,10 +223,10 @@ export class MyScene extends CGFscene {
     //if (this.displayLeaf) this.leaf.display();
 
     //changed here
-    if (this.displayRockSet) this.rockSet.display();
+    //if (this.displayRockSet) this.rockSet.display();
   
     if (this.displayGarden) this.garden.display();
-    //if (this.displayBee) this.bee.display();
+    if (this.displayBee) this.bee.display();
 
     if (this.displayPollen) this.pollen.display();
     // ---- BEGIN Primitive drawing section
