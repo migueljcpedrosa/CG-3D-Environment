@@ -173,6 +173,13 @@ export class MyScene extends CGFscene {
     this.honeyappearance.loadTexture('images/honey.png'); // Load honey texture
     this.honeyappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
 
+    this.polenappearance = new CGFappearance(this);
+    this.polenappearance.setAmbient(0.4, 0.2, 0, 1); // Adjust ambient color to a warm tone
+    this.polenappearance.setDiffuse(0.8, 0.4, 0, 1); // Adjust diffuse color to a deeper tone of honey
+    this.polenappearance.setSpecular(0.5, 0.3, 0, 1); // Adjust specular color to resemble honey
+    this.polenappearance.setShininess(10); // Set a moderate shininess for a glossy effect
+    this.polenappearance.loadTexture('images/honey.png'); // Load honey texture
+    this.polenappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
     
     //Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -188,7 +195,7 @@ export class MyScene extends CGFscene {
     this.myPanorama = new MyPanorama(this, this.panorama);
     this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance1);
 
-    this.pollen = new MyPollen(this, 5, 5, 1);
+    this.pollen = new MyPollen(this, this.polenappearance);
     this.cube = new MyCube(this, this.woodappearance);
     this.hive = new MyHive(this, this.woodappearance, this.honeyappearance);
   }
@@ -250,7 +257,7 @@ export class MyScene extends CGFscene {
     if (this.displayPollen) this.pollen.display();
 
     //this.cube.display();
-    this.hive.display();
+    //this.hive.display();
     // ---- BEGIN Primitive drawing section
 
 
