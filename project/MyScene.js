@@ -53,6 +53,7 @@ export class MyScene extends CGFscene {
     this.displayBee = true;
     this.scaleFactor = 1;
     this.gardenRowsColumns = 5;
+    this.cameraLock = false;
 
     this.setUpdatePeriod(30);
     this.previousTime = Date.now();
@@ -276,6 +277,11 @@ export class MyScene extends CGFscene {
       this.bee.reset();
       this.resetCamera();
     }
+    if (this.gui.isKeyPressed("KeyY")){
+      text += " Y ";
+      keysPressed = true;
+      this.cameraLock = !this.cameraLock;
+    }
     if(keysPressed){
       console.log(text);
     }
@@ -286,7 +292,10 @@ export class MyScene extends CGFscene {
     this.previousTime = t;
     this.checkKeys();
     this.bee.update(delta);
-    this.updateCamera();
+    if(this.cameraLock){
+      this.updateCamera();
+    }
+    console.log(this.cameraLock);
   }
 
   normalizeVector(vector) {
@@ -297,23 +306,23 @@ export class MyScene extends CGFscene {
   updateCamera(){
     const normalized = this.normalizeVector(vec3.fromValues(-Math.sin(this.bee.orientation), 0, -Math.cos(this.bee.orientation)));
 
-    this.camera.position[0] = this.bee.position[0] + normalized[0] * 10;
-    this.camera.position[1] = this.bee.position[1] + 4;
-    this.camera.position[2] = this.bee.position[2] + normalized[2] * 10;
+    this.camera.setPosition(vec3.fromValues(
+      this.bee.position[0] + normalized[0] * 10,
+      this.bee.position[1] + 4,
+      this.bee.position[2] + normalized[2] * 10, 
+    ));
 
-    this.camera.target[0] = this.bee.position[0];
-    this.camera.target[1] = this.bee.position[1];
-    this.camera.target[2] = this.bee.position[2];
+
+    this.camera.setTarget(vec3.fromValues(
+      this.bee.position[0],
+      this.bee.position[1],
+      this.bee.position[2],
+    ));
   }
 
   resetCamera(){
-    this.camera.position[0] = 0;
-    this.camera.position[1] = 4;
-    this.camera.position[2] = -10;
-
-    this.camera.target[0] = 0;
-    this.camera.target[1] = 0;
-    this.camera.target[2] = 0;
+    this.camera.setPosition(vec3.fromValues(0, 4, -10));
+    this.camera.setTarget(vec3.fromValues(0, 0, 0));
   }
 }
 
