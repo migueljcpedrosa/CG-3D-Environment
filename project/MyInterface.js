@@ -43,7 +43,7 @@ export class MyInterface extends CGFinterface {
         //
         this.gui.add(this.scene, 'displayGarden').name('Display Garden');
 
-        //this.gui.add(this.scene, 'displayBee').name('Display Bee');
+        this.gui.add(this.scene, 'displayBee').name('Display Bee');
 
         //
         this.gui.add(this.scene, 'gardenRowsColumns', 5, 15).step(1).name('Garden Rows/Columns').onChange(value => {

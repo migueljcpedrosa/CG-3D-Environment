@@ -12,7 +12,7 @@ import { MyEllipsoid } from "../shapes/MyEllipsoid.js";
 export class Mybee extends CGFobject{
     constructor(scene, headMaterial, eyeMaterial, thoraxMaterial, torsoMaterial, wingMaterial, stingerMaterial){
         super(scene);
-        this.speedCap = 0.1 * this.scene.speedFactor;
+        this.speedCap = 100 * this.scene.speedFactor;
         this.position = vec3.fromValues(0, 0, 0);
         this.orientation = 0;
         this.velocity = vec3.fromValues(0, 0, 0);
@@ -44,12 +44,18 @@ export class Mybee extends CGFobject{
         this.stinger = new BeeStinger(scene, 1, 0.5, 5, this.stingerMaterial);
         this.tooth1 = new MyEllipsoid(scene, 10, 5, .2, .2, .2);
         this.tooth2 = new MyEllipsoid(scene, 10, 5, .2, .2, .2);
+
+        this.time = 0; // Add this line
     }
 
     initMaterials(){
         this.black = new CGFappearance(this.scene);
         this.black.setAmbient(0, 0, 0, 1);
         this.black.setDiffuse(0, 0, 0, 1);
+    }
+    
+    oscillatePosition() {
+        this.verticalOscillation = Math.sin(this.time * 2 * Math.PI) * 0.5; // oscillation amplitude of 0.5
     }
 
     display(){
@@ -197,10 +203,12 @@ export class Mybee extends CGFobject{
     }
 
     update(t){
+        this.time += t;
+        this.oscillatePosition();
         this.velocity[0] = this.speed * Math.sin(this.orientation);
         this.velocity[2] = this.speed * Math.cos(this.orientation);
         this.position[0] += this.velocity[0] * t;
-        this.position[1] += this.velocity[1] * t;
+        this.position[1] += this.verticalOscillation;
         this.position[2] += this.velocity[2] * t;
     }
 

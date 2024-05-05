@@ -86,6 +86,7 @@ export class MyFlower extends CGFobject {
  
         //generate heart and top stem
         this.heart = new MyReceptacle(scene, heartRadius, 5, 1, this.receptacleMaterial);
+        //console.log(stemRadius, stemRadius, stemHeight, slices, stacks);
         this.stem = new MyStem(scene, stemRadius + 0.5 * stemRadius, stemRadius, stemHeight, slices, stacks, this.stemMaterial, this.shadesOfGreen[chooseColor]);
 
         //store lead angles and scales
@@ -156,6 +157,7 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix();
     
             // Update the cumulativeHeight and cumulativeForwardOffset for the next segment
+            //console.log(this.stemSegments[i].height);
             cumulativeHeight += Math.cos(cumulativeRotationAngle) * this.stemSegments[i+1].height;
             cumulativeForwardOffset += Math.sin(cumulativeRotationAngle) * this.stemSegments[i+1].height;
             finalI += 1;
