@@ -346,14 +346,14 @@ export class MyScene extends CGFscene {
 
     this.camera.setPosition(vec3.fromValues(
       this.bee.position[0] + normalized[0] * 10,
-      this.bee.position[1] + 4,
+      4,
       this.bee.position[2] + normalized[2] * 10, 
     ));
 
 
     this.camera.setTarget(vec3.fromValues(
       this.bee.position[0],
-      this.bee.position[1],
+      0,
       this.bee.position[2],
     ));
   }
