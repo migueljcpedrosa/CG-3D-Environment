@@ -55,7 +55,7 @@ export class Mybee extends CGFobject{
     }
     
     oscillatePosition() {
-        this.verticalOscillation = Math.sin(this.time * 2 * Math.PI) * 0.5; // oscillation amplitude of 0.5
+        this.verticalOscillation = 3 + Math.sin(this.time * 2 * Math.PI) * 0.5; // oscillation amplitude of 0.5
     }
 
     display(){
