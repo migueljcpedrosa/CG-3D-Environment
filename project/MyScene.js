@@ -27,8 +27,8 @@ export class MyScene extends CGFscene {
 
     //////////////////////////////////CHANGE HERE
     // Load textures
-    this.grassTexture0 = new CGFtexture(this, 'images/grass0.png');
-    this.grassTexture1 = new CGFtexture(this, 'images/grass2.png');
+    this.grassTexture1 = new CGFtexture(this, 'images/grass0.png');
+    this.grassTexture2 = new CGFtexture(this, 'images/grass2.png');
 
     // Initialize the grass shader
     this.grassShader = new CGFshader(this.gl, 'shaders/grass.vert', 'shaders/grass.frag');
@@ -292,6 +292,10 @@ export class MyScene extends CGFscene {
 
     this.setGlobalAmbientLight(1, 1, 1, 1);
 
+    // CHANGED HERE
+    this.lights[0].update();
+    this.lights[1].update();
+
 
     this.setUpdatePeriod(50);
 
@@ -399,13 +403,8 @@ export class MyScene extends CGFscene {
         this.bee.wing4.update(delta);
     }
 
-    //Calculate time factor to animate the grass
-    const currentTime = Date.now();
-    const timeFactor = (currentTime - this.lastUpdateTime) / 1000; // Convert to seconds
-    this.lastUpdateTime = currentTime;
-
-    // Update the shader with the new time factor
-    this.grassShader.setUniformsValues({ timeFactor: timeFactor });
+    //animate the grass
+    this.grassShader.setUniformsValues({ timeFactor: t / 500 % 100 });
   }
 
   normalizeVector(vector) {
