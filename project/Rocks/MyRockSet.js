@@ -76,7 +76,7 @@ export class MyRockSet extends CGFobject {
 
         this.scene.popMatrix();
 
-        this.scene.popMatrix(); // Restore the previous state of the matrix
+        this.scene.popMatrix(); // Restore the previous state of the matrix 
         this.scene.gl.enable(this.scene.gl.CULL_FACE);
     }
 
