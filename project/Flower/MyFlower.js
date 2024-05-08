@@ -122,6 +122,9 @@ export class MyFlower extends CGFobject {
 
         //random rotation angle between stem segments to simulate curvature of the flower
         this.rotationAngleDegrees = Math.random() * (20 - 0) + 0;
+
+        //random rotation angle for pollen
+        this.pollenRotation = Math.random() * (90 - 0) + 0;
     }
 
     display() {
@@ -176,7 +179,11 @@ export class MyFlower extends CGFobject {
         this.scene.setAmbient(0.6, 0.6, 0.1, 1.0); // Bright yellow ambient light
         this.scene.pushMatrix();
         this.scene.scale(this.heartRadius*0.7,this.heartRadius*0.7, this.heartRadius*0.7);
+        this.scene.pushMatrix();
+        this.scene.rotate(this.pollenRotation * Math.PI / 180, 1, 1, 0);
         this.pollen.display();
+        this.scene.rotate(-this.pollenRotation * Math.PI / 180, 1, 1, 0);
+        this.scene.popMatrix();
         this.scene.popMatrix();
         this.heart.display();
         this.scene.pushMatrix();
