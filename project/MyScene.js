@@ -42,6 +42,8 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
     //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
   
+    this.speedFactor = 1;
+    this.scaleFactor = 1;
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -56,6 +58,10 @@ export class MyScene extends CGFscene {
     this.displayBee = true;
     this.scaleFactor = 1;
     this.gardenRowsColumns = 5;
+    this.cameraLock = false;
+
+    this.setUpdatePeriod(30);
+    this.previousTime = Date.now();
 
     this.enableTextures(true);
 
@@ -214,7 +220,7 @@ export class MyScene extends CGFscene {
       1.5,
       0.1,
       1000,
-      vec3.fromValues(50, 10, 15),
+      vec3.fromValues(0, 4, -10),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -229,10 +235,10 @@ export class MyScene extends CGFscene {
   update(currTime) {
     console.log("Update called");
     if (this.lastUpdate === 0) {
-        this.lastUpdate = currTime; // to avoid large deltaTime on the first frame
+        this.lastUpdate = t; // to avoid large deltaTime on the first frame
     }
-    let deltaTime = (currTime - this.lastUpdate) / 1000.0; // to convert time to seconds
-    this.lastUpdate = currTime;
+    let deltaTime = (t - this.lastUpdate) / 1000.0; // to convert time to seconds
+    this.lastUpdate = t;
 
     // update bee animation
     if (this.displayBee) {
@@ -303,6 +309,87 @@ export class MyScene extends CGFscene {
 
   redraw() {
     this.display();
+  }
+
+  checkKeys(){
+    var text = "Keys Pressed: ";
+    var keysPressed = false;
+
+    if (this.gui.isKeyPressed("KeyW")) {
+      text += " W ";
+      keysPressed = true;
+      this.bee.accelerate(1);
+    }
+    if (this.gui.isKeyPressed("KeyS")) {
+      text += " S ";
+      keysPressed = true;
+      this.bee.accelerate(-1);
+    }
+    if (this.gui.isKeyPressed("KeyA")) {
+      this.bee.turn(Math.PI/32);
+    }
+    if (this.gui.isKeyPressed("KeyD")){
+      this.bee.turn(-Math.PI/32);
+    }
+    if (this.gui.isKeyPressed("KeyR")){
+      this.bee.reset();
+      this.resetCamera();
+    }
+    if (this.gui.isKeyPressed("KeyY")){
+      text += " Y ";
+      keysPressed = true;
+      this.cameraLock = !this.cameraLock;
+    }
+    if(keysPressed){
+      console.log(text);
+    }
+  }
+
+  update(t){
+    var delta = (t - this.previousTime)/ 1000;
+    this.previousTime = t;
+    this.checkKeys();
+    this.bee.update(delta);
+    if(this.cameraLock){
+      this.updateCamera();
+    }
+
+    // update bee animation
+    if (this.displayBee) {
+        this.bee.update(delta);
+        // update the bee's wings
+        this.bee.wing1.update(delta);
+        this.bee.wing2.update(delta);
+        this.bee.wing3.update(delta);
+        this.bee.wing4.update(delta);
+    }
+  }
+
+  normalizeVector(vector) {
+    const length = Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2]);
+    return [vector[0] / length, vector[1] / length, vector[2] / length];
+  }
+
+  updateCamera(){
+    const normalized = this.normalizeVector(vec3.fromValues(-Math.sin(this.bee.orientation), 0, -Math.cos(this.bee.orientation)));
+
+    this.camera.setPosition(vec3.fromValues(
+      this.bee.position[0] + normalized[0] * 10,
+      4,
+      this.bee.position[2] + normalized[2] * 10, 
+    ));
+
+
+    this.camera.setTarget(vec3.fromValues(
+      this.bee.position[0],
+      0,
+      this.bee.position[2],
+    ));
+  }
+
+  resetCamera(){
+    this.camera.setPosition(vec3.fromValues(0, 4, -10));
+    this.camera.setTarget(vec3.fromValues(0, 0, 0));
   }
 }
 
