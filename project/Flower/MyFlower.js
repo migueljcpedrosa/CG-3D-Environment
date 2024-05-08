@@ -3,6 +3,7 @@ import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
 import { MyLeaf } from './MyLeaf.js';
+import { MyPollen} from '../Pollen/MyPollen.js';
 /**
  * MyFlower
  * @constructor
@@ -31,7 +32,7 @@ import { MyLeaf } from './MyLeaf.js';
  * flower types to be instantiated.
  */
 export class MyFlower extends CGFobject {
-    constructor(scene, flowerRadius, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks, petalMaterial, stemMaterial, receptacleMaterial, leafMaterial) {
+    constructor(scene, flowerRadius, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks, petalMaterial, stemMaterial, receptacleMaterial, leafMaterial, pollenMaterial) {
         super(scene);
         this.flowerRadius = flowerRadius;
         this.flowerDiameter = 2 * this.flowerRadius;
@@ -52,6 +53,9 @@ export class MyFlower extends CGFobject {
         this.stemMaterial = stemMaterial;
         this.receptacleMaterial = receptacleMaterial;
         this.leafMaterial = leafMaterial;
+        this.pollenMaterial = pollenMaterial;
+
+        this.pollen = new MyPollen(scene, this.pollenMaterial);
 
         //different colors for flower components
         this.shadesOfGreen = [[0.13, 0.2, 0.13, 1], [0.1, 0.35, 0.1, 1], [0, 0, 0, 1], [0.0, 0.25, 0.0, 1]];
@@ -118,6 +122,9 @@ export class MyFlower extends CGFobject {
 
         //random rotation angle between stem segments to simulate curvature of the flower
         this.rotationAngleDegrees = Math.random() * (20 - 0) + 0;
+
+        //random rotation angle for pollen
+        this.pollenRotation = Math.random() * (90 - 0) + 0;
     }
 
     display() {
@@ -170,6 +177,14 @@ export class MyFlower extends CGFobject {
         // Transformations for the heart
         this.scene.setDiffuse(1.0, 1.0, 0.0, 1); // Bright yellow diffuse color
         this.scene.setAmbient(0.6, 0.6, 0.1, 1.0); // Bright yellow ambient light
+        this.scene.pushMatrix();
+        this.scene.scale(this.heartRadius*0.7,this.heartRadius*0.7, this.heartRadius*0.7);
+        this.scene.pushMatrix();
+        this.scene.rotate(this.pollenRotation * Math.PI / 180, 1, 1, 0);
+        this.pollen.display();
+        this.scene.rotate(-this.pollenRotation * Math.PI / 180, 1, 1, 0);
+        this.scene.popMatrix();
+        this.scene.popMatrix();
         this.heart.display();
         this.scene.pushMatrix();
 

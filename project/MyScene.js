@@ -10,6 +10,8 @@ import { MyGarden } from "./Flower/MyGarden.js";
 import { Mybee } from "./bee/MyBee.js";
 
 import { MyRockSet } from "./Rocks/MyRockSet.js";
+import { MyHive } from "./Pollen/MyHive.js";
+import { MyPollen } from "./Pollen/MyPollen.js";
 
 /**
  * MyScene
@@ -160,6 +162,29 @@ export class MyScene extends CGFscene {
     this.stingerAppearence.setSpecular(0.5, 0.5, 0.5, 1);
     this.stingerAppearence.setShininess(10.0);
 
+    this.woodappearance = new CGFappearance(this);
+    this.woodappearance.setAmbient(0.2, 0.2, 0.2, 1); // Dim ambient light to simulate indirect lighting
+    this.woodappearance.setDiffuse(0.6, 0.4, 0.2, 1); // Adjust diffuse to simulate wood color
+    this.woodappearance.setSpecular(0.1, 0.1, 0.1, 1); // Reduce specular to make it less shiny
+    this.woodappearance.setShininess(10); // Lower shininess for a more rough surface
+    this.woodappearance.loadTexture('images/wood.png'); // Load wood texture
+    this.woodappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
+
+    this.honeyappearance = new CGFappearance(this);
+    this.honeyappearance.setAmbient(0.4, 0.2, 0, 1); // Adjust ambient color to a warm tone
+    this.honeyappearance.setDiffuse(0.8, 0.4, 0, 1); // Adjust diffuse color to a deeper tone of honey
+    this.honeyappearance.setSpecular(0.5, 0.3, 0, 1); // Adjust specular color to resemble honey
+    this.honeyappearance.setShininess(10); // Set a moderate shininess for a glossy effect
+    this.honeyappearance.loadTexture('images/honey.png'); // Load honey texture
+    this.honeyappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
+
+    this.polenappearance = new CGFappearance(this);
+    this.polenappearance.setAmbient(0.4, 0.2, 0, 1); // Adjust ambient color to a warm tone
+    this.polenappearance.setDiffuse(0.8, 0.4, 0, 1); // Adjust diffuse color to a deeper tone of honey
+    this.polenappearance.setSpecular(0.5, 0.3, 0, 1); // Adjust specular color to resemble honey
+    this.polenappearance.setShininess(10); // Set a moderate shininess for a glossy effect
+    this.polenappearance.loadTexture('images/pollen.png'); // Load honey texture
+    this.polenappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
 
 
     //Initialize scene objects
@@ -168,13 +193,15 @@ export class MyScene extends CGFscene {
     this.receptacle = new MyReceptacle(this, 1, 30, 30, this.receptacleAppearance);
     this.stem = new MyStem(this, 0.5, 0.5, 1, 30, 30, this.stemAppearance, [0, 1, 0, 1]);
     this.petal = new MyPetal(this, 100, this.petalAppearance1, [1, 0, 0, 1]);
-    this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
+    this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance, this.polenappearance);
     this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance, [0, 1, 0, 1]);
-    this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance);
+    this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance, this.polenappearance);
     this.bee = new Mybee(this, this.headAppearence, this.eyeAppearence, this.thoraxAppearence, this.toraxAppearence2, this.wingAppearence, this.stingerAppearence);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
     this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance1);
+    this.hive = new MyHive(this, this.woodappearance, this.honeyappearance);
+    this.pollen = new MyPollen(this, this.polenappearance);
   }
 
   initLights() {
@@ -256,6 +283,8 @@ export class MyScene extends CGFscene {
   
     if (this.displayGarden) this.garden.display();
     if (this.displayBee) this.bee.display();
+    this.pollen.display();
+    this.hive.display();
     // ---- BEGIN Primitive drawing section
 
 
