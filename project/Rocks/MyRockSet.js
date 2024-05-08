@@ -30,6 +30,10 @@ export class MyRockSet extends CGFobject {
 
     display() {
         this.scene.gl.disable(this.scene.gl.CULL_FACE);
+
+        this.scene.pushMatrix(); // Save the current state of the matrix
+        this.scene.scale(3, 3, 3);
+        this.scene.translate(10, -32, 0); // Center the pyramid in the scene
         this.scene.pushMatrix(); // Save the current state of the matrix
         //this.scene.translate(-100, 0, -100); // Center the pyramid in the scene
 
@@ -71,6 +75,8 @@ export class MyRockSet extends CGFobject {
         }
 
         this.scene.popMatrix();
+
+        this.scene.popMatrix(); // Restore the previous state of the matrix
         this.scene.gl.enable(this.scene.gl.CULL_FACE);
     }
 
