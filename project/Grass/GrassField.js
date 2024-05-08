@@ -52,14 +52,4 @@ export class GrassField extends CGFobject {
         }
     }
 
-    update(dt) {
-        const windFrequency = 0.5; // frequency to control wind speed
-        const windAmplitude = Math.PI / 16; // amplitude for more/less rotation
-
-        for (const { blade } of this.blades) {
-            // sine wave for oscillating motion
-            const windAngle = Math.sin(windFrequency * dt) * windAmplitude;
-            blade.setAngle(windAngle);
-        }
-    }
 }

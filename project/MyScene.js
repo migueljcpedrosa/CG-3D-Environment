@@ -19,10 +19,29 @@ import { GrassField } from "./Grass/GrassField.js";
 export class MyScene extends CGFscene {
   constructor() {
     super();
-    this.lastUpdate = 0;
   }
   init(application) {
     super.init(application);
+
+    this.lastUpdate = 0;
+
+    //////////////////////////////////CHANGE HERE
+    // Load textures
+    this.grassTexture0 = new CGFtexture(this, 'images/grass0.png');
+    this.grassTexture1 = new CGFtexture(this, 'images/grass2.png');
+
+    // Initialize the grass shader
+    this.grassShader = new CGFshader(this.gl, 'shaders/grass.vert', 'shaders/grass.frag');
+
+    // Set initial uniform values
+    //this.grassShader.setUniformsValues({ windStrength: 0.1, randomness: 2.0, uSampler: 0 });
+    this.grassShader.setUniformsValues({ windStrength: 0.2, randomness: 2.0 });
+    this.grassShader.setUniformsValues({ grassTex0: 0, grassTex1: 1 }); // Uniforms for texture units
+
+    // Initial time setup
+    this.lastUpdateTime = Date.now();
+    
+    /****************************************************************************** */
 
     this.setUpdatePeriod(50); // Update every 50 milliseconds
 
@@ -52,8 +71,8 @@ export class MyScene extends CGFscene {
     this.displayFlower = true;
     this.displayLeaf = true;
     this.displayGarden = true;
-    this.displayBee = true;
-    this.displayRockSet = true;
+    this.displayBee = false;
+    this.displayRockSet = false;
     this.scaleFactor = 1;
     this.gardenRowsColumns = 5;
     this.cameraLock = false;
@@ -76,14 +95,14 @@ export class MyScene extends CGFscene {
     this.grassMaterial1.setDiffuse(0.3, 0.6, 0.3, 1.0); // Bright and distinct diffuse green
     this.grassMaterial1.setSpecular(0.1, 0.2, 0.1, 1.0); // Low specular, not very shiny
     this.grassMaterial1.setShininess(10.0); // Low shininess for a softer highlight
-    this.grassMaterial1.loadTexture('images/grass1.png'); // grass texture image
+    this.grassMaterial1.loadTexture('images/grass0.png'); // grass texture image
 
     this.grassMaterial2 = new CGFappearance(this);
     this.grassMaterial2.setAmbient(0.1, 0.3, 0.1, 1.0); 
     this.grassMaterial2.setDiffuse(0.3, 0.6, 0.3, 1.0); 
     this.grassMaterial2.setSpecular(0.1, 0.2, 0.1, 1.0);
     this.grassMaterial2.setShininess(10.0);
-    this.grassMaterial1.loadTexture('images/grass2.png');
+    this.grassMaterial2.loadTexture('images/grass2.png');
 
     //ROCK
     this.rockAppearance = new CGFappearance(this);
@@ -195,7 +214,7 @@ export class MyScene extends CGFscene {
     this.myPanorama = new MyPanorama(this, this.panorama);
     this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance);
 
-    this.grassField = new GrassField(this, 50, 50, 2000, this.grassMaterial1, this.grassMaterial2); // Adjust numBlades for better performance
+    this.grassField = new GrassField(this, 50, 50, 4000, this.grassMaterial1, this.grassMaterial2);
   }
 
   initLights() {
@@ -226,7 +245,8 @@ export class MyScene extends CGFscene {
   }
 
   //for bee and wings animation
-  update(currTime) {
+  /*
+  update() {
     console.log("Update called");
     if (this.lastUpdate === 0) {
         this.lastUpdate = t; // to avoid large deltaTime on the first frame
@@ -244,16 +264,26 @@ export class MyScene extends CGFscene {
         this.bee.wing4.update(deltaTime);
     }
 
-    this.grassField.update(dt);
+  
+    //Calculate time factor to animate the grass
+    const currentTime = Date.now();
+    const timeFactor = (currentTime - this.lastUpdateTime) / 1000; // Convert to seconds
+    this.lastUpdateTime = currentTime;
+
+    // Update the shader with the new time factor
+    this.grassShader.setUniformsValues({ timeFactor: timeFactor });
+  
     
-  }
+  } */
 
 
   display() {
     // ---- BEGIN Background, camera and axis setup
+
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+
     // Initialize Model-View matrix as identity (no transformation
     this.updateProjectionMatrix();
     this.loadIdentity();
@@ -275,11 +305,20 @@ export class MyScene extends CGFscene {
     //if (this.displayFlower) this.flower.display();
     //if (this.displayLeaf) this.leaf.display();
 
-    //if (this.displayRockSet) this.rockSet.display();
+    if (this.displayRockSet) this.rockSet.display();
   
     if (this.displayGarden) this.garden.display();
-    //if (this.displayBee) this.bee.display();
+    if (this.displayBee) this.bee.display();
+
+  
+    //Apply grass shader
+    this.setActiveShader(this.grassShader);
+
     this.grassField.display();
+
+    // Restore default shader
+    this.setActiveShader(this.defaultShader);
+  
 
     // ---- BEGIN Primitive drawing section
 
@@ -359,6 +398,14 @@ export class MyScene extends CGFscene {
         this.bee.wing3.update(delta);
         this.bee.wing4.update(delta);
     }
+
+    //Calculate time factor to animate the grass
+    const currentTime = Date.now();
+    const timeFactor = (currentTime - this.lastUpdateTime) / 1000; // Convert to seconds
+    this.lastUpdateTime = currentTime;
+
+    // Update the shader with the new time factor
+    this.grassShader.setUniformsValues({ timeFactor: timeFactor });
   }
 
   normalizeVector(vector) {
