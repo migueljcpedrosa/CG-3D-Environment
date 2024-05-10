@@ -56,6 +56,7 @@ export class MyFlower extends CGFobject {
         this.pollenMaterial = pollenMaterial;
 
         this.pollen = new MyPollen(scene, this.pollenMaterial);
+        this.pollenOffsets = [];
 
         //different colors for flower components
         this.shadesOfGreen = [[0.13, 0.2, 0.13, 1], [0.1, 0.35, 0.1, 1], [0, 0, 0, 1], [0.0, 0.25, 0.0, 1]];
@@ -125,6 +126,31 @@ export class MyFlower extends CGFobject {
 
         //random rotation angle for pollen
         this.pollenRotation = Math.random() * (90 - 0) + 0;
+
+        this.updateOffsets();
+    }
+
+    updateOffsets() {
+        let cumulativeHeight = 0;
+        let cumulativeForwardOffset = 0;
+        const rotationAngleRadians = this.rotationAngleDegrees * Math.PI / 180;
+        let cumulativeRotationAngle = 0;
+        let finalI = 0;
+    
+        for (let i = 0; i < this.numStemSegments-2; i++) { 
+            cumulativeRotationAngle += rotationAngleRadians;
+            // Update the cumulativeHeight and cumulativeForwardOffset for the next segment
+            //console.log(this.stemSegments[i].height);
+            cumulativeHeight += Math.cos(cumulativeRotationAngle) * this.stemSegments[i+1].height;
+            cumulativeForwardOffset += Math.sin(cumulativeRotationAngle) * this.stemSegments[i+1].height;
+            finalI += 1;
+        }
+        // Store or update the computed offsets
+        this.pollenOffsets.push({
+            x: 0,
+            y: cumulativeHeight + this.stemSegments[0].height + 0.2,
+            z: cumulativeForwardOffset
+        });
     }
 
     display() {
@@ -172,6 +198,7 @@ export class MyFlower extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(0, cumulativeHeight, cumulativeForwardOffset);
+        //console.log(this.pollenOffsets[0].x);
         this.scene.rotate(cumulativeRotationAngle, 1, 0, 0);
         this.scene.pushMatrix();
         // Transformations for the heart
@@ -230,8 +257,7 @@ export class MyFlower extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.popMatrix();
-
-
+        //console.log(this.pollenOffsets[0]);
     }
 
 

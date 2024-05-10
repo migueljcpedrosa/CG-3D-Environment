@@ -25,6 +25,10 @@ export class MyGarden extends CGFobject {
         this.leafMaterial = leafMaterial;
         this.pollenMaterial = pollenMaterial;
 
+        this.baseSpacing = 35;
+        this.baseSize = 3;
+        this.pollenAbsoluteOffsets = [];
+
         // Initialize arrays for random values and flowers
         this.initRandomValuesAndFlowers();
     }
@@ -34,13 +38,16 @@ export class MyGarden extends CGFobject {
         this.flowers = [];
         this.rotationAngles = [];
         this.randomDivisors = [];
-
+        this.flowerPositions = [];
+        this.pollenAbsoluteOffsets = [];
+    
         for (let row = 0; row < this.numRows; row++) {
             this.flowers[row] = [];
             this.rotationAngles[row] = [];
+            this.flowerPositions[row] = [];
             for (let col = 0; col < this.numCols; col++) {
                 this.randomDivisors.push(Math.random() * (2 - 1) + 1);
-
+    
                 let flowerRadiusTemp = Math.random() * (3.5 - 1.5) + 1.5;
                 let chosenPetalMaterial = Math.random() < 0.5 ? this.petalMaterial1 : this.petalMaterial2;
                 this.flowers[row][col] = new MyFlower(
@@ -66,6 +73,25 @@ export class MyGarden extends CGFobject {
                     this.pollenMaterial
                 );
                 this.rotationAngles[row][col] = Math.random() * 2 * Math.PI;
+    
+                // Store positions
+                this.flowerPositions[row][col] = {
+                    x: col * this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols)) + this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col],
+                    z: row * this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols)) + this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col]
+                };
+    
+                let angle = -this.rotationAngles[row][col] + Math.PI / 2;
+                let deltaX = this.flowers[row][col].pollenOffsets[0].z * Math.cos(angle);
+                let deltaZ = this.flowers[row][col].pollenOffsets[0].z * Math.sin(angle);
+                let pollenX = this.flowerPositions[row][col].x + deltaX;
+                let pollenZ = this.flowerPositions[row][col].z + deltaZ;
+                let pollenY = this.flowers[row][col].pollenOffsets[0].y;
+    
+                this.pollenAbsoluteOffsets.push({
+                    x: pollenX,
+                    y: pollenY,
+                    z: pollenZ
+                });
             }
         }
     }
@@ -81,10 +107,8 @@ export class MyGarden extends CGFobject {
     // Display the garden
     display() {
         this.scene.pushMatrix(); // Save the current state of the matrix
-        this.scene.translate(-185, -100, -185); // Center the garden
-        const baseSpacing = 70;
-        const baseSize = 5;
-        const spacing = baseSpacing * (baseSize / Math.max(this.numRows, this.numCols));
+        this.scene.translate(-3 * this.baseSpacing / 2, -100, -2 * this.baseSpacing / 2); // Center the garden
+        const spacing = this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols));
 
         // Loop through each flower in the garden
         for (let row = 0; row < this.numRows; row++) {
@@ -98,6 +122,18 @@ export class MyGarden extends CGFobject {
                 this.scene.popMatrix();
             }
         }
+
+        //just for debug
+        /*
+        for (let i = 0; i < this.pollenAbsoluteOffsets.length; i++) {
+            this.scene.pushMatrix();
+            this.scene.translate(this.pollenAbsoluteOffsets[i].x, this.pollenAbsoluteOffsets[i].y, this.pollenAbsoluteOffsets[i].z);
+            this.flowers[1][1].pollen.display();
+            this.scene.popMatrix();
+        }
+        */
+        
+
         this.scene.popMatrix();
     }
 }
