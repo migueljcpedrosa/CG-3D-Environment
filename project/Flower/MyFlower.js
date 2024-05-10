@@ -149,7 +149,7 @@ export class MyFlower extends CGFobject {
         this.pollenOffsets.push({
             x: 0,
             y: cumulativeHeight,
-            z: cumulativeForwardOffset // Adjust if necessary
+            z: cumulativeForwardOffset
         });
     }
 

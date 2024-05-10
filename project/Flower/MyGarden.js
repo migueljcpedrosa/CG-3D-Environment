@@ -78,8 +78,12 @@ export class MyGarden extends CGFobject {
                 let pollenX = col * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col] + this.flowers[row][col].pollenOffsets[0].x * Math.cos(this.rotationAngles[row][col]);
                 let pollenZ = row * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col] + this.flowers[row][col].pollenOffsets[0].z * Math.sin(this.rotationAngles[row][col]);
                 let pollenY = this.flowers[row][col].pollenOffsets[0].y;
-                console.log(pollenY);
-                //this.pollenAbsoluteOffsets.push({})
+                //console.log(pollenY);
+                this.pollenAbsoluteOffsets.push({
+                    x: pollenX,
+                    y: pollenY,
+                    z: pollenZ 
+                });
             }
         }
     }
@@ -112,6 +116,14 @@ export class MyGarden extends CGFobject {
                 this.scene.popMatrix();
             }
         }
+
+        for (let i = 0; i < this.pollenAbsoluteOffsets.length; i++) {
+            this.scene.pushMatrix();
+            this.scene.translate(this.pollenAbsoluteOffsets[i].x, this.pollenAbsoluteOffsets[i].y, this.pollenAbsoluteOffsets[i].z);
+            this.flowers[1][1].pollen.display();
+            this.scene.popMatrix();
+        }
+
         this.scene.popMatrix();
     }
 }
