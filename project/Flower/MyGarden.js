@@ -107,7 +107,7 @@ export class MyGarden extends CGFobject {
     // Display the garden
     display() {
         this.scene.pushMatrix(); // Save the current state of the matrix
-        this.scene.translate(-5 * this.baseSpacing / 2, -100, 5 * this.baseSpacing / 2); // Center the garden
+        this.scene.translate(-3 * this.baseSpacing / 2, -100, -2 * this.baseSpacing / 2); // Center the garden
         const spacing = this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols));
 
         // Loop through each flower in the garden
@@ -124,13 +124,14 @@ export class MyGarden extends CGFobject {
         }
 
         //just for debug
-        
+        /*
         for (let i = 0; i < this.pollenAbsoluteOffsets.length; i++) {
             this.scene.pushMatrix();
             this.scene.translate(this.pollenAbsoluteOffsets[i].x, this.pollenAbsoluteOffsets[i].y, this.pollenAbsoluteOffsets[i].z);
             this.flowers[1][1].pollen.display();
             this.scene.popMatrix();
         }
+        */
         
 
         this.scene.popMatrix();
