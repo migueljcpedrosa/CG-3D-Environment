@@ -75,9 +75,9 @@ export class MyGarden extends CGFobject {
                     x: col * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col],
                     z: row * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col]
                 };
-                let pollenX = col * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col];
-                let pollenZ = row * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col];
-                let pollenY = this.flowers[row][col].pollenOffsets[0];
+                let pollenX = col * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col] + this.flowers[row][col].pollenOffsets[0].x * Math.cos(this.rotationAngles[row][col]);
+                let pollenZ = row * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col] + this.flowers[row][col].pollenOffsets[0].z * Math.sin(this.rotationAngles[row][col]);
+                let pollenY = this.flowers[row][col].pollenOffsets[0].y;
                 console.log(pollenY);
                 //this.pollenAbsoluteOffsets.push({})
             }
