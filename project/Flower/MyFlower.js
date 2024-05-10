@@ -148,7 +148,7 @@ export class MyFlower extends CGFobject {
         // Store or update the computed offsets
         this.pollenOffsets.push({
             x: 0,
-            y: cumulativeHeight,
+            y: cumulativeHeight + this.stemSegments[0].height + 0.2,
             z: cumulativeForwardOffset
         });
     }
@@ -258,8 +258,6 @@ export class MyFlower extends CGFobject {
 
         this.scene.popMatrix();
         //console.log(this.pollenOffsets[0]);
-
-
     }
 
 
