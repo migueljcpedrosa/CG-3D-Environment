@@ -25,6 +25,8 @@ export class MyGarden extends CGFobject {
         this.leafMaterial = leafMaterial;
         this.pollenMaterial = pollenMaterial;
 
+        this.baseSpacing = 35;
+        this.baseSize = 3;
         this.pollenAbsoluteOffsets = [];
 
         // Initialize arrays for random values and flowers
@@ -74,8 +76,8 @@ export class MyGarden extends CGFobject {
     
                 // Store positions
                 this.flowerPositions[row][col] = {
-                    x: col * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col],
-                    z: row * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col]
+                    x: col * this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols)) + this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col],
+                    z: row * this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols)) + this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col]
                 };
     
                 let angle = -this.rotationAngles[row][col] + Math.PI / 2;
@@ -105,10 +107,8 @@ export class MyGarden extends CGFobject {
     // Display the garden
     display() {
         this.scene.pushMatrix(); // Save the current state of the matrix
-        this.scene.translate(-185, -100, -185); // Center the garden
-        const baseSpacing = 70;
-        const baseSize = 5;
-        const spacing = baseSpacing * (baseSize / Math.max(this.numRows, this.numCols));
+        this.scene.translate(-5 * this.baseSpacing / 2, -100, 5 * this.baseSpacing / 2); // Center the garden
+        const spacing = this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols));
 
         // Loop through each flower in the garden
         for (let row = 0; row < this.numRows; row++) {
@@ -124,14 +124,14 @@ export class MyGarden extends CGFobject {
         }
 
         //just for debug
-  
+        
         for (let i = 0; i < this.pollenAbsoluteOffsets.length; i++) {
             this.scene.pushMatrix();
             this.scene.translate(this.pollenAbsoluteOffsets[i].x, this.pollenAbsoluteOffsets[i].y, this.pollenAbsoluteOffsets[i].z);
             this.flowers[1][1].pollen.display();
             this.scene.popMatrix();
         }
-
+        
 
         this.scene.popMatrix();
     }
