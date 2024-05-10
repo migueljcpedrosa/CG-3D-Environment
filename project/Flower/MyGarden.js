@@ -34,10 +34,12 @@ export class MyGarden extends CGFobject {
         this.flowers = [];
         this.rotationAngles = [];
         this.randomDivisors = [];
+        this.flowerPositions = []; // Initialize the array for storing flower positions
 
         for (let row = 0; row < this.numRows; row++) {
             this.flowers[row] = [];
             this.rotationAngles[row] = [];
+            this.flowerPositions[row] = []; // Initialize the row in the positions array
             for (let col = 0; col < this.numCols; col++) {
                 this.randomDivisors.push(Math.random() * (2 - 1) + 1);
 
@@ -66,6 +68,11 @@ export class MyGarden extends CGFobject {
                     this.pollenMaterial
                 );
                 this.rotationAngles[row][col] = Math.random() * 2 * Math.PI;
+                // Store positions
+                this.flowerPositions[row][col] = {
+                    x: col * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col],
+                    z: row * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col]
+                };
             }
         }
     }
