@@ -78,9 +78,9 @@ export class MyGarden extends CGFobject {
                     z: row * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col]
                 };
     
-                let angle = this.rotationAngles[row][col] + Math.PI / 2;
-                let deltaX = this.flowers[row][col].pollenOffsets[0].x;
-                let deltaZ = this.flowers[row][col].pollenOffsets[0].z;
+                let angle = -this.rotationAngles[row][col] + Math.PI / 2;
+                let deltaX = this.flowers[row][col].pollenOffsets[0].z * Math.cos(angle);
+                let deltaZ = this.flowers[row][col].pollenOffsets[0].z * Math.sin(angle);
                 let pollenX = this.flowerPositions[row][col].x + deltaX;
                 let pollenZ = this.flowerPositions[row][col].z + deltaZ;
                 let pollenY = this.flowers[row][col].pollenOffsets[0].y;
@@ -117,21 +117,21 @@ export class MyGarden extends CGFobject {
                 let xPosition = col * spacing + spacing / this.randomDivisors[row * this.numCols + col]; // Random offset within each flower's matrix square limits
                 let zPosition = row * spacing + spacing / this.randomDivisors[row * this.numCols + col]; // Random offset within each flower's matrix square limits
                 this.scene.translate(xPosition, 0, zPosition);
-                //this.scene.rotate(this.rotationAngles[row][col], 0, 1, 0);
+                this.scene.rotate(this.rotationAngles[row][col], 0, 1, 0);
                 this.flowers[row][col].display();
                 this.scene.popMatrix();
             }
         }
 
         //just for debug
-        /*
+  
         for (let i = 0; i < this.pollenAbsoluteOffsets.length; i++) {
             this.scene.pushMatrix();
             this.scene.translate(this.pollenAbsoluteOffsets[i].x, this.pollenAbsoluteOffsets[i].y, this.pollenAbsoluteOffsets[i].z);
             this.flowers[1][1].pollen.display();
             this.scene.popMatrix();
         }
-        */
+
 
         this.scene.popMatrix();
     }
