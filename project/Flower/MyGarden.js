@@ -25,6 +25,8 @@ export class MyGarden extends CGFobject {
         this.leafMaterial = leafMaterial;
         this.pollenMaterial = pollenMaterial;
 
+        this.pollenAbsoluteOffsets = [];
+
         // Initialize arrays for random values and flowers
         this.initRandomValuesAndFlowers();
     }
@@ -73,6 +75,11 @@ export class MyGarden extends CGFobject {
                     x: col * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col],
                     z: row * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col]
                 };
+                let pollenX = col * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col];
+                let pollenZ = row * 70 * (5 / Math.max(this.numRows, this.numCols)) + 70 * (5 / Math.max(this.numRows, this.numCols)) / this.randomDivisors[row * this.numCols + col];
+                let pollenY = this.flowers[row][col].pollenOffsets[0];
+                console.log(pollenY);
+                //this.pollenAbsoluteOffsets.push({})
             }
         }
     }
