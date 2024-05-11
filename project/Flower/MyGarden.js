@@ -88,9 +88,11 @@ export class MyGarden extends CGFobject {
                 let pollenY = this.flowers[row][col].pollenOffsets[0].y;
     
                 this.pollenAbsoluteOffsets.push({
-                    x: pollenX,
-                    y: pollenY,
-                    z: pollenZ
+                    x: pollenX -3 * this.baseSpacing / 2,
+                    y: pollenY - 100,
+                    z: pollenZ - 2 * this.baseSpacing / 2,
+                    flower: this.flowers[row][col],
+                    collected: false
                 });
             }
         }
@@ -108,6 +110,7 @@ export class MyGarden extends CGFobject {
     display() {
         this.scene.pushMatrix(); // Save the current state of the matrix
         this.scene.translate(-3 * this.baseSpacing / 2, -100, -2 * this.baseSpacing / 2); // Center the garden
+
         const spacing = this.baseSpacing * (this.baseSize / Math.max(this.numRows, this.numCols));
 
         // Loop through each flower in the garden

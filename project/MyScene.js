@@ -196,11 +196,11 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this, 3.5, 5, [1, 0, 0, 1], 1, [1, 0, 0, 1], 0.5, 5, [0, 1, 0, 1], [0, 1, 0, 1], 100, 150, 5, 30, 30, this.petalAppearance1, this.stemAppearance, this.receptacleAppearance, this.leafAppearance, this.polenappearance);
     this.leaf = new MyLeaf(this, 1, 1, 1, 3, this.leafAppearance, [0, 1, 0, 1]);
     this.garden = new MyGarden(this, this.gardenRowsColumns, this.gardenRowsColumns, this.petalAppearance1, this.petalAppearance2, this.stemAppearance, this.receptacleAppearance, this.leafAppearance, this.polenappearance);
-    this.bee = new Mybee(this, this.headAppearence, this.eyeAppearence, this.thoraxAppearence, this.toraxAppearence2, this.wingAppearence, this.stingerAppearence);
+    this.bee = new Mybee(this, this.headAppearence, this.eyeAppearence, this.thoraxAppearence, this.toraxAppearence2, this.wingAppearence, this.stingerAppearence, this.polenappearance);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
     this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance1);
-    this.hive = new MyHive(this, this.woodappearance, this.honeyappearance);
+    this.hive = new MyHive(this, this.woodappearance, this.honeyappearance, this.polenappearance);
     this.pollen = new MyPollen(this, this.polenappearance);
   }
 
@@ -220,7 +220,7 @@ export class MyScene extends CGFscene {
       1.5,
       0.1,
       1000,
-      vec3.fromValues(0, 4, -10),
+      vec3.fromValues(0, 6, -15),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -283,7 +283,6 @@ export class MyScene extends CGFscene {
   
     if (this.displayGarden) this.garden.display();
     if (this.displayBee) this.bee.display();
-    this.pollen.display();
     this.hive.display();
     // ---- BEGIN Primitive drawing section
 
@@ -296,7 +295,6 @@ export class MyScene extends CGFscene {
     this.plane.display();
     this.popMatrix();
     this.myPanorama.display();
-
 
     // ---- END Primitive drawing section
   }
@@ -312,36 +310,58 @@ export class MyScene extends CGFscene {
   }
 
   checkKeys(){
-    var text = "Keys Pressed: ";
-    var keysPressed = false;
-
     if (this.gui.isKeyPressed("KeyW")) {
-      text += " W ";
-      keysPressed = true;
-      this.bee.accelerate(1);
+      if(!this.bee.returnToHive)
+        this.bee.accelerate(1);
     }
     if (this.gui.isKeyPressed("KeyS")) {
-      text += " S ";
-      keysPressed = true;
-      this.bee.accelerate(-1);
+      if(!this.bee.returnToHive)
+        this.bee.accelerate(-1);
     }
     if (this.gui.isKeyPressed("KeyA")) {
-      this.bee.turn(Math.PI/32);
+      if(!this.bee.returnToHive)
+        this.bee.turn(Math.PI/32);
     }
     if (this.gui.isKeyPressed("KeyD")){
-      this.bee.turn(-Math.PI/32);
+      if(!this.bee.returnToHive)
+        this.bee.turn(-Math.PI/32);
     }
     if (this.gui.isKeyPressed("KeyR")){
       this.bee.reset();
       this.resetCamera();
+      for(let pollen of this.garden.pollenAbsoluteOffsets){
+        pollen.collected = false;
+      }
     }
     if (this.gui.isKeyPressed("KeyY")){
-      text += " Y ";
-      keysPressed = true;
       this.cameraLock = !this.cameraLock;
     }
-    if(keysPressed){
-      console.log(text);
+    if(this.gui.isKeyPressed("KeyP")){
+      if(!this.bee.returnToHive){
+        for(let pollen of this.garden.pollenAbsoluteOffsets){
+          if(this.bee.checkColision(pollen) && !this.bee.hasPollen){
+            this.bee.hasPollen = true;
+            pollen.flower.hasPollen = false;
+            pollen.collected = true;
+            this.bee.speed = this.oldSpeed;
+          }
+        }
+        this.bee.isDescending = false;
+        this.bee.isAscending = !this.bee.isAscending;        
+      }
+    }
+    if(this.gui.isKeyPressed("KeyF")){
+      if(!this.bee.returnToHive){
+        this.bee.isDescending = !this.bee.isDescending;
+        this.bee.isAscending = false;        
+      }
+    }
+    if(this.gui.isKeyPressed("KeyO")){
+      if(this.bee.hasPollen){
+        this.bee.isAscending = false;
+        this.bee.isDescending = false;
+        this.bee.returnToHive = true;
+      }
     }
   }
 
@@ -349,19 +369,33 @@ export class MyScene extends CGFscene {
     var delta = (t - this.previousTime)/ 1000;
     this.previousTime = t;
     this.checkKeys();
-    this.bee.update(delta);
     if(this.cameraLock){
       this.updateCamera();
     }
 
     // update bee animation
     if (this.displayBee) {
-        this.bee.update(delta);
-        // update the bee's wings
-        this.bee.wing1.update(delta);
-        this.bee.wing2.update(delta);
-        this.bee.wing3.update(delta);
-        this.bee.wing4.update(delta);
+      for(let pollen of this.garden.pollenAbsoluteOffsets){
+        if(this.bee.checkColision(pollen) && !this.bee.hasPollen){
+          if(this.bee.speed != 0)
+            this.oldSpeed = this.bee.speed;
+          this.bee.stop();
+        }
+      }
+
+      if(this.bee.deliverPolen){
+        this.bee.deliverPolen = false;
+        this.bee.hasPollen = false;
+        this.bee.returnToHive = false;
+        this.hive.pollenNum++;
+      }
+
+      this.bee.update(delta);
+      // update the bee's wings
+      this.bee.wing1.update(delta);
+      this.bee.wing2.update(delta);
+      this.bee.wing3.update(delta);
+      this.bee.wing4.update(delta);
     }
   }
 
@@ -374,22 +408,23 @@ export class MyScene extends CGFscene {
     const normalized = this.normalizeVector(vec3.fromValues(-Math.sin(this.bee.orientation), 0, -Math.cos(this.bee.orientation)));
 
     this.camera.setPosition(vec3.fromValues(
-      this.bee.position[0] + normalized[0] * 10,
-      4,
-      this.bee.position[2] + normalized[2] * 10, 
+      this.bee.position[0] + normalized[0] * 15,
+      this.bee.stableY + 6,
+      this.bee.position[2] + normalized[2] * 15, 
     ));
 
 
     this.camera.setTarget(vec3.fromValues(
       this.bee.position[0],
-      0,
+      this.bee.stableY,
       this.bee.position[2],
     ));
   }
 
   resetCamera(){
-    this.camera.setPosition(vec3.fromValues(0, 4, -10));
+    this.camera.setPosition(vec3.fromValues(0, 6, -15));
     this.camera.setTarget(vec3.fromValues(0, 0, 0));
   }
+  
 }
 

@@ -8,9 +8,10 @@ import { BeeLeg } from "./BeeLeg.js";
 import { BeeWing } from "./BeeWing.js";
 import { BeeStinger } from "./BeeStinger.js";
 import { MyEllipsoid } from "../shapes/MyEllipsoid.js";
+import { MyPollen } from "../Pollen/MyPollen.js";
  
 export class Mybee extends CGFobject{
-    constructor(scene, headMaterial, eyeMaterial, thoraxMaterial, torsoMaterial, wingMaterial, stingerMaterial){
+    constructor(scene, headMaterial, eyeMaterial, thoraxMaterial, torsoMaterial, wingMaterial, stingerMaterial, pollenAppearance){
         super(scene);
         this.speedCap = 100 * this.scene.speedFactor;
         this.position = vec3.fromValues(0, 0, 0);
@@ -23,6 +24,7 @@ export class Mybee extends CGFobject{
         this.torsoMaterial = torsoMaterial;
         this.wingMaterial = wingMaterial;
         this.stingerMaterial = stingerMaterial;
+        this.pollenAppearance = pollenAppearance;
         this.initMaterials();
         this.head = new BeeHead(scene, 20, 10, this.headMaterial);
         this.eye1 = new BeeEye(scene, this.eyeMaterial);
@@ -44,8 +46,16 @@ export class Mybee extends CGFobject{
         this.stinger = new BeeStinger(scene, 1, 0.5, 5, this.stingerMaterial);
         this.tooth1 = new MyEllipsoid(scene, 10, 5, .2, .2, .2);
         this.tooth2 = new MyEllipsoid(scene, 10, 5, .2, .2, .2);
+        this.pollen = new MyPollen(this.scene, this.pollenAppearance);
 
         this.time = 0; // Add this line
+        this.isDescending = false;
+        this.stableY = 0;
+        this.hasPollen = false;
+        this.isAscending = false;
+        this.hivePos = vec3.fromValues(0.6, -77.5, -43);
+        this.returnToHive = false;  
+        this.deliverPolen = false;
     }
 
     initMaterials(){
@@ -199,17 +209,73 @@ export class Mybee extends CGFobject{
         this.scene.scale(1, 3, 1);
         this.tooth2.display();
         this.scene.popMatrix();
+
+        if(this.hasPollen){
+            this.scene.pushMatrix();
+            this.scene.translate(0, -2, -1.5);
+            this.scene.rotate(Math.PI/4, 1, 0, 0);
+            this.pollen.display()
+            this.scene.popMatrix();
+        }
+
         this.scene.popMatrix();
     }
 
     update(t){
-        this.time += t;
-        this.oscillatePosition();
-        this.velocity[0] = this.speed * Math.sin(this.orientation);
-        this.velocity[2] = this.speed * Math.cos(this.orientation);
-        this.position[0] += this.velocity[0] * t;
-        this.position[1] = this.verticalOscillation;
-        this.position[2] += this.velocity[2] * t;
+        if(this.returnToHive){
+            this.speed = 10;
+            let direction = vec3.create();
+            vec3.subtract(direction, this.hivePos, this.position);
+            let distance = vec3.length(direction);
+            vec3.normalize(direction, direction);
+            let angle = Math.atan2(direction[0], direction[2]);
+            this.orientation = angle;
+            this.velocity[0] = this.speed * direction[0];
+            this.velocity[1] = this.speed * direction[1];
+            this.velocity[2] = this.speed * direction[2];
+
+            this.position[0] += this.velocity[0] * t;
+            this.position[1] += this.velocity[1] * t;
+            this.stableY = this.position[1];
+            this.position[2] += this.velocity[2] * t;
+            if(distance <= this.speed * t){
+                this.position = vec3.clone(this.hivePos);
+                this.returnToHive = false;
+                this.speed = 0;
+                this.deliverPolen = true;
+            }
+        }
+        else{
+            this.time += t;
+            this.velocity[0] = this.speed * Math.sin(this.orientation);
+            this.velocity[2] = this.speed * Math.cos(this.orientation);
+            this.position[0] += this.velocity[0] * t;
+            this.position[2] += this.velocity[2] * t;
+            if(this.isDescending){
+                if(this.stableY > -95){
+                    this.position[1]--;
+                    this.stableY--;      
+                }
+                else{
+                    this.isDescending = false;
+                }
+            } else if(this.isAscending){
+                if(this.stableY < 0){
+                    this.position[1]++;
+                    this.stableY++;
+                }
+                else{
+                    this.isAscending = false;
+                }
+            }
+            else{
+                this.oscillatePosition();
+                this.position[1] = this.stableY + this.verticalOscillation;            
+            }            
+        }
+
+
+
     }
 
     turn(v){
@@ -222,10 +288,28 @@ export class Mybee extends CGFobject{
         else if(this.speed <= 0) this.speed = 0;
     }
 
+    stop(){
+        this.speed = 0;
+        this.isDescending = false;
+        this.isAscending = false;
+    }
+
     reset(){
         this.position = vec3.fromValues(0, 0, 0);
         this.orientation = 0;
         this.velocity = vec3.fromValues(0, 0, 0);
         this.speed = 0;
+        this.stableY = 0;
+        this.isDescending = false;
+        this.hasPollen = false;
+        this.returnToHive = false;
+    }
+
+    checkColision(object){
+        let distance = Math.sqrt(Math.pow(this.position[0] - object.x, 2) + Math.pow(this.position[1] - object.y, 2) + Math.pow(this.position[2] - object.z, 2));
+
+        if(distance <= 4 && !object.collected)
+            return true;
+        return false;
     }
 }
