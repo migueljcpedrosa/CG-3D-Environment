@@ -42,7 +42,7 @@ export class GrassField extends CGFobject {
     }
 
     display() {
-        const yOffset = 0; //  offset to lower grass blades on the y-axis
+        const yOffset = -7; //  offset to lower grass blades on the y-axis
 
         for (const { blade, x, z } of this.blades) {
             this.scene.pushMatrix();

@@ -244,38 +244,6 @@ export class MyScene extends CGFscene {
     this.setShininess(10.0);
   }
 
-  //for bee and wings animation
-  /*
-  update() {
-    console.log("Update called");
-    if (this.lastUpdate === 0) {
-        this.lastUpdate = t; // to avoid large deltaTime on the first frame
-    }
-    let deltaTime = (t - this.lastUpdate) / 1000.0; // to convert time to seconds
-    this.lastUpdate = t;
-
-    // update bee animation
-    if (this.displayBee) {
-        this.bee.update(deltaTime);
-        // update the bee's wings
-        this.bee.wing1.update(deltaTime);
-        this.bee.wing2.update(deltaTime);
-        this.bee.wing3.update(deltaTime);
-        this.bee.wing4.update(deltaTime);
-    }
-
-  
-    //Calculate time factor to animate the grass
-    const currentTime = Date.now();
-    const timeFactor = (currentTime - this.lastUpdateTime) / 1000; // Convert to seconds
-    this.lastUpdateTime = currentTime;
-
-    // Update the shader with the new time factor
-    this.grassShader.setUniformsValues({ timeFactor: timeFactor });
-  
-    
-  } */
-
 
   display() {
     // ---- BEGIN Background, camera and axis setup
@@ -292,7 +260,7 @@ export class MyScene extends CGFscene {
 
     this.setGlobalAmbientLight(1, 1, 1, 1);
 
-    // CHANGED HERE
+    // UPDATE LIGHTS
     this.lights[0].update();
     this.lights[1].update();
 
