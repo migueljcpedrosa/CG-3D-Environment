@@ -12,6 +12,7 @@ import { Mybee } from "./bee/MyBee.js";
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 import { MyHive } from "./Pollen/MyHive.js";
 import { MyPollen } from "./Pollen/MyPollen.js";
+import { GrassField } from "./Grass/GrassField.js";
 
 /**
  * MyScene
@@ -20,10 +21,29 @@ import { MyPollen } from "./Pollen/MyPollen.js";
 export class MyScene extends CGFscene {
   constructor() {
     super();
-    this.lastUpdate = 0;
   }
   init(application) {
     super.init(application);
+
+    this.lastUpdate = 0;
+
+    //////////////////////////////////CHANGE HERE
+    // Load textures
+    this.grassTexture1 = new CGFtexture(this, 'images/grass0.png');
+    this.grassTexture2 = new CGFtexture(this, 'images/grass2.png');
+
+    // Initialize the grass shader
+    this.grassShader = new CGFshader(this.gl, 'shaders/grass.vert', 'shaders/grass.frag');
+
+    // Set initial uniform values
+    //this.grassShader.setUniformsValues({ windStrength: 0.1, randomness: 2.0, uSampler: 0 });
+    this.grassShader.setUniformsValues({ windStrength: 0.2, randomness: 2.0 });
+    this.grassShader.setUniformsValues({ grassTex0: 0, grassTex1: 1 }); // Uniforms for texture units
+
+    // Initial time setup
+    this.lastUpdateTime = Date.now();
+    
+    /****************************************************************************** */
 
     this.setUpdatePeriod(50); // Update every 50 milliseconds
 
@@ -45,17 +65,16 @@ export class MyScene extends CGFscene {
     this.speedFactor = 1;
     this.scaleFactor = 1;
 
-    //Objects connected to MyInterface
+    //objects connected to MyInterface
     this.displayAxis = true;
     this.displayReceptacle = true;
     this.displayStem = true;
     this.displayPetal = true;
     this.displayFlower = true;
     this.displayLeaf = true;
-    //changed here
-    this.displayRockSet = true;
     this.displayGarden = true;
-    this.displayBee = true;
+    this.displayBee = false;
+    this.displayRockSet = false;
     this.scaleFactor = 1;
     this.gardenRowsColumns = 5;
     this.cameraLock = false;
@@ -72,13 +91,30 @@ export class MyScene extends CGFscene {
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     this.sphereAppearance = new CGFappearance(this);
 
-    this.rockAppearance1 = new CGFappearance(this);
-    this.rockAppearance1.setAmbient(0.2, 0.2, 0.2, 1);  // Slightly brighter ambient reflectance
-    this.rockAppearance1.setDiffuse(0.6, 0.6, 0.6, 1);  // Moderate diffuse reflectance
-    this.rockAppearance1.setSpecular(0.3, 0.3, 0.3, 1); // Slightly higher specular reflectance
-    this.rockAppearance1.setShininess(20.0);            // more shininess, for rough surfaces
-    this.rockAppearance1.loadTexture('images/rock.jpg'); // rock texture image
+    //GRASS
+    this.grassMaterial1 = new CGFappearance(this);
+    this.grassMaterial1.setAmbient(0.1, 0.3, 0.1, 1.0); // Low but noticeable ambient green
+    this.grassMaterial1.setDiffuse(0.3, 0.6, 0.3, 1.0); // Bright and distinct diffuse green
+    this.grassMaterial1.setSpecular(0.1, 0.2, 0.1, 1.0); // Low specular, not very shiny
+    this.grassMaterial1.setShininess(10.0); // Low shininess for a softer highlight
+    this.grassMaterial1.loadTexture('images/grass0.png'); // grass texture image
 
+    this.grassMaterial2 = new CGFappearance(this);
+    this.grassMaterial2.setAmbient(0.1, 0.3, 0.1, 1.0); 
+    this.grassMaterial2.setDiffuse(0.3, 0.6, 0.3, 1.0); 
+    this.grassMaterial2.setSpecular(0.1, 0.2, 0.1, 1.0);
+    this.grassMaterial2.setShininess(10.0);
+    this.grassMaterial2.loadTexture('images/grass2.png');
+
+    //ROCK
+    this.rockAppearance = new CGFappearance(this);
+    this.rockAppearance.setAmbient(0.2, 0.2, 0.2, 1);  // Slightly brighter ambient reflectance
+    this.rockAppearance.setDiffuse(0.6, 0.6, 0.6, 1);  // Moderate diffuse reflectance
+    this.rockAppearance.setSpecular(0.3, 0.3, 0.3, 1); // Slightly higher specular reflectance
+    this.rockAppearance.setShininess(20.0);            // more shininess, for rough surfaces
+    this.rockAppearance.loadTexture('images/rock.jpg'); // rock texture image
+
+    //PETALS
     this.petalAppearance1 = new CGFappearance(this);
     this.petalAppearance1.setAmbient(0.1, 0.1, 0.1, 1);
     this.petalAppearance1.setSpecular(0.1, 0.1, 0.1, 1);
@@ -92,6 +128,7 @@ export class MyScene extends CGFscene {
     this.petalAppearance2.setShininess(10.0);
     this.petalAppearance2.loadTexture('images/bluepetal.jpg');
 
+    //STEM
     this.stemAppearance = new CGFappearance(this);
     this.stemAppearance.setDiffuse(0.1, 0.35, 0.1, 1);
     this.stemAppearance.setSpecular(0.1, 0.1, 0.1, 0.5)
@@ -107,6 +144,7 @@ export class MyScene extends CGFscene {
     this.receptacleAppearance.loadTexture('images/yellowreceptacle.png');
     this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
+    //LEAF
     this.leafAppearance = new CGFappearance(this);
     this.leafAppearance.setAmbient(0.1, 0.3, 0.1, 1);
     this.leafAppearance.setDiffuse(0.2, 0.5, 0.2, 1);
@@ -115,6 +153,7 @@ export class MyScene extends CGFscene {
     this.leafAppearance.loadTexture('images/greenleaf.jpg');
     this.leafAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
+    //BEE
     this.thoraxAppearence = new CGFappearance(this);
     this.thoraxAppearence.setAmbient(0.9, 0.8, 0.1, 1); // Bright, to reflect more ambient light
     this.thoraxAppearence.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
@@ -187,7 +226,7 @@ export class MyScene extends CGFscene {
     this.polenappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
 
 
-    //Initialize scene objects
+    //SCENE OBJECTS
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.receptacle = new MyReceptacle(this, 1, 30, 30, this.receptacleAppearance);
@@ -199,7 +238,9 @@ export class MyScene extends CGFscene {
     this.bee = new Mybee(this, this.headAppearence, this.eyeAppearence, this.thoraxAppearence, this.toraxAppearence2, this.wingAppearence, this.stingerAppearence, this.polenappearance);
 
     this.myPanorama = new MyPanorama(this, this.panorama);
-    this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance1);
+    this.rockSet = new MyRockSet(this, 15, 3, this.rockAppearance);
+
+    this.grassField = new GrassField(this, 50, 50, 4000, this.grassMaterial1, this.grassMaterial2);
     this.hive = new MyHive(this, this.woodappearance, this.honeyappearance, this.polenappearance);
     this.pollen = new MyPollen(this, this.polenappearance);
   }
@@ -231,33 +272,14 @@ export class MyScene extends CGFscene {
     this.setShininess(10.0);
   }
 
-  //for bee and wings animation
-  update(currTime) {
-    console.log("Update called");
-    if (this.lastUpdate === 0) {
-        this.lastUpdate = t; // to avoid large deltaTime on the first frame
-    }
-    let deltaTime = (t - this.lastUpdate) / 1000.0; // to convert time to seconds
-    this.lastUpdate = t;
-
-    // update bee animation
-    if (this.displayBee) {
-        this.bee.update(deltaTime);
-        // update the bee's wings
-        this.bee.wing1.update(deltaTime);
-        this.bee.wing2.update(deltaTime);
-        this.bee.wing3.update(deltaTime);
-        this.bee.wing4.update(deltaTime);
-    }
-    
-  }
-
 
   display() {
     // ---- BEGIN Background, camera and axis setup
+
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+
     // Initialize Model-View matrix as identity (no transformation
     this.updateProjectionMatrix();
     this.loadIdentity();
@@ -265,6 +287,10 @@ export class MyScene extends CGFscene {
     this.applyViewMatrix();
 
     this.setGlobalAmbientLight(1, 1, 1, 1);
+
+    // UPDATE LIGHTS
+    this.lights[0].update();
+    this.lights[1].update();
 
 
     this.setUpdatePeriod(50);
@@ -284,6 +310,17 @@ export class MyScene extends CGFscene {
     if (this.displayGarden) this.garden.display();
     if (this.displayBee) this.bee.display();
     this.hive.display();
+
+  
+    //Apply grass shader
+    this.setActiveShader(this.grassShader);
+
+    this.grassField.display();
+
+    // Restore default shader
+    this.setActiveShader(this.defaultShader);
+  
+
     // ---- BEGIN Primitive drawing section
 
 
@@ -397,6 +434,9 @@ export class MyScene extends CGFscene {
       this.bee.wing3.update(delta);
       this.bee.wing4.update(delta);
     }
+
+    //animate the grass
+    this.grassShader.setUniformsValues({ timeFactor: t / 500 % 100 });
   }
 
   normalizeVector(vector) {
