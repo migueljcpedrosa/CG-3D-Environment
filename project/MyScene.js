@@ -403,8 +403,15 @@ export class MyScene extends CGFscene {
   }
 
   update(t){
-    var delta = (t - this.previousTime)/ 1000;
-    this.previousTime = t;
+    
+    console.log("Update called");
+    if (this.lastUpdate === 0) {
+        this.lastUpdate = t; // to avoid large deltaTime on the first frame
+    }
+    let deltaTime = (t - this.lastUpdate) / 1000.0; // to convert time to seconds
+    this.lastUpdate = t;
+
+
     this.checkKeys();
     if(this.cameraLock){
       this.updateCamera();
@@ -427,12 +434,12 @@ export class MyScene extends CGFscene {
         this.hive.pollenNum++;
       }
 
-      this.bee.update(delta);
+      this.bee.update(deltaTime);
       // update the bee's wings
-      this.bee.wing1.update(delta);
-      this.bee.wing2.update(delta);
-      this.bee.wing3.update(delta);
-      this.bee.wing4.update(delta);
+      this.bee.wing1.update(deltaTime);
+      this.bee.wing2.update(deltaTime);
+      this.bee.wing3.update(deltaTime);
+      this.bee.wing4.update(deltaTime);
     }
 
     //animate the grass
