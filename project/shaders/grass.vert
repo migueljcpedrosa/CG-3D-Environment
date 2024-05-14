@@ -20,7 +20,8 @@ void main() {
     float waveAngle = sin(aVertexPosition.y * randomness + timeFactor) * windStrength;
 
     // Apply the waving to the x-coordinate to simulate bending
-    vec3 offset = vec3(waveAngle, 0.0, 0.0);
+    // Ensure the base of the grass (y=0) does not move
+    vec3 offset = vec3(waveAngle * aVertexPosition.y, 0.0, 0.0);
 
     // Calculate final vertex position
     vec3 displacedPosition = aVertexPosition + offset;
