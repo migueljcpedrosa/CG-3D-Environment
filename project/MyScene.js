@@ -29,8 +29,8 @@ export class MyScene extends CGFscene {
 
     //////////////////////////////////CHANGE HERE
     // Load textures
-    this.grassTexture1 = new CGFtexture(this, 'images/grass0.png');
-    this.grassTexture2 = new CGFtexture(this, 'images/grass2.png');
+    this.grassTexture1 = new CGFtexture(this, 'images/grass3.png');
+    this.grassTexture2 = new CGFtexture(this, 'images/grass4.png');
 
     // Initialize the grass shader
     this.grassShader = new CGFshader(this.gl, 'shaders/grass.vert', 'shaders/grass.frag');
@@ -93,18 +93,16 @@ export class MyScene extends CGFscene {
 
     //GRASS
     this.grassMaterial1 = new CGFappearance(this);
-    this.grassMaterial1.setAmbient(0.1, 0.3, 0.1, 1.0); // Low but noticeable ambient green
-    this.grassMaterial1.setDiffuse(0.3, 0.6, 0.3, 1.0); // Bright and distinct diffuse green
-    this.grassMaterial1.setSpecular(0.1, 0.2, 0.1, 1.0); // Low specular, not very shiny
-    this.grassMaterial1.setShininess(10.0); // Low shininess for a softer highlight
-    this.grassMaterial1.loadTexture('images/grass0.png'); // grass texture image
+    this.grassMaterial1.setDiffuse(0.1, 0.35, 0.1, 1);
+    this.grassMaterial1.setSpecular(0.1, 0.1, 0.1, 0.5)
+    this.grassMaterial1.setShininess(5.0); // Low shininess for a softer highlight
+    this.grassMaterial1.loadTexture('images/grass3.png'); // grass texture image
 
     this.grassMaterial2 = new CGFappearance(this);
-    this.grassMaterial2.setAmbient(0.1, 0.3, 0.1, 1.0); 
-    this.grassMaterial2.setDiffuse(0.3, 0.6, 0.3, 1.0); 
-    this.grassMaterial2.setSpecular(0.1, 0.2, 0.1, 1.0);
-    this.grassMaterial2.setShininess(10.0);
-    this.grassMaterial2.loadTexture('images/grass2.png');
+    this.grassMaterial2.setDiffuse(0.1, 0.35, 0.1, 1);
+    this.grassMaterial2.setSpecular(0.1, 0.1, 0.1, 0.5)
+    this.grassMaterial2.setShininess(5.0);
+    this.grassMaterial2.loadTexture('images/grass4.png');
 
     //ROCK
     this.rockAppearance = new CGFappearance(this);

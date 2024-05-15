@@ -13,3 +13,5 @@ void main() {
     // Set the output color
     gl_FragColor = color;
 }
+
+//usar coordenada do ponto no fragment shader pra alterar a iluminacao. mais escuro na base, mais claro na ponta
