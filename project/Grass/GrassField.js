@@ -1,5 +1,5 @@
 import { CGFobject } from '../../lib/CGF.js';
-import { GrassBlade } from './grassBlade.js';
+import { GrassBlade } from './GrassBlade.js';
 
 /**
  * GrassField
