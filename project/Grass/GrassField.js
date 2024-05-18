@@ -43,8 +43,8 @@ export class GrassField extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.scale(5, 10, 5);
-        this.scene.translate(0, -3, 0); // grass field position
+        this.scene.scale(5, 20, 5);
+        this.scene.translate(0, 2, 0); // grass field position
         const yOffset = -7; //  offset to lower grass blades on the y-axis
 
         for (const { blade, x, z } of this.blades) {
