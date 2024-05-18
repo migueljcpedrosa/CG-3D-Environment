@@ -10,8 +10,12 @@ void main() {
     // Fetch the grass texture color
     vec4 color = texture2D(uSampler, vTextureCoord);
 
-    // Set the output color
-    gl_FragColor = color;
-}
+    // Adjust the illumination based on the y-coordinate of the texture coordinate
+    float illumination = mix(0.5, 1.0, vTextureCoord.y); // Darker at the base (0.5) and lighter at the top (1.0)
+    
+    // Adjust RGB values with illumination, keep alpha unchanged
+    vec4 illuminatedColor = vec4(color.rgb * illumination, color.a);
 
-//usar coordenada do ponto no fragment shader pra alterar a iluminacao. mais escuro na base, mais claro na ponta
+    // Set the output color
+    gl_FragColor = illuminatedColor;
+}
