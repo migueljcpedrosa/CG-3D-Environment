@@ -222,6 +222,22 @@ export class Mybee extends CGFobject {
     }
 
     update(t) {
+        const T_peak = 5000; // Time to reach peak height in ms
+        const totalTime = T_peak * 2; // Total time for the parabolic motion
+        const amplitude = 10; // Amplitude of the parabolic motion
+
+        // Calculate elapsed time
+        let elapsedTime = this.time % totalTime;
+
+        // Calculate parabolic modulation factor
+        let modulation;
+        if (elapsedTime <= T_peak) {
+            modulation = 1 - Math.pow((elapsedTime / T_peak - 1), 2);
+        } else {
+            let t_descending = elapsedTime - T_peak;
+            modulation = 1 - Math.pow((t_descending / T_peak - 1), 2);
+        }
+
         if (this.returnToHive) {
             this.speed = 10;
             let direction = vec3.create();
@@ -230,23 +246,6 @@ export class Mybee extends CGFobject {
             vec3.normalize(direction, direction);
             let angle = Math.atan2(direction[0], direction[2]);
             this.orientation = angle;
-
-            const T_peak = 5000; // Time to reach peak height in ms
-            const totalTime = T_peak * 2; // Total time for the parabolic motion
-
-            // Calculate elapsed time
-            let elapsedTime = this.time % totalTime;
-
-            // Calculate parabolic modulation factor
-            let modulation;
-            if (elapsedTime <= T_peak) {
-                modulation = 1 - Math.pow((elapsedTime / T_peak - 1), 2);
-            } else {
-                let t_descending = elapsedTime - T_peak;
-                modulation = 1 - Math.pow((t_descending / T_peak - 1), 2);
-            }
-
-            const amplitude = 10; // Amplitude of the parabolic motion
 
             this.velocity[0] = this.speed * direction[0];
             this.velocity[1] = this.speed * direction[1] * modulation * amplitude;
@@ -267,8 +266,13 @@ export class Mybee extends CGFobject {
             this.time += t;
             this.velocity[0] = this.speed * Math.sin(this.orientation);
             this.velocity[2] = this.speed * Math.cos(this.orientation);
+
+            this.velocity[1] = this.speed * modulation * amplitude; // Apply parabolic motion to velocity[1]
+
             this.position[0] += this.velocity[0] * t;
+            this.position[1] += this.velocity[1] * t;
             this.position[2] += this.velocity[2] * t;
+
             if (this.isDescending) {
                 if (this.stableY > -95) {
                     this.position[1]--;
