@@ -240,13 +240,13 @@ export class Mybee extends CGFobject {
             // Calculate parabolic modulation factor
             let modulation;
             if (elapsedTime <= T_peak) {
-                modulation = 1 - (2 * elapsedTime / T_peak) + Math.pow((elapsedTime / T_peak), 2);
+                modulation = 1 - Math.pow((elapsedTime / T_peak - 1), 2);
             } else {
                 let t_descending = elapsedTime - T_peak;
-                modulation = 1 - Math.pow((t_descending / T_peak), 2);
+                modulation = 1 - Math.pow((t_descending / T_peak - 1), 2);
             }
 
-            const amplitude = 2; // Amplitude of the parabolic motion
+            const amplitude = 10; // Amplitude of the parabolic motion
 
             this.velocity[0] = this.speed * direction[0];
             this.velocity[1] = this.speed * direction[1] * modulation * amplitude;
