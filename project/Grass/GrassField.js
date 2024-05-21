@@ -8,6 +8,8 @@ import { GrassBlade } from './GrassBlade.js';
  * @param width - Width of the grass field
  * @param height - Height of the grass field
  * @param numBlades - Number of blades to populate the field
+ * @param grassMaterial1 - Material for the first type of grass
+ * @param grassMaterial2 - Material for the second type of grass
  *
  * Represents a field of grass by using multiple instances of GrassBlade. Each blade is positioned randomly within
  * the field and has varying angles to simulate randomness.

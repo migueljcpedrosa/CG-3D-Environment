@@ -1,6 +1,15 @@
 import { CGFobject } from "../../lib/CGF.js";
 import { MyEllipsoid } from "../shapes/MyEllipsoid.js";
 
+/**
+ * BeeEye
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param material - Material to apply to the eye
+ * Represents a bee eye object.
+ * This class initializes the eye with a specified material.
+ */
+
 export class BeeEye extends CGFobject{
     constructor(scene, material){
         super(scene);
