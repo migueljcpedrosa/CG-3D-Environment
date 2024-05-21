@@ -1,5 +1,13 @@
 import { CGFobject } from '../../lib/CGF.js';
 
+/**
+ * MyCube
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param material - Material to apply to the cube
+ * Represents a cube object.
+ * This class initializes the cube with a specified material.
+ */
 export class MyCube extends CGFobject {
     constructor(scene, material) {
         super(scene);

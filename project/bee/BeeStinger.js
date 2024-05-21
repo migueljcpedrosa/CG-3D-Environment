@@ -8,9 +8,9 @@ import { CGFappearance, CGFobject } from '../../lib/CGF.js';
  * @param baseRadius - Radius of the cone's base
  * @param slices - Number of slices around the cone
  *
- * Represents a cone object that might resemble the stinger of a bee.
+ * Represents a cone object resembles the stinger of a bee.
  * This class initializes the cone with a specified height, base radius, and number of slices.
- * The appearance of the cone including texture can be set using a material that is initialized elsewhere.
+ * The appearance of the cone including texture can be set using a material.
  */
 export class BeeStinger extends CGFobject {
     constructor(scene, height, baseRadius, slices, material) {

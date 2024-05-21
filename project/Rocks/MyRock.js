@@ -1,5 +1,23 @@
 import { CGFobject } from '../../lib/CGF.js';
 
+/**
+ * MyRock
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param slices - Number of slices around the rock
+ * @param stacks - Number of stacks along the rock
+ * @param variation - Variation of the rock's surface
+ * @param scaleX - Scale factor in the X axis
+ * @param scaleY - Scale factor in the Y axis
+ * @param scaleZ - Scale factor in the Z axis
+ * @param rockMaterial - Material to apply to the rock
+ * Represents a rock object.
+ * This class initializes the rock with a specified material.
+ * The rock is created with a specified number of slices and stacks, and a variation factor to add noise to the surface.
+ * The appearance of the rock can be set using a material.
+ * The rock can be scaled in the X, Y and Z axis.
+ */
+
 export class MyRock extends CGFobject {
     constructor(scene, slices, stacks, variation = 0.05, scaleX, scaleY, scaleZ, rockMaterial) {
         super(scene);

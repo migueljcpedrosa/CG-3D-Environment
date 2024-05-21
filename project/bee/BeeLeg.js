@@ -2,6 +2,16 @@ import { CGFobject } from "../../lib/CGF.js";
 import { MyCylinder } from "../shapes/MyCylinder.js";
 import { MyEllipsoid } from "../shapes/MyEllipsoid.js";
 
+/**
+ * BeeLeg
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param left - Boolean to determine if the leg is the left or right leg
+ * Represents a bee leg object.
+ * This class initializes the leg with a specified left boolean.
+ * The leg is composed of three parts: a cylinder, a larger cylinder, and an ellipsoid.
+ */
+
 export class BeeLeg extends CGFobject{
     constructor(scene, left){
         super(scene);

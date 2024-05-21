@@ -1,5 +1,17 @@
 import { CGFobject } from "../../lib/CGF.js";
-
+/**
+ * MyEllipsoid
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param slices - Number of slices around the ellipsoid
+ * @param stacks - Number of stacks around the ellipsoid
+ * @param radiusX - Radius of the ellipsoid on the X axis
+ * @param radiusY - Radius of the ellipsoid on the Y axis
+ * @param radiusZ - Radius of the ellipsoid on the Z axis
+ * Represents an ellipsoid object.
+ * This class initializes the ellipsoid with the specified parameters.
+ * The ellipsoid is created by generating vertices, normals and indices for the ellipsoid.
+ */
 export class MyEllipsoid extends CGFobject {
     constructor(scene, slices, stacks, radiusX, radiusY, radiusZ) {
         super(scene);

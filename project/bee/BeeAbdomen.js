@@ -1,6 +1,15 @@
 import { CGFobject } from "../../lib/CGF.js";
 import { MyEllipsoid } from "../shapes/MyEllipsoid.js";
 
+/**
+ * BeeAbdomen
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param material - Material to apply to the abdomen
+ * Represents a bee abdomen object.
+ * This class initializes the abdomen with a specified material.
+ */
+
 export class BeeAbdomen extends CGFobject{
     constructor(scene, material){
         super(scene);
