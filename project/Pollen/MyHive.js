@@ -2,6 +2,18 @@ import { CGFappearance, CGFobject } from "../../lib/CGF.js";
 import { MyCube } from "../shapes/MyCube.js";
 import { MyPollen } from "./MyPollen.js";
  
+/**
+ * MyHive
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param woodMaterial - Material to apply to the hive
+ * @param honeyMaterial - Material to apply to the honey
+ * @param pollenMaterial - Material to apply to the pollen
+ * Represents a hive object.
+ * This class initializes the hive with a specified material.
+ * The hive is composed of several wooden boards, and honey boards.
+ * The hive can store a maximum of 40 pollen.
+*/
 export class MyHive extends CGFobject{
     constructor(scene, woodMaterial, honeyMaterial, pollenMaterial){
         super(scene);
