@@ -10,6 +10,29 @@ import { BeeStinger } from "./BeeStinger.js";
 import { MyEllipsoid } from "../shapes/MyEllipsoid.js";
 import { MyPollen } from "../Pollen/MyPollen.js";
 
+/**
+ * MyBee
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param headMaterial - Material for the bee's head
+ * @param eyeMaterial - Material for the bee's eyes
+ * @param thoraxMaterial - Material for the bee's thorax
+ * @param torsoMaterial - Material for the bee's torso
+ * @param wingMaterial - Material for the bee's wings
+ * @param stingerMaterial - Material for the bee's stinger
+ * @param pollenAppearance - Appearance for the pollen object
+ *
+ * Represents a bee.
+ * This class initializes the bee with materials for its head, eyes, thorax, torso, wings, and stinger.
+ * The bee's body parts are represented by separate objects.
+ * The bee can move, turn, accelerate, and stop.
+ * The bee can also oscillate vertically and display pollen.
+ * The bee can check for collisions with objects.
+ * The bee can return to the hive and deliver pollen, in a parabolic trajectory.
+ * The bee can also ascend and descend in a parabolic trajectory.
+ * 
+ */
+
 export class Mybee extends CGFobject {
     constructor(scene, headMaterial, eyeMaterial, thoraxMaterial, torsoMaterial, wingMaterial, stingerMaterial, pollenAppearance) {
         super(scene);
@@ -329,3 +352,4 @@ export class Mybee extends CGFobject {
         return false;
     }
 }
+

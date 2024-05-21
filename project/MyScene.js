@@ -446,6 +446,8 @@ export class MyScene extends CGFscene {
     this.grassShader.setUniformsValues({ timeFactor: t / 500 % 100 });
   }
 
+  
+
   normalizeVector(vector) {
     const length = Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2]);
     return [vector[0] / length, vector[1] / length, vector[2] / length];
