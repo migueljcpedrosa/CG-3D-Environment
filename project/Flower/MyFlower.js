@@ -141,7 +141,6 @@ export class MyFlower extends CGFobject {
         for (let i = 0; i < this.numStemSegments-2; i++) { 
             cumulativeRotationAngle += rotationAngleRadians;
             // Update the cumulativeHeight and cumulativeForwardOffset for the next segment
-            //console.log(this.stemSegments[i].height);
             cumulativeHeight += Math.cos(cumulativeRotationAngle) * this.stemSegments[i+1].height;
             cumulativeForwardOffset += Math.sin(cumulativeRotationAngle) * this.stemSegments[i+1].height;
             finalI += 1;
@@ -191,7 +190,6 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix();
     
             // Update the cumulativeHeight and cumulativeForwardOffset for the next segment
-            //console.log(this.stemSegments[i].height);
             cumulativeHeight += Math.cos(cumulativeRotationAngle) * this.stemSegments[i+1].height;
             cumulativeForwardOffset += Math.sin(cumulativeRotationAngle) * this.stemSegments[i+1].height;
             finalI += 1;
@@ -199,7 +197,6 @@ export class MyFlower extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(0, cumulativeHeight, cumulativeForwardOffset);
-        //console.log(this.pollenOffsets[0].x);
         this.scene.rotate(cumulativeRotationAngle, 1, 0, 0);
         this.scene.pushMatrix();
         // Transformations for the heart
@@ -260,7 +257,6 @@ export class MyFlower extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.popMatrix();
-        //console.log(this.pollenOffsets[0]);
     }
 
 }

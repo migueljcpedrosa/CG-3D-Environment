@@ -27,7 +27,6 @@ export class MyScene extends CGFscene {
 
     this.lastUpdate = 0;
 
-    //////////////////////////////////CHANGE HERE
     // Load textures
     this.grassTexture1 = new CGFtexture(this, 'images/grass3.png');
     this.grassTexture2 = new CGFtexture(this, 'images/grass4.png');
@@ -42,10 +41,9 @@ export class MyScene extends CGFscene {
 
     // Initial time setup
     this.lastUpdateTime = Date.now();
-    
-    /****************************************************************************** */
 
-    this.setUpdatePeriod(50); // Update every 50 milliseconds
+    // Update every 50 milliseconds
+    this.setUpdatePeriod(50);
 
     this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
     this.gl.enable(this.gl.BLEND);
@@ -60,7 +58,6 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
-    //(scene, flowerDiameter, numPetals, petalColor, heartRadius, heartColor, stemRadius, stemHeight, stemColor, leafColor,minPetalAngle, maxPetalAngle, numStemSegments, slices, stacks) {
   
     this.speedFactor = 1;
     this.scaleFactor = 1;
@@ -93,16 +90,16 @@ export class MyScene extends CGFscene {
 
     // GRASS
     this.grassMaterial1 = new CGFappearance(this);
-    this.grassMaterial1.setAmbient(0.9, 0.8, 0.1, 1); // Set alpha to 1
-    this.grassMaterial1.setDiffuse(0.1, 0.35, 0.1, 1); // Alpha is already 1
-    this.grassMaterial1.setSpecular(0.1, 0.1, 0.1, 1); // Set alpha to 1
+    this.grassMaterial1.setAmbient(0.9, 0.8, 0.1, 1); 
+    this.grassMaterial1.setDiffuse(0.1, 0.35, 0.1, 1); 
+    this.grassMaterial1.setSpecular(0.1, 0.1, 0.1, 1); 
     this.grassMaterial1.setShininess(10.0); // Low shininess for a softer highlight
     this.grassMaterial1.loadTexture('images/grass3.png'); // grass texture image
 
     this.grassMaterial2 = new CGFappearance(this);
-    this.grassMaterial2.setAmbient(0.9, 0.8, 0.1, 1); // Alpha is already 1
-    this.grassMaterial2.setDiffuse(0.1, 0.35, 0.1, 1); // Alpha is already 1
-    this.grassMaterial2.setSpecular(0.1, 0.1, 0.1, 1); // Alpha is already 1
+    this.grassMaterial2.setAmbient(0.9, 0.8, 0.1, 1); 
+    this.grassMaterial2.setDiffuse(0.1, 0.35, 0.1, 1); 
+    this.grassMaterial2.setSpecular(0.1, 0.1, 0.1, 1); 
     this.grassMaterial2.setShininess(10.0);
     this.grassMaterial2.loadTexture('images/grass4.png');
 
@@ -155,34 +152,34 @@ export class MyScene extends CGFscene {
 
     //BEE
     this.thoraxAppearence = new CGFappearance(this);
-    this.thoraxAppearence.setAmbient(0.9, 0.8, 0.1, 1); // Bright, to reflect more ambient light
-    this.thoraxAppearence.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
-    this.thoraxAppearence.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax    
+    this.thoraxAppearence.setAmbient(0.9, 0.8, 0.1, 1); 
+    this.thoraxAppearence.setDiffuse(0.9, 0.8, 0.1, 1);
+    this.thoraxAppearence.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective
     this.thoraxAppearence.setShininess(10.0);
     this.thoraxAppearence.loadTexture('images/beetexture.png');
     this.thoraxAppearence.setTextureWrap('REPEAT', 'REPEAT');
 
     this.toraxAppearence2 = new CGFappearance(this);
-    this.toraxAppearence2.setAmbient(0.9, 0.8, 0.1, 1); // Bright, to reflect more ambient light
-    this.toraxAppearence2.setDiffuse(0.9, 0.8, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
-    this.toraxAppearence2.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax    
+    this.toraxAppearence2.setAmbient(0.9, 0.8, 0.1, 1); 
+    this.toraxAppearence2.setDiffuse(0.9, 0.8, 0.1, 1);
+    this.toraxAppearence2.setSpecular(0.5, 0.5, 0.1, 1); 
     this.toraxAppearence2.setShininess(10.0);
     this.toraxAppearence2.loadTexture('images/abdomentexture.jpg');
     this.toraxAppearence2.setTextureWrap('REPEAT', 'REPEAT');
 
     this.wingAppearence = new CGFappearance(this);
-    this.wingAppearence.setAmbient(0.9, 0.8, 0.1, 0.1); // Bright, to reflect more ambient light
-    this.wingAppearence.setDiffuse(0.9, 0.8, 0.1, 0.1); // Primary color of the texture, assuming yellow is dominant
-    this.wingAppearence.setSpecular(0.5, 0.5, 0.1, 0.1); // Slightly reflective, giving a sheen to the bee's thorax 
+    this.wingAppearence.setAmbient(0.9, 0.8, 0.1, 0.1);
+    this.wingAppearence.setDiffuse(0.9, 0.8, 0.1, 0.1); 
+    this.wingAppearence.setSpecular(0.5, 0.5, 0.1, 0.1); 
     this.wingAppearence.setEmission(0.9, 0.8, 0.1, 0.1);
     this.wingAppearence.setShininess(10.0);
     this.wingAppearence.loadTexture('images/wing.jpg');
     this.wingAppearence.setTextureWrap('REPEAT', 'REPEAT');
 
     this.headAppearence = new CGFappearance(this);
-    this.headAppearence.setAmbient(0.7, 0.7, 0.1, 1); // Bright, to reflect more ambient light
-    this.headAppearence.setDiffuse(0.4, 0.4, 0.1, 1); // Primary color of the texture, assuming yellow is dominant
-    this.headAppearence.setSpecular(0.5, 0.5, 0.1, 1); // Slightly reflective, giving a sheen to the bee's thorax
+    this.headAppearence.setAmbient(0.7, 0.7, 0.1, 1);
+    this.headAppearence.setDiffuse(0.4, 0.4, 0.1, 1);
+    this.headAppearence.setSpecular(0.5, 0.5, 0.1, 1);
     this.headAppearence.setShininess(10.0);
     this.headAppearence.loadTexture('images/head.jpg');
     this.headAppearence.setTextureWrap('REPEAT', 'REPEAT');
@@ -196,34 +193,34 @@ export class MyScene extends CGFscene {
     this.eyeAppearence.setTextureWrap('REPEAT', 'REPEAT');
 
     this.stingerAppearence = new CGFappearance(this);
-    this.stingerAppearence.setAmbient(0, 0, 0, 1); // Bright, to reflect more ambient light
+    this.stingerAppearence.setAmbient(0, 0, 0, 1);
     this.stingerAppearence.setDiffuse(0, 0, 0, 1);
     this.stingerAppearence.setSpecular(0.5, 0.5, 0.5, 1);
     this.stingerAppearence.setShininess(10.0);
 
     this.woodappearance = new CGFappearance(this);
-    this.woodappearance.setAmbient(0.2, 0.2, 0.2, 1); // Dim ambient light to simulate indirect lighting
-    this.woodappearance.setDiffuse(0.6, 0.4, 0.2, 1); // Adjust diffuse to simulate wood color
-    this.woodappearance.setSpecular(0.1, 0.1, 0.1, 1); // Reduce specular to make it less shiny
-    this.woodappearance.setShininess(10); // Lower shininess for a more rough surface
-    this.woodappearance.loadTexture('images/wood.png'); // Load wood texture
-    this.woodappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
+    this.woodappearance.setAmbient(0.2, 0.2, 0.2, 1);
+    this.woodappearance.setDiffuse(0.6, 0.4, 0.2, 1);
+    this.woodappearance.setSpecular(0.1, 0.1, 0.1, 1);
+    this.woodappearance.setShininess(10); 
+    this.woodappearance.loadTexture('images/wood.png'); 
+    this.woodappearance.setTextureWrap('REPEAT', 'REPEAT');
 
     this.honeyappearance = new CGFappearance(this);
-    this.honeyappearance.setAmbient(0.4, 0.2, 0, 1); // Adjust ambient color to a warm tone
-    this.honeyappearance.setDiffuse(0.8, 0.4, 0, 1); // Adjust diffuse color to a deeper tone of honey
-    this.honeyappearance.setSpecular(0.5, 0.3, 0, 1); // Adjust specular color to resemble honey
-    this.honeyappearance.setShininess(10); // Set a moderate shininess for a glossy effect
-    this.honeyappearance.loadTexture('images/honey.png'); // Load honey texture
-    this.honeyappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
+    this.honeyappearance.setAmbient(0.4, 0.2, 0, 1); 
+    this.honeyappearance.setDiffuse(0.8, 0.4, 0, 1); 
+    this.honeyappearance.setSpecular(0.5, 0.3, 0, 1); 
+    this.honeyappearance.setShininess(10);
+    this.honeyappearance.loadTexture('images/honey.png');
+    this.honeyappearance.setTextureWrap('REPEAT', 'REPEAT');
 
     this.polenappearance = new CGFappearance(this);
-    this.polenappearance.setAmbient(0.4, 0.2, 0, 1); // Adjust ambient color to a warm tone
-    this.polenappearance.setDiffuse(0.8, 0.4, 0, 1); // Adjust diffuse color to a deeper tone of honey
-    this.polenappearance.setSpecular(0.5, 0.3, 0, 1); // Adjust specular color to resemble honey
-    this.polenappearance.setShininess(10); // Set a moderate shininess for a glossy effect
-    this.polenappearance.loadTexture('images/pollen.png'); // Load honey texture
-    this.polenappearance.setTextureWrap('REPEAT', 'REPEAT'); // Repeat texture to cover the object
+    this.polenappearance.setAmbient(0.4, 0.2, 0, 1); 
+    this.polenappearance.setDiffuse(0.8, 0.4, 0, 1); 
+    this.polenappearance.setSpecular(0.5, 0.3, 0, 1); 
+    this.polenappearance.setShininess(10); //glossy effect
+    this.polenappearance.loadTexture('images/pollen.png'); //honey texture
+    this.polenappearance.setTextureWrap('REPEAT', 'REPEAT'); //texture to cover the object
 
 
     //SCENE OBJECTS
@@ -256,6 +253,7 @@ export class MyScene extends CGFscene {
     this.lights[1].enable();
     this.lights[1].update();
   }
+  
   initCameras() {
     this.camera = new CGFcamera(
       1.5,
@@ -265,6 +263,7 @@ export class MyScene extends CGFscene {
       vec3.fromValues(0, 0, 0)
     );
   }
+
   setDefaultAppearance() {
     this.setAmbient(0.2, 0.4, 0.8, 1.0);
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -274,8 +273,6 @@ export class MyScene extends CGFscene {
 
 
   display() {
-    // ---- BEGIN Background, camera and axis setup
-
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -295,19 +292,16 @@ export class MyScene extends CGFscene {
 
     this.setUpdatePeriod(50);
 
-
-    //this.garden.updateGarden(this.gardenRowsColumns, this.gardenRowsColumns)
     // Draw axis
     if (this.displayAxis) this.axis.display();
-    //if (this.displayReceptacle) this.receptacle.display();
-    //if (this.displayStem) this.stem.display();
-    //if (this.displayPetal) this.petal.display();
-    //if (this.displayFlower) this.flower.display();
-    //if (this.displayLeaf) this.leaf.display();
 
+    //RockSet
     if (this.displayRockSet) this.rockSet.display();
   
+    //Garden
     if (this.displayGarden) this.garden.display();
+
+    //Bee
     if (this.displayBee) this.bee.display();
     this.hive.display();
 
@@ -315,14 +309,11 @@ export class MyScene extends CGFscene {
     //Apply grass shader
     this.setActiveShader(this.grassShader);
 
+    // Grass field
     this.grassField.display();
 
     // Restore default shader
     this.setActiveShader(this.defaultShader);
-  
-
-    // ---- BEGIN Primitive drawing section
-
 
     this.pushMatrix();
     this.appearance.apply();
@@ -333,7 +324,6 @@ export class MyScene extends CGFscene {
     this.popMatrix();
     this.myPanorama.display();
 
-    // ---- END Primitive drawing section
   }
 
   updateGarden(value) {
@@ -406,9 +396,9 @@ export class MyScene extends CGFscene {
     
     console.log("Update called");
     if (this.lastUpdate === 0) {
-        this.lastUpdate = t; // to avoid large deltaTime on the first frame
+        this.lastUpdate = t;
     }
-    let deltaTime = (t - this.lastUpdate) / 1000.0; // to convert time to seconds
+    let deltaTime = (t - this.lastUpdate) / 1000.0; //time to seconds
     this.lastUpdate = t;
 
 

@@ -32,7 +32,6 @@ export class MyRockSet extends CGFobject {
             let scaleY = (2 - 1) * Math.random() + 1;
             let scaleZ = (3 - 2) * Math.random() + 2;
 
-            //updated here:
             let rock = new MyRock(this.scene, 15, 10, rockSize * 0.2, scaleX, scaleY, scaleZ, this.rockMaterial);
             
             this.rocks.push(rock);
@@ -47,7 +46,6 @@ export class MyRockSet extends CGFobject {
         this.scene.scale(3, 3, 3);
         this.scene.translate(12, -32, -18); // Center the pyramid in the scene
         this.scene.pushMatrix(); // Save the current state of the matrix
-        //this.scene.translate(-100, 0, -100); // Center the pyramid in the scene
 
         // Define an array that specifies the number of rocks per layer
         const layers = [5, 3, 1];
@@ -69,7 +67,6 @@ export class MyRockSet extends CGFobject {
                 let zPosition = radius * Math.sin(angle * Math.PI / 180);
 
                 this.scene.translate(xPosition, heightOffset, zPosition);
-                //this.rocks[rockIndex++].display(); // Display the rock and increment index
 
                 if (currentLayer == layers.length - 1) {
                     this.scene.translate(- radius/2, 0, - radius/2);
