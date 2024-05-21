@@ -434,7 +434,7 @@ export class MyScene extends CGFscene {
         this.hive.pollenNum++;
       }
 
-      this.bee.update(deltaTime);
+      this.bee.update((t - this.lastUpdate)+40 / 1000.0);
       // update the bee's wings
       this.bee.wing1.update(deltaTime);
       this.bee.wing2.update(deltaTime);
