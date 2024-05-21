@@ -45,7 +45,7 @@ export class MyRockSet extends CGFobject {
 
         this.scene.pushMatrix(); // Save the current state of the matrix
         this.scene.scale(3, 3, 3);
-        this.scene.translate(12, -32, -15); // Center the pyramid in the scene
+        this.scene.translate(12, -32, -18); // Center the pyramid in the scene
         this.scene.pushMatrix(); // Save the current state of the matrix
         //this.scene.translate(-100, 0, -100); // Center the pyramid in the scene
 
