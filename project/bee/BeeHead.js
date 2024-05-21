@@ -1,5 +1,17 @@
 import { CGFobject } from "../../lib/CGF.js";
 
+/**
+ * BeeHead
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param slices - Number of slices around the head
+ * @param stacks - Number of stacks around the head
+ * @param material - Material to apply to the head
+ * Represents a bee head object.
+ * This class initializes the head with a specified number of slices and stacks.
+ * The appearance of the head including texture can be set using a material.
+ */
+
 export class BeeHead extends CGFobject{
     constructor(scene, slices, stacks, material) {
         super(scene);

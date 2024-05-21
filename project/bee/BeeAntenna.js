@@ -1,6 +1,16 @@
 import { CGFobject } from "../../lib/CGF.js";
 import { MyCylinder } from "../shapes/MyCylinder.js";
 
+/**
+ * BeeAntenna
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param material - Material to apply to the antenna
+ * Represents a bee antenna object.
+ * This class initializes the antenna with a specified material.
+ * The antenna is composed of two parts.
+ */
+
 export class BeeAntenna extends CGFobject{
     constructor(scene, material){
         super(scene);

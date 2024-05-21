@@ -4,6 +4,10 @@ import { CGFobject } from '../../lib/CGF.js';
  * GrassBlade
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param maxHeight - Maximum height of the grass blade
+ * @param maxWidth - Maximum width of the grass blade
+ * @param subdivisions - Number of subdivisions for the grass blade
+ * @param grassMaterial - Material to apply to the grass blade
  * 
  * Represents a single blade of grass with some randomness in shape and a triangular taper towards the tip.
  */

@@ -1,6 +1,18 @@
 import { CGFobject } from '../../lib/CGF.js';
 import { MyRock } from './MyRock.js'; 
 
+/**
+ * MyRockSet
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param numRocks - Number of rocks to be displayed
+ * @param rockBaseSize - Base size for the rocks
+ * @param rockMaterial - Material to apply to the rocks
+ * Represents a set of rocks object.
+ * This class initializes the set of rocks with a specified material.
+ * The rocks are displayed in a pyramidal pattern with varying sizes.
+ */
+
 
 export class MyRockSet extends CGFobject {
     constructor(scene, numRocks, rockBaseSize, rockMaterial) {

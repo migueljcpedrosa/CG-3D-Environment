@@ -1,5 +1,17 @@
 import { CGFobject } from "../../lib/CGF.js";
 
+/**
+ * BeeWing
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param left - Boolean to determine if the wing is the left or right wing
+ * @param wingMaterial - Material to apply to the wing
+ *
+ * Represents a bee wing object.
+ * This class initializes the wing with a specified material.
+ * The wing can be animated to simulate flapping.
+ */
+
 export class BeeWing extends CGFobject {
     constructor(scene, left, wingMaterial) {
         super(scene);
