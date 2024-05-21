@@ -271,7 +271,7 @@ export class Mybee extends CGFobject {
             this.orientation = angle;
 
             this.velocity[0] = this.speed * direction[0];
-            this.velocity[1] = this.speed * direction[1] * modulation * amplitude;
+            this.velocity[1] = this.speed *10 * direction[1] * modulation * amplitude;
             this.velocity[2] = this.speed * direction[2];
 
             this.position[0] += this.velocity[0] * t;
