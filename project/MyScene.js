@@ -27,7 +27,6 @@ export class MyScene extends CGFscene {
 
     this.lastUpdate = 0;
 
-    //////////////////////////////////CHANGE HERE
     // Load textures
     this.grassTexture1 = new CGFtexture(this, 'images/grass3.png');
     this.grassTexture2 = new CGFtexture(this, 'images/grass4.png');
