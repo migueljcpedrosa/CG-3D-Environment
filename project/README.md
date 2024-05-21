@@ -7,9 +7,8 @@
 | Gonçalo Marques  | 202006874 | up202006874@edu.fe.up.pt              |
 | Joana Marques    | 202103346 | up202103346@edu.fe.up.pt              |
 
-
 |                  |                  |                  |
 |------------------|------------------|------------------|
-| ![](screenshots/project-t03g05-1.1.png) | ![](screenshots/project-t03g05-1.2.png) | ![](screenshots/project-t03g05-2.jpeg) |
-| ![](screenshots/project-t03g05-3.png) | ![](screenshots/project-t03g05-4.png) | ![](screenshots/project-t03g05-5.png)  |
-| ![](screenshots/project-t03g05-6.png) | ![](screenshots/project-t03g05-7.png) | ![](screenshots/project-t03g05-8.png)  |
+| <img src="screenshots/project-t03g05-1.1.png" width="300"/> | <img src="screenshots/project-t03g05-1.2.png" width="300"/> | <img src="screenshots/project-t03g05-2.jpeg" width="300"/> |
+| <img src="screenshots/project-t03g05-3.png" width="300"/> | <img src="screenshots/project-t03g05-4.png" width="300"/> | <img src="screenshots/project-t03g05-5.png" width="300"/>  |
+| <img src="screenshots/project-t03g05-6.png" width="300"/> | <img src="screenshots/project-t03g05-7.png" width="300"/> | <img src="screenshots/project-t03g05-8.png" width="300"/>  |
