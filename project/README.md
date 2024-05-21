@@ -24,6 +24,7 @@
 |As flores têm duas camadas de pétalas que nascem em ângulos diferentes, o que aumenta o realismo e melhora a beleza da cena.|
 |É possível fazer "lock" da câmara com a abelha, carregando na tecla Y, sendo assim possível acompanhar todo o seu movimento, tal como num videojogo.|
 |Nos shaders da relva, alteramos também a iluminação, ficando a raíz de cada folha de relva menos iluminada, e a ponta melhor iluminada. Isto permitiu fazer um melhor "blend" das folhas de relva (objetos físicos) com o terreno e a sua textura, dando assim um efeito mais realista e tornando a cena mais agradável ao olhar.|
+|É possível armazenar até 40 grãos de pólen na colmeia. Depois de pousar um grão na colmeia, o grão fica visível, no seu espaco adequado. Os seguintes grãos são colocados lado a lado, de forma matricial.|
 
 
 |                  |                  |                  |
