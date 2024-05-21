@@ -8,12 +8,8 @@
 | Joana Marques    | 202103346 | up202103346@edu.fe.up.pt              |
 
 
-![Project Screenshot](screenshots/project-t03g05-1.1.png)
-![Project Screenshot](screenshots/project-t03g05-1.2.png)
-![Project Screenshot](screenshots/project-t03g05-2.jpeg)
-![Project Screenshot](screenshots/project-t03g05-3.png)
-![Project Screenshot](screenshots/project-t03g05-4.png)
-![Project Screenshot](screenshots/project-t03g05-5.png)
-![Project Screenshot](screenshots/project-t03g05-6.png)
-![Project Screenshot](screenshots/project-t03g05-7.png)
-![Project Screenshot](screenshots/project-t03g05-8.png)
+|                  |                  |                  |
+|------------------|------------------|------------------|
+| ![](screenshots/project-t03g05-1.1.png) | ![](screenshots/project-t03g05-1.2.png) | ![](screenshots/project-t03g05-2.jpeg) |
+| ![](screenshots/project-t03g05-3.png) | ![](screenshots/project-t03g05-4.png) | ![](screenshots/project-t03g05-5.png)  |
+| ![](screenshots/project-t03g05-6.png) | ![](screenshots/project-t03g05-7.png) | ![](screenshots/project-t03g05-8.png)  |
